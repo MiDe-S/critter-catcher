@@ -1,0 +1,95 @@
+[gd_scene load_steps=15 format=3 uid="uid://b7nbfx75rgqx0"]
+
+[ext_resource type="Script" path="res://critter.gd" id="1_bhkd6"]
+[ext_resource type="Texture2D" uid="uid://cebbv0cqmfotj" path="res://snail-charge.png" id="2_6wqhp"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tponc"]
+atlas = ExtResource("2_6wqhp")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kt1yc"]
+atlas = ExtResource("2_6wqhp")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kh2mw"]
+atlas = ExtResource("2_6wqhp")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tr03n"]
+atlas = ExtResource("2_6wqhp")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3bw80"]
+atlas = ExtResource("2_6wqhp")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7v4xx"]
+atlas = ExtResource("2_6wqhp")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_35m5a"]
+atlas = ExtResource("2_6wqhp")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_12wkw"]
+atlas = ExtResource("2_6wqhp")
+region = Rect2(448, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hct7a"]
+atlas = ExtResource("2_6wqhp")
+region = Rect2(512, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ukx3e"]
+atlas = ExtResource("2_6wqhp")
+region = Rect2(576, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1d4pg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tponc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kt1yc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kh2mw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tr03n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3bw80")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7v4xx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_35m5a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_12wkw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hct7a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ukx3e")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_laubu"]
+
+[node name="Critter" type="Area2D"]
+script = ExtResource("1_bhkd6")
+nickName = "John"
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_1d4pg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_laubu")

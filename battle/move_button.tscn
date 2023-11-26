@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bbfti4fksfx0f"]
+
+[node name="MoveButton" type="Button"]
+offset_right = 8.0
+offset_bottom = 8.0
+text = "Sample"
