@@ -11,8 +11,16 @@ config_version=5
 [application]
 
 config/name="Critter Catcher"
+run/main_scene="res://battle/sample-battle.tscn"
 config/features=PackedStringArray("4.1", "Mobile")
 config/icon="res://icon.svg"
+
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=720
+window/stretch/mode="viewport"
+window/stretch/aspect="expand"
 
 [rendering]
 

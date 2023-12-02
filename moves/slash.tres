@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Move" load_steps=3 format=3 uid="uid://oyu8ijb6twy5"]
+
+[ext_resource type="Script" path="res://moves/move.gd" id="1_kifeh"]
+[ext_resource type="Resource" uid="uid://dskw2l0imviun" path="res://types/light.tres" id="2_f74hg"]
+
+[resource]
+script = ExtResource("1_kifeh")
+name = "Slash"
+type = ExtResource("2_f74hg")
+power = 10
+accuracy = 95
+description = ""

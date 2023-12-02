@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Move" load_steps=3 format=3 uid="uid://cghlqeyvbfbnf"]
+
+[ext_resource type="Script" path="res://moves/move.gd" id="1_v3dwv"]
+[ext_resource type="Resource" uid="uid://cbb7y8cfs3axk" path="res://types/fire.tres" id="2_55gl3"]
+
+[resource]
+script = ExtResource("1_v3dwv")
+name = "Pyroblast"
+type = ExtResource("2_55gl3")
+power = 150
+accuracy = 100
+description = ""

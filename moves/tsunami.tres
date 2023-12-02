@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Move" load_steps=3 format=3 uid="uid://c6vjbgaigkvtx"]
+
+[ext_resource type="Script" path="res://moves/move.gd" id="1_0cdfu"]
+[ext_resource type="Resource" uid="uid://1newl3tfu73m" path="res://types/water.tres" id="2_5xeon"]
+
+[resource]
+script = ExtResource("1_0cdfu")
+name = "Tsunami"
+type = ExtResource("2_5xeon")
+power = 120
+accuracy = 100
+description = ""

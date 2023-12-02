@@ -2,10 +2,15 @@ extends GridContainer
 
 var move_button = preload("res://battle/move_button.tscn")
 
-func createMoveButtons(names):
-	for n in names:
+func createMoveButtons(moves):
+	for move in moves:
 		var button = move_button.instantiate()
-		button.text = n
+		button.text = move.getName()
+		var stylebox = StyleBoxFlat.new()
+		stylebox.bg_color = Color(move.getTypeColor())
+		button.set("theme_override_styles/normal", stylebox)
+		var icon = load(move.getTypeIcon())
+		button.set("icon", icon)
 		add_child(button)
 		
 func clearMoveButtons():
@@ -15,7 +20,6 @@ func clearMoveButtons():
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	createMoveButtons(["test1", "test2", "test3", "test4"])
 	pass
 
 

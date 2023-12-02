@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Type" load_steps=2 format=3 uid="uid://bwv1p0eb3idb1"]
+
+[ext_resource type="Script" path="res://types/type_base.gd" id="1_nd2kt"]
+
+[resource]
+script = ExtResource("1_nd2kt")
+name = "Dark"
+color = "#696969"
+image = "res://types/type-icons/dark.png"

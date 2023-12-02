@@ -1,5 +1,5 @@
 extends Resource
-class_name Type
+class_name TypeManger
 
 enum Type {
 	Fire,
