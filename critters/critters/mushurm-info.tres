@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="CritterInfo" load_steps=3 format=3 uid="uid://cus20ulf3jk44"]
+
+[ext_resource type="Script" path="res://critters/critter-base.gd" id="1_0btbd"]
+[ext_resource type="Resource" uid="uid://dab4ahxqokbpo" path="res://types/lush.tres" id="2_4d1uf"]
+
+[resource]
+script = ExtResource("1_0btbd")
+id = 0
+name = "Mushurm"
+type = Array[Resource("res://types/type-base.gd")]([ExtResource("2_4d1uf")])
+description = ""
+catch_rate = 0
+health = 0
+attack = 0
+defense = 0
+magi_attack = 0
+magi_defense = 0
+speed = 0

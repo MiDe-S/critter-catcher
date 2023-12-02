@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c75us4hay3u2o"
-path="res://.godot/imported/water.png-9520b5cf329dd758cab09ef4b49254f1.ctex"
+uid="uid://cc825y2wmvfi8"
+path="res://.godot/imported/ernox.png-b3f2f46a60d096d3ac45542f6be46330.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://types/type-icons/water.png"
-dest_files=["res://.godot/imported/water.png-9520b5cf329dd758cab09ef4b49254f1.ctex"]
+source_file="res://critters/critter-images/ernox.png"
+dest_files=["res://.godot/imported/ernox.png-b3f2f46a60d096d3ac45542f6be46330.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://btel8xqnh73x8"
-path="res://.godot/imported/lush.png-35d03a45f8194fce30310b2470caea72.ctex"
+uid="uid://cw16fetg22jrx"
+path="res://.godot/imported/mushurm.png-4469cfbb88d9c0937ae9c3574565102b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://types/type-icons/lush.png"
-dest_files=["res://.godot/imported/lush.png-35d03a45f8194fce30310b2470caea72.ctex"]
+source_file="res://critters/critter-images/mushurm.png"
+dest_files=["res://.godot/imported/mushurm.png-4469cfbb88d9c0937ae9c3574565102b.ctex"]
 
 [params]
 

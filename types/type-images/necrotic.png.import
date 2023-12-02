@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cryqj3x2cjb13"
-path="res://.godot/imported/earth.png-544b24405885e7ea57e1cbb2b366688f.ctex"
+uid="uid://bemb67x0qrmu1"
+path="res://.godot/imported/necrotic.png-f7a8c39744f7c7e7a7078bc7ffd53a95.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://types/type-icons/earth.png"
-dest_files=["res://.godot/imported/earth.png-544b24405885e7ea57e1cbb2b366688f.ctex"]
+source_file="res://types/type-images/necrotic.png"
+dest_files=["res://.godot/imported/necrotic.png-f7a8c39744f7c7e7a7078bc7ffd53a95.ctex"]
 
 [params]
 

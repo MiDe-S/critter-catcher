@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="CritterInfo" load_steps=3 format=3 uid="uid://d2johio30vnyj"]
+
+[ext_resource type="Script" path="res://critters/critter-base.gd" id="1_m5cmn"]
+[ext_resource type="Resource" uid="uid://bwv1p0eb3idb1" path="res://types/dark.tres" id="2_i8olb"]
+
+[resource]
+script = ExtResource("1_m5cmn")
+id = 0
+name = "Ernox"
+type = Array[Resource("res://types/type-base.gd")]([ExtResource("2_i8olb")])
+description = ""
+catch_rate = 0
+health = 0
+attack = 0
+defense = 0
+magi_attack = 0
+magi_defense = 0
+speed = 0

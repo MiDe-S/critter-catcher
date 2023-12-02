@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bemb67x0qrmu1"
-path="res://.godot/imported/necrotic.png-871915507e5d8ea6ef0f6835055b6ee7.ctex"
+uid="uid://ducn5oc7n0nyc"
+path="res://.godot/imported/erdies.png-4f134a452aea8cad47d4eba7d8d2ca2b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://types/type-icons/necrotic.png"
-dest_files=["res://.godot/imported/necrotic.png-871915507e5d8ea6ef0f6835055b6ee7.ctex"]
+source_file="res://critters/critter-images/erdies.png"
+dest_files=["res://.godot/imported/erdies.png-4f134a452aea8cad47d4eba7d8d2ca2b.ctex"]
 
 [params]
 

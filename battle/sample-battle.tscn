@@ -1,17 +1,27 @@
-[gd_scene load_steps=8 format=3 uid="uid://dcq5qr2lrx5ps"]
+[gd_scene load_steps=5 format=3 uid="uid://dcq5qr2lrx5ps"]
 
 [ext_resource type="Script" path="res://battle/Battle.gd" id="1_krkkt"]
-[ext_resource type="PackedScene" uid="uid://b7nbfx75rgqx0" path="res://Critter-John.tscn" id="2_xrmci"]
+[ext_resource type="PackedScene" uid="uid://l8caa8o6ly33" path="res://battle/player.tscn" id="3_1paof"]
 [ext_resource type="PackedScene" uid="uid://cau0um2ta1bbi" path="res://battle/battle_ui.tscn" id="3_oknn5"]
-[ext_resource type="Resource" uid="uid://mkkq1cpocw5" path="res://moves/bash.tres" id="3_yvnxl"]
-[ext_resource type="Resource" uid="uid://oyu8ijb6twy5" path="res://moves/slash.tres" id="4_rtq0w"]
-[ext_resource type="Resource" uid="uid://cghlqeyvbfbnf" path="res://moves/pyroblast.tres" id="5_ipb6c"]
-[ext_resource type="Resource" uid="uid://c6vjbgaigkvtx" path="res://moves/tsunami.tres" id="6_60h47"]
+[ext_resource type="PackedScene" uid="uid://bgurn8tmt6awv" path="res://battle/enemy.tscn" id="4_4p4f5"]
 
 [node name="Battle" type="Node"]
 script = ExtResource("1_krkkt")
 
-[node name="Critter" parent="." instance=ExtResource("2_xrmci")]
-moves = Array[Resource("res://moves/move.gd")]([ExtResource("3_yvnxl"), ExtResource("4_rtq0w"), ExtResource("5_ipb6c"), ExtResource("6_60h47")])
-
 [node name="BattleUI" parent="." instance=ExtResource("3_oknn5")]
+
+[node name="LeftSpawnTop" type="Node2D" parent="."]
+position = Vector2(224, 144)
+
+[node name="LeftSpawnBottom" type="Node2D" parent="."]
+position = Vector2(224, 422)
+
+[node name="RightSpawnTop" type="Node2D" parent="."]
+position = Vector2(1038, 144)
+
+[node name="RightSpawnBottom" type="Node2D" parent="."]
+position = Vector2(1038, 421)
+
+[node name="Player" parent="." instance=ExtResource("3_1paof")]
+
+[node name="Enemy" parent="." instance=ExtResource("4_4p4f5")]

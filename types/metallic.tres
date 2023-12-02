@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Type" load_steps=2 format=3 uid="uid://c48p640yoi3rf"]
+
+[ext_resource type="Script" path="res://types/type-base.gd" id="1_l4qvs"]
+
+[resource]
+script = ExtResource("1_l4qvs")
+name = "Metallic"
+color = "#c0c0c0"
+image = "res://types/type-images/metallic.png"

@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Type" load_steps=2 format=3 uid="uid://t8guve4ir7gw"]
+
+[ext_resource type="Script" path="res://types/type-base.gd" id="1_5jc74"]
+
+[resource]
+script = ExtResource("1_5jc74")
+name = "Necrotic"
+color = "#8a2be2"
+image = "res://types/type-images/necrotic.png"

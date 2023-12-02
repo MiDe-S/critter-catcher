@@ -1,0 +1,33 @@
+[gd_resource type="Resource" script_class="Scanner" load_steps=9 format=3 uid="uid://svclorrbdkso"]
+
+[ext_resource type="Script" path="res://scanners/scanner-base.gd" id="1_em0g7"]
+[ext_resource type="Resource" uid="uid://dr7ab7goceg6u" path="res://critters/critters/erdies-info.tres" id="2_nx67g"]
+[ext_resource type="Resource" uid="uid://mkkq1cpocw5" path="res://moves/bash.tres" id="3_5of3d"]
+[ext_resource type="Script" path="res://critters/critter-instance.gd" id="4_3pdeo"]
+[ext_resource type="Resource" uid="uid://d2johio30vnyj" path="res://critters/critters/ernox-info.tres" id="5_3xos4"]
+[ext_resource type="Resource" uid="uid://oyu8ijb6twy5" path="res://moves/slash.tres" id="6_iiwjx"]
+
+[sub_resource type="Resource" id="Resource_frle4"]
+script = ExtResource("4_3pdeo")
+nickname = ""
+moves = Array[Resource("res://moves/move.gd")]([ExtResource("3_5of3d")])
+abilityIndex = 0
+level = 7
+experience = 0
+weight = 0
+critterInfo = ExtResource("2_nx67g")
+
+[sub_resource type="Resource" id="Resource_1qp51"]
+script = ExtResource("4_3pdeo")
+nickname = ""
+moves = Array[Resource("res://moves/move.gd")]([ExtResource("6_iiwjx")])
+abilityIndex = 0
+level = 5
+experience = 0
+weight = 0
+critterInfo = ExtResource("5_3xos4")
+
+[resource]
+script = ExtResource("1_em0g7")
+name = "MiDe"
+team = Array[ExtResource("4_3pdeo")]([SubResource("Resource_frle4"), SubResource("Resource_1qp51")])

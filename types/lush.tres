@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Type" load_steps=2 format=3 uid="uid://dab4ahxqokbpo"]
+
+[ext_resource type="Script" path="res://types/type-base.gd" id="1_7eldw"]
+
+[resource]
+script = ExtResource("1_7eldw")
+name = "Lush"
+color = "#98fb98"
+image = "res://types/type-images/lush.png"

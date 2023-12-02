@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bbfti4fksfx0f"]
 
-[ext_resource type="Texture2D" uid="uid://duvxmvjr2ggl1" path="res://types/type-icons/basic.png" id="1_6nouj"]
+[ext_resource type="Texture2D" uid="uid://duvxmvjr2ggl1" path="res://types/type-images/basic.png" id="1_akl4p"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0fmag"]
 bg_color = Color(1, 0.137255, 0.8, 1)
@@ -13,6 +13,6 @@ theme_override_constants/outline_size = 5
 theme_override_font_sizes/font_size = 64
 theme_override_styles/normal = SubResource("StyleBoxFlat_0fmag")
 text = "Sample"
-icon = ExtResource("1_6nouj")
+icon = ExtResource("1_akl4p")
 icon_alignment = 1
 expand_icon = true
