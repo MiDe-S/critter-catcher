@@ -29,5 +29,5 @@ position = Vector2(1038, 421)
 
 [node name="Enemy" parent="." instance=ExtResource("4_4p4f5")]
 
-[connection signal="selection" from="Selector" to="." method="_critterChosen"]
+[connection signal="selection" from="Selector" to="." method="selectNode"]
 [connection signal="moveChosen" from="BattleUI" to="." method="_moveChosen"]

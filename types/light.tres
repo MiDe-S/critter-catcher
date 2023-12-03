@@ -5,5 +5,5 @@
 [resource]
 script = ExtResource("1_qisw5")
 name = "Light"
-color = " #fffacd"
-image = "res://types/type-icons/light.png"
+color = "#fffacd"
+image = "res://types/type-images/light.png"

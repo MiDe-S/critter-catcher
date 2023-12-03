@@ -1,4 +1,5 @@
 extends Area2D
+class_name CritterInstance
 
 @export var critter: Critter
 
@@ -10,12 +11,15 @@ func _ready():
 func _process(delta):
 	pass
 	
-func getMoveNames():
+func getMoves():
 	return critter.getMoves()
 	
-func setCritter(critter: Critter):
-	critter = critter
+func setCritter(critterInput: Critter):
+	critter = critterInput
 	
 func faceLeft():
 	$AnimatedSprite2D.set_flip_h(true)
+	
+func getName():
+	return critter.getName()
 

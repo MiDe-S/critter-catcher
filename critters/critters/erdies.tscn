@@ -31,7 +31,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_laubu"]
-size = Vector2(18.5, 20)
+size = Vector2(97.5, 103)
 
 [node name="Erdies" type="Area2D"]
 texture_filter = 1
@@ -43,4 +43,5 @@ critter = SubResource("Resource_28m1m")
 sprite_frames = SubResource("SpriteFrames_xk777")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(3.25, 12.5)
 shape = SubResource("RectangleShape2D_laubu")

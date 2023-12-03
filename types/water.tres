@@ -6,4 +6,4 @@
 script = ExtResource("1_yq56b")
 name = "Water"
 color = "#add8e6"
-image = "res://types/type-icons/water.png"
+image = "res://types/type-images/water.png"

@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://bbfti4fksfx0f"]
+[gd_scene load_steps=4 format=3 uid="uid://bbfti4fksfx0f"]
 
 [ext_resource type="Texture2D" uid="uid://duvxmvjr2ggl1" path="res://types/type-images/basic.png" id="1_akl4p"]
+[ext_resource type="Script" path="res://battle/move_button.gd" id="2_dobhc"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0fmag"]
 bg_color = Color(1, 0.137255, 0.8, 1)
@@ -16,3 +17,6 @@ text = "Sample"
 icon = ExtResource("1_akl4p")
 icon_alignment = 1
 expand_icon = true
+script = ExtResource("2_dobhc")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

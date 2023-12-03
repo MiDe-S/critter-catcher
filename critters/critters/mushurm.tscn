@@ -31,9 +31,9 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_laubu"]
-size = Vector2(18.5, 20)
+size = Vector2(99.5, 116)
 
-[node name="Ernox" type="Area2D"]
+[node name="Mushurm" type="Area2D"]
 texture_filter = 1
 scale = Vector2(2, 2)
 script = ExtResource("1_bq6jj")
@@ -44,5 +44,5 @@ sprite_frames = SubResource("SpriteFrames_oxqsh")
 animation = &"new_animation"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-0.75, 0)
+position = Vector2(-3.75, 8)
 shape = SubResource("RectangleShape2D_laubu")

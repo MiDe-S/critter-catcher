@@ -6,8 +6,17 @@ class_name Move
 @export var power: int = 0
 @export var accuracy: int = 0
 @export var description: String = ""
+@export var target := targetType.SINGLE
 #@export var effects: Effects = Effects.EFFECT1
 #@export var placeholder: Effects = Effects.EFFECT1
+
+enum targetType {
+	SELF, # 1 self
+	SINGLE, # Any single
+	ENEMIES, # All 2 enemy
+	OTHERS, # All 3
+	ALL # All 4
+}
 
 func _init(name_val = "", type_val = 0):
 	name = name_val
@@ -23,4 +32,7 @@ func getTypeColor():
 		
 func getTypeIcon():
 	return type.getIcon();
+	
+func getTarget():
+	return target
 	
