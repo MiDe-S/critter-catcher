@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://hd6mqwjddgt0"]
+
+[ext_resource type="Script" path="res://battle/battle-ui/critterUI/critterUI.gd" id="1_mimj6"]
+[ext_resource type="Script" path="res://addons/health_bar_2d/health_bar_2d.gd" id="2_7dm2b"]
+[ext_resource type="Texture2D" uid="uid://cnjw8wn77f05i" path="res://addons/health_bar_2d/resources/health_bar_texture.png" id="2_ro7wa"]
+
+[node name="CritterUI" type="Node2D"]
+script = ExtResource("1_mimj6")
+
+[node name="HealthBar2D" type="TextureProgressBar" parent="."]
+offset_left = 83.0
+offset_top = 40.0
+offset_right = 1022.0
+offset_bottom = 67.0
+value = 50.0
+nine_patch_stretch = true
+texture_under = ExtResource("2_ro7wa")
+texture_progress = ExtResource("2_ro7wa")
+tint_under = Color(0, 0, 0, 1)
+tint_progress = Color(1, 0, 0, 1)
+script = ExtResource("2_7dm2b")
+_static = true
+_gradient = true
+_offset = Vector2(0, -16)

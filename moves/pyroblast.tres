@@ -10,3 +10,4 @@ type = ExtResource("2_55gl3")
 power = 150
 accuracy = 100
 description = ""
+target = 1

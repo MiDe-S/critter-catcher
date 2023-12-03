@@ -7,6 +7,7 @@ class_name Critter
 @export var level: int
 @export var experience: int
 @export var weight: int
+@export var maxHealth: int
 
 @export var critterInfo: CritterInfo
 
@@ -27,3 +28,9 @@ func getNickname():
 
 func getName():
 	return critterInfo.getName()
+
+func getLevel():
+	return level
+	
+func getHealth():
+	return maxHealth

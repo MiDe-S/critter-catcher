@@ -2,11 +2,16 @@ extends Node
 
 var critterPath = "res://critters/critters/"
 var critterFormat = ".tscn"
+
+var critterUIPath = "res://battle/battle-ui/critter-ui/critter_ui.tscn"
 # on init spawn people from people
 
 var p1CritterIndex = 0
 var selectedMove: Move = null
 var turnActions: Array[Action]
+
+var leftPositions = ["LeftSpawnTop", "LeftSpawnBottom"]
+var rightPositions = ["RightSpawnTop", "RightSpawnBottom"]
 
 ### Turn
 ## Select Move on critter 1
@@ -65,26 +70,21 @@ func handleNextCritterTurn():
 	get_tree().get_nodes_in_group("move_button").front().grab_focus()
 
 func setUpPlayers(critters, p1: bool = true):
-	var s1 = load(critterPath + critters[0].getName() + critterFormat).instantiate()
-	s1.setCritter(critters[0])
-	if p1:
-		s1.position = $LeftSpawnTop.position
-	else:
-		s1.position = $RightSpawnTop.position
-		s1.faceLeft()
-	var s2 = load(critterPath + critters[1].getName() + critterFormat).instantiate()
-	s2.setCritter(critters[1])
-	if p1:
-		s2.position = $LeftSpawnBottom.position
-	else:
-		s2.position = $RightSpawnBottom.position
-		s2.faceLeft()
-	self.add_child(s1)
-	self.add_child(s2)
-	
-	if p1:
-		s1.add_to_group("p1")
-		s2.add_to_group("p1")
-	else:
-		s1.add_to_group("p2")
-		s2.add_to_group("p2")
+	var i = 0
+	for critter in critters:
+		var critInstance = load(critterPath + critter.getName() + critterFormat).instantiate()
+		critInstance.setCritter(critter)
+		if p1:
+			critInstance.add_to_group("p1")
+			critInstance.position = get_node(leftPositions[i]).position
+		else:
+			critInstance.add_to_group("p2")
+			critInstance.position = get_node(rightPositions[i]).position
+			critInstance.faceLeft()
+			
+		var critUi = load(critterUIPath).instantiate()
+		critInstance.add_child(critUi)
+		critUi.initialize(critter.getName(), critter.getLevel(), critter.getHealth())
+		
+		self.add_child(critInstance)
+		i += 1

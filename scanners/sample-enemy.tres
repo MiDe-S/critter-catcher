@@ -12,9 +12,10 @@ script = ExtResource("4_3pdeo")
 nickname = ""
 moves = Array[Resource("res://moves/move.gd")]([ExtResource("3_0c2bj")])
 abilityIndex = 0
-level = 0
+level = 1
 experience = 0
 weight = 0
+maxHealth = 80
 critterInfo = ExtResource("2_dsxik")
 
 [sub_resource type="Resource" id="Resource_68jkd"]
@@ -22,9 +23,10 @@ script = ExtResource("4_3pdeo")
 nickname = ""
 moves = Array[Resource("res://moves/move.gd")]([ExtResource("6_xnsew")])
 abilityIndex = 0
-level = 0
+level = 100
 experience = 0
 weight = 0
+maxHealth = 24
 critterInfo = ExtResource("5_p85ql")
 
 [resource]

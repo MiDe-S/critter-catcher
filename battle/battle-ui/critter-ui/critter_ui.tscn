@@ -1,0 +1,41 @@
+[gd_scene load_steps=5 format=3 uid="uid://hd6mqwjddgt0"]
+
+[ext_resource type="Script" path="res://battle/battle-ui/critter-ui/critter_ui.gd" id="1_mimj6"]
+[ext_resource type="Script" path="res://addons/health_bar_2d/health_bar_2d.gd" id="2_7dm2b"]
+[ext_resource type="Texture2D" uid="uid://cnjw8wn77f05i" path="res://addons/health_bar_2d/resources/health_bar_texture.png" id="2_ro7wa"]
+[ext_resource type="Theme" uid="uid://b1nmw3tifrb0r" path="res://font.tres" id="4_1hvv4"]
+
+[node name="CritterUI" type="Node2D"]
+script = ExtResource("1_mimj6")
+
+[node name="HealthBar2D" type="TextureProgressBar" parent="."]
+offset_left = -67.0
+offset_top = -4.0
+offset_right = 66.0
+offset_bottom = 5.0
+value = 100.0
+nine_patch_stretch = true
+texture_under = ExtResource("2_ro7wa")
+texture_progress = ExtResource("2_ro7wa")
+tint_under = Color(0, 0, 0, 1)
+tint_progress = Color(0, 1, 0, 1)
+script = ExtResource("2_7dm2b")
+_static = true
+_gradient = true
+_offset = Vector2(16, 16)
+
+[node name="Name" type="Label" parent="."]
+offset_left = -67.0
+offset_top = -20.0
+offset_right = 19.0
+offset_bottom = 6.0
+theme = ExtResource("4_1hvv4")
+text = "Name here"
+
+[node name="Level" type="Label" parent="."]
+offset_left = 26.0
+offset_top = 5.0
+offset_right = 66.0
+offset_bottom = 31.0
+theme = ExtResource("4_1hvv4")
+text = "Lvl:"
