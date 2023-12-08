@@ -7,6 +7,7 @@
 script = ExtResource("1_kifeh")
 name = "Slash"
 type = ExtResource("2_f74hg")
-power = 10
+power = 15
 accuracy = 95
 description = ""
+target = 1

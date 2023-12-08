@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dcq5qr2lrx5ps"]
+[gd_scene load_steps=8 format=3 uid="uid://dcq5qr2lrx5ps"]
 
 [ext_resource type="Script" path="res://battle/Battle.gd" id="1_krkkt"]
 [ext_resource type="PackedScene" uid="uid://l8caa8o6ly33" path="res://battle/player.tscn" id="3_1paof"]
@@ -9,9 +9,6 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jw77u"]
 size = Vector2(302, 520)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_1qm0m"]
-size = Vector2(1006, 461)
 
 [node name="Battle" type="Node"]
 script = ExtResource("1_krkkt")
@@ -36,20 +33,13 @@ position = Vector2(1038, 421)
 
 [node name="Enemy" parent="." instance=ExtResource("4_4p4f5")]
 
-[node name="SelectorRegion" parent="." groups=["side"] instance=ExtResource("6_i1is2")]
+[node name="SelectorRegion" parent="." instance=ExtResource("6_i1is2")]
 position = Vector2(1040, 275)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SelectorRegion"]
 position = Vector2(1, -1)
 shape = SubResource("RectangleShape2D_jw77u")
 disabled = true
-
-[node name="SelectorRegion2" parent="." groups=["all"] instance=ExtResource("6_i1is2")]
-position = Vector2(638, 292)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SelectorRegion2"]
-position = Vector2(-2, 1.5)
-shape = SubResource("RectangleShape2D_1qm0m")
 
 [connection signal="selection" from="Selector" to="." method="_critterChosen"]
 [connection signal="moveChosen" from="BattleUI" to="." method="_moveChosen"]

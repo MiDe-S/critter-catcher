@@ -36,3 +36,6 @@ func getTypeIcon():
 func getTarget():
 	return target
 	
+func getPower():
+	return power
+	

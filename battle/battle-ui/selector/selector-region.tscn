@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://df56bqij4lnw0"]
+
+[node name="SelectorRegion" type="Area2D"]
+disable_mode = 1
+monitoring = false
+monitorable = false

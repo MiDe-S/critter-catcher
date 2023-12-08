@@ -34,12 +34,19 @@ func _process(delta):
 	pass
 
 func _critterChosen(critter):
+	var targets: Array[Node] = []
 	if critter == null:
 		# nothing selected, refocus button
 		get_tree().get_nodes_in_group("move_button")[0].grab_focus()
 		selectedMove = null
 		return;
-	var action = Action.new(get_tree().get_nodes_in_group("p1")[p1CritterIndex], selectedMove, [critter])
+	elif critter.is_in_group("side"):
+		targets = get_tree().get_nodes_in_group("p2")
+	elif critter.is_in_group("all"):
+		targets = get_tree().get_nodes_in_group("p1") + get_tree().get_nodes_in_group("p2")
+	else:
+		targets.append(critter)
+	var action = Action.new(get_tree().get_nodes_in_group("p1")[p1CritterIndex], selectedMove, targets)
 	turnActions.append(action)
 	handleNextCritterTurn()
 	
@@ -54,20 +61,44 @@ func _moveChosen(move):
 					options.insert(0, node)
 				i += 1
 			$Selector.setFocus(options)
+		Move.targetType.ENEMIES:
+			$Selector.setFocus(get_tree().get_nodes_in_group("side"))
+		Move.targetType.ALL:
+			$Selector.setFocus(get_tree().get_nodes_in_group("all"))
 			
 func startTurn():
 	p1CritterIndex = 0
+	turnActions = []
 	$BattleUI.setMoves(get_tree().get_nodes_in_group("p1")[p1CritterIndex].getMoves())
 	get_tree().get_nodes_in_group("move_button").front().grab_focus()
 
 func handleNextCritterTurn():
 	p1CritterIndex += 1
 	if p1CritterIndex >= get_tree().get_nodes_in_group("move_button").size():
-		for action in turnActions:
-			action.printInfo()
+		endTurn()
 		return 
 	$BattleUI.setMoves(get_tree().get_nodes_in_group("p1")[p1CritterIndex].getMoves())
 	get_tree().get_nodes_in_group("move_button").front().grab_focus()
+	
+func endTurn():
+	# determine who goes first with speed + effects
+	# calculate damage for all
+	for action in turnActions:
+		action.printInfo()
+		# check accuracy
+		var typeAdvantage = 1
+		var movePower = action.getMove().getPower()
+		# check physical vs range
+		var atk = action.getAttacker().getCritter().getAttackForCalc()
+		# do our level / their level as multiplier ??
+		for defender in action.getDefenders():
+			var def = defender.getCritter().getDefenseForCalc()
+			defender.dealDamage(movePower * typeAdvantage * atk / def)
+	# check arena conditions + 
+	# advance turn counter 1
+	startTurn()
+	pass
+	
 
 func setUpPlayers(critters, p1: bool = true):
 	var i = 0
@@ -84,7 +115,7 @@ func setUpPlayers(critters, p1: bool = true):
 			
 		var critUi = load(critterUIPath).instantiate()
 		critInstance.add_child(critUi)
-		critUi.initialize(critter.getName(), critter.getLevel(), critter.getHealth())
+		critUi.initialize(critter.getName(), critter.getLevel(), critter.getMaxHealth(), critInstance.getSigName())
 		
 		self.add_child(critInstance)
 		i += 1

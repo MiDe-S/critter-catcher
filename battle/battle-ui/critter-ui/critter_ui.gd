@@ -14,7 +14,7 @@ func _ready() -> void:
 func _process(delta) -> void:
 	pass
 
-func initialize(nameInput, levelInput: int, maxHealthInput):
+func initialize(nameInput, levelInput: int, maxHealthInput, sigName):
 	maxHealth = maxHealthInput
 	health = maxHealth
 	
@@ -24,3 +24,11 @@ func initialize(nameInput, levelInput: int, maxHealthInput):
 	$HealthBar2D.set_max(maxHealth)
 	set_global_position(get_parent().position + _offset)
 	
+	get_parent().connect(sigName, updateHealth)
+	
+func updateHealth(healthInput: float):
+	print("Health was " + str(health) + " now " + str(health - healthInput) + ": " + str(healthInput) + " damage")
+	health -= healthInput
+	health_changed.emit(health)
+	
+

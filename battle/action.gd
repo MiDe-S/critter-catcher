@@ -1,11 +1,11 @@
 extends Resource
 class_name Action
 
-@export var attacker: CritterInstance
+@export var attacker: Node
 @export var move: Move
-@export var defenders: Array[CritterInstance]
+@export var defenders: Array[Node]
 
-func _init(attackerInput, moveInput, defendersInput: Array[CritterInstance]):
+func _init(attackerInput, moveInput, defendersInput: Array[Node]):
 	attacker = attackerInput
 	move = moveInput
 	defenders = defendersInput
@@ -19,3 +19,12 @@ func printInfo():
 	for critter in defenders:
 		output += critter.getName() + ", "
 	print(output)
+	
+func getMove():
+	return move
+
+func getAttacker():
+	return attacker
+	
+func getDefenders():
+	return defenders

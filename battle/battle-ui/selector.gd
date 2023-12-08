@@ -46,8 +46,8 @@ func setFocus(focusableList, index: int = 0):
 		var scaleX = node.get_scale().y
 		var scaleY = node.get_scale().y
 		var size = getNodeSize(node)
-		var x = node.get_position().x
-		var y = node.get_position().y
+		var x = node.get_global_position().x
+		var y = node.get_global_position().y
 		
 		coords.append(Vector2(x - scaleX * size.x / 2, y - scaleY * size.y / 2))
 		coords.append(Vector2(x + scaleX * size.x / 2, y - scaleY * size.y / 2))
@@ -66,7 +66,6 @@ func _input(event):
 		if event.is_action_pressed("ui_back"):
 			deactivate()
 			selection.emit(null)
-	
 
 func deactivate():
 	active = false
@@ -77,4 +76,6 @@ func getNodeSize(node):
 		return node.get_node("CollisionShape2D").shape.get_size()
 	if node.is_in_group("move_button"):
 		return node.get("size")
+	if node.is_in_group("side") or node.is_in_group("all"):
+		return node.get_node("CollisionShape2D").shape.get_size()
 	assert(false, "Unknown group in selecter options")
