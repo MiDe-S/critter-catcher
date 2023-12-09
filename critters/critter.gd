@@ -33,4 +33,7 @@ func getSigName():
 
 func dealDamage(healthInput: float):
 	healthUpdater.emit(healthInput)
+	
+func getType():
+	return critter.getType()
 

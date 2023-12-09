@@ -55,9 +55,12 @@ func getDefenseForCalc():
 
 func calcStat(base, baseAdd, add):
 	var baseTotal = base + baseAdd
-	var additional = add / 100 * 0.25 + 1
-	var lvl = 1#level / 2.5
+	var additional = add / 100.0 * 0.25 + 1
+	var lvl = level / 100.0 * 1 + 0.3
 	return lvl * baseTotal * additional
 
 func getMaxHealth():
-	return healthAdd + critterInfo.getHealth() * (healthAdd / 100 * 0.25 + 1) * 1#level / 2.5
+	return calcStat(critterInfo.getHealth(), healthBase, healthAdd)
+
+func getType():
+	return critterInfo.getType()

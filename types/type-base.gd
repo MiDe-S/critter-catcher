@@ -10,3 +10,6 @@ func getColor():
 	
 func getIcon():
 	return image
+
+func getName():
+	return name

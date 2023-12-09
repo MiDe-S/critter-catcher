@@ -31,3 +31,6 @@ func getDefense():
 
 func getHealth():
 	return health
+	
+func getType():
+	return type

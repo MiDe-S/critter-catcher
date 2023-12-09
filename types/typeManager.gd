@@ -1,25 +1,20 @@
 extends Resource
 class_name TypeManger
 
-enum Type {
-	Fire,
-	Water,
-	Earth,
-	Wind
-}
+var typeMap
+var fp := 'res://types/types.json'
+
+func read_json(file_path):
+	var file = FileAccess.open(file_path, FileAccess.READ)
+	return JSON.parse_string(file.get_as_text())
+
 
 func _init():
 	#load enum from file
-	pass
-
-func getTypeByValue(enum_value):
-#	for name in Type.names():
-#		if Type[name] == enum_value:
-#			return name
-	return "???"
+	typeMap = read_json(fp)
 	
-func getTypeByName(enum_name):
-	return Type[enum_name]
-
-func getTypeEnum():
-	return Type
+func getAdvantage(attackType: Type, defenseType: Array[Type]):
+	var output = 1
+	for type in defenseType:
+		output = output * typeMap[attackType.getName()][type.getName()]
+	return output

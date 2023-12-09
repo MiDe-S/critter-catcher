@@ -13,6 +13,8 @@ var turnActions: Array[Action]
 var leftPositions = ["LeftSpawnTop", "LeftSpawnBottom"]
 var rightPositions = ["RightSpawnTop", "RightSpawnBottom"]
 
+var typeManager: TypeManger = TypeManger.new()
+
 ### Turn
 ## Select Move on critter 1
 # Select Target
@@ -33,73 +35,6 @@ func _ready():
 func _process(delta):
 	pass
 
-func _critterChosen(critter):
-	var targets: Array[Node] = []
-	if critter == null:
-		# nothing selected, refocus button
-		get_tree().get_nodes_in_group("move_button")[0].grab_focus()
-		selectedMove = null
-		return;
-	elif critter.is_in_group("side"):
-		targets = get_tree().get_nodes_in_group("p2")
-	elif critter.is_in_group("all"):
-		targets = get_tree().get_nodes_in_group("p1") + get_tree().get_nodes_in_group("p2")
-	else:
-		targets.append(critter)
-	var action = Action.new(get_tree().get_nodes_in_group("p1")[p1CritterIndex], selectedMove, targets)
-	turnActions.append(action)
-	handleNextCritterTurn()
-	
-func _moveChosen(move):
-	selectedMove = move
-	match move.getTarget():
-		Move.targetType.SINGLE:
-			var options = get_tree().get_nodes_in_group("p2")
-			var i = 0
-			for node in get_tree().get_nodes_in_group("p1"):
-				if i != p1CritterIndex:
-					options.insert(0, node)
-				i += 1
-			$Selector.setFocus(options)
-		Move.targetType.ENEMIES:
-			$Selector.setFocus(get_tree().get_nodes_in_group("side"))
-		Move.targetType.ALL:
-			$Selector.setFocus(get_tree().get_nodes_in_group("all"))
-			
-func startTurn():
-	p1CritterIndex = 0
-	turnActions = []
-	$BattleUI.setMoves(get_tree().get_nodes_in_group("p1")[p1CritterIndex].getMoves())
-	get_tree().get_nodes_in_group("move_button").front().grab_focus()
-
-func handleNextCritterTurn():
-	p1CritterIndex += 1
-	if p1CritterIndex >= get_tree().get_nodes_in_group("move_button").size():
-		endTurn()
-		return 
-	$BattleUI.setMoves(get_tree().get_nodes_in_group("p1")[p1CritterIndex].getMoves())
-	get_tree().get_nodes_in_group("move_button").front().grab_focus()
-	
-func endTurn():
-	# determine who goes first with speed + effects
-	# calculate damage for all
-	for action in turnActions:
-		action.printInfo()
-		# check accuracy
-		var typeAdvantage = 1
-		var movePower = action.getMove().getPower()
-		# check physical vs range
-		var atk = action.getAttacker().getCritter().getAttackForCalc()
-		# do our level / their level as multiplier ??
-		for defender in action.getDefenders():
-			var def = defender.getCritter().getDefenseForCalc()
-			defender.dealDamage(movePower * typeAdvantage * atk / def)
-	# check arena conditions + 
-	# advance turn counter 1
-	startTurn()
-	pass
-	
-
 func setUpPlayers(critters, p1: bool = true):
 	var i = 0
 	for critter in critters:
@@ -119,3 +54,77 @@ func setUpPlayers(critters, p1: bool = true):
 		
 		self.add_child(critInstance)
 		i += 1
+
+
+
+			
+func startTurn():
+	p1CritterIndex = 0
+	turnActions = []
+	$BattleUI.setMoves(get_tree().get_nodes_in_group("p1")[p1CritterIndex].getMoves())
+	get_tree().get_nodes_in_group("move_button").front().grab_focus()
+	
+func _moveChosen(move):
+	selectedMove = move
+	match move.getTarget():
+		Move.targetType.SINGLE:
+			var options = get_tree().get_nodes_in_group("p2")
+			var i = 0
+			for node in get_tree().get_nodes_in_group("p1"):
+				if i != p1CritterIndex:
+					options.insert(0, node)
+				i += 1
+			$Selector.setFocus(options)
+		Move.targetType.ENEMIES:
+			$Selector.setFocus(get_tree().get_nodes_in_group("side"))
+		Move.targetType.ALL:
+			$Selector.setFocus(get_tree().get_nodes_in_group("all"))
+			
+func _critterChosen(critter):
+	var targets: Array[Node] = []
+	if critter == null:
+		# nothing selected, refocus button
+		get_tree().get_nodes_in_group("move_button")[0].grab_focus()
+		selectedMove = null
+		return;
+	elif critter.is_in_group("side"):
+		targets = get_tree().get_nodes_in_group("p2")
+	elif critter.is_in_group("all"):
+		targets = get_tree().get_nodes_in_group("p1") + get_tree().get_nodes_in_group("p2")
+	else:
+		targets.append(critter)
+	var action = Action.new(get_tree().get_nodes_in_group("p1")[p1CritterIndex], selectedMove, targets)
+	turnActions.append(action)
+	handleNextCritterTurn()
+
+func handleNextCritterTurn():
+	p1CritterIndex += 1
+	if p1CritterIndex >= get_tree().get_nodes_in_group("p1").size():
+		endTurn()
+		return 
+	$BattleUI.setMoves(get_tree().get_nodes_in_group("p1")[p1CritterIndex].getMoves())
+	get_tree().get_nodes_in_group("move_button").front().grab_focus()
+	
+func endTurn():
+	var rng = RandomNumberGenerator.new()
+	# determine who goes first with speed + effects
+	# calculate damage for all
+	for action in turnActions:
+		action.printInfo()
+		var movePower = action.getMove().getPower() / 2.0
+		# check physical vs range
+		var atk = action.getAttacker().getCritter().getAttackForCalc()
+		# check for STAB
+		for defender in action.getDefenders():
+			if rng.randf_range(0, 100) <= action.getMove().getAccuracy():
+				var randomness = rng.randf_range(.96, 1.04)
+				var def = defender.getCritter().getDefenseForCalc()
+				var typeAdvantage = typeManager.getAdvantage(action.getMove().getType(), defender.getCritter().getType())
+				defender.dealDamage(movePower * typeAdvantage * atk / def * randomness)
+			else:
+				print("Move missed")
+	# check arena conditions + 
+	# advance turn counter 1
+	startTurn()
+	pass
+	

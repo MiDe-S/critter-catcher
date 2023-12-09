@@ -39,3 +39,8 @@ func getTarget():
 func getPower():
 	return power
 	
+func getType():
+	return type
+	
+func getAccuracy():
+	return accuracy

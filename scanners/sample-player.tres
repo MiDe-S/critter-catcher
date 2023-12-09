@@ -24,7 +24,7 @@ defenseAdd = 0
 attackBase = 0
 defenseBase = 0
 critterInfo = ExtResource("2_7comv")
-health = 100
+health = 100.0
 
 [sub_resource type="Resource" id="Resource_1qp51"]
 script = ExtResource("4_kvwpf")
@@ -41,7 +41,7 @@ defenseAdd = 0
 attackBase = 0
 defenseBase = 0
 critterInfo = ExtResource("5_bq4h0")
-health = 100
+health = 100.0
 
 [resource]
 script = ExtResource("1_76hns")
