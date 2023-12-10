@@ -7,7 +7,8 @@
 script = ExtResource("1_miu8d")
 name = "Eruption"
 type = ExtResource("2_phmg2")
-power = 70
-accuracy = 100
+power = 100
+accuracy = 60
 description = "Oh no"
 target = 4
+attribute = 1

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Scanner" load_steps=11 format=3 uid="uid://svclorrbdkso"]
+[gd_resource type="Resource" script_class="Scanner" load_steps=12 format=3 uid="uid://svclorrbdkso"]
 
 [ext_resource type="Script" path="res://scanners/scanner-base.gd" id="1_76hns"]
 [ext_resource type="Resource" uid="uid://dr7ab7goceg6u" path="res://critters/critters/erdies-info.tres" id="2_7comv"]
@@ -7,39 +7,52 @@
 [ext_resource type="Resource" uid="uid://c6vjbgaigkvtx" path="res://moves/tsunami.tres" id="4_qtbvw"]
 [ext_resource type="Resource" uid="uid://d2johio30vnyj" path="res://critters/critters/ernox-info.tres" id="5_bq4h0"]
 [ext_resource type="Resource" uid="uid://pjqpe1v1ow74" path="res://moves/eruption.tres" id="5_yl288"]
+[ext_resource type="Resource" uid="uid://d00upfwdoaoxb" path="res://moves/block.tres" id="6_8xl86"]
 [ext_resource type="Resource" uid="uid://oyu8ijb6twy5" path="res://moves/slash.tres" id="6_uybgs"]
 
 [sub_resource type="Resource" id="Resource_frle4"]
 script = ExtResource("4_kvwpf")
 nickname = ""
-moves = Array[Resource("res://moves/move.gd")]([ExtResource("3_itvar"), ExtResource("4_qtbvw"), ExtResource("5_yl288")])
+moves = Array[Resource("res://moves/move.gd")]([ExtResource("3_itvar"), ExtResource("4_qtbvw"), ExtResource("5_yl288"), ExtResource("6_8xl86")])
 abilityIndex = 0
-level = 10
+level = 50
 experience = 0
 weight = 0
 healthAdd = 0
-healthBase = 0
 attackAdd = 0
 defenseAdd = 0
+rangeAttackAdd = 0
+rangeDefenseAdd = 0
+speedAdd = 0
+healthBase = 0
 attackBase = 0
 defenseBase = 0
+rangeAttackBase = 0
+rangeDefenseBase = 0
+speedBase = 0
 critterInfo = ExtResource("2_7comv")
 health = 100.0
 
 [sub_resource type="Resource" id="Resource_1qp51"]
 script = ExtResource("4_kvwpf")
 nickname = ""
-moves = Array[Resource("res://moves/move.gd")]([ExtResource("6_uybgs")])
+moves = Array[Resource("res://moves/move.gd")]([ExtResource("6_uybgs"), ExtResource("5_yl288")])
 abilityIndex = 0
-level = 10
+level = 50
 experience = 0
 weight = 0
 healthAdd = 0
-healthBase = 0
 attackAdd = 0
 defenseAdd = 0
+rangeAttackAdd = 0
+rangeDefenseAdd = 0
+speedAdd = 0
+healthBase = 0
 attackBase = 0
 defenseBase = 0
+rangeAttackBase = 0
+rangeDefenseBase = 0
+speedBase = 0
 critterInfo = ExtResource("5_bq4h0")
 health = 100.0
 

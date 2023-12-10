@@ -23,14 +23,23 @@ class_name CritterInfo
 func getName():
 	return name
 
+func getHealth():
+	return health
+
 func getAttack():
 	return attack
 	
 func getDefense():
 	return defense
 
-func getHealth():
-	return health
+func getRangeAttack():
+	return range_attack
+	
+func getRangeDefense():
+	return range_defense
+	
+func getSpeed():
+	return speed
 	
 func getType():
 	return type

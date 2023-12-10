@@ -32,8 +32,13 @@ func getSigName():
 	return "healthUpdater"
 
 func dealDamage(healthInput: float):
-	healthUpdater.emit(healthInput)
+	healthUpdater.emit(healthInput * critter.getDamageReduction())
 	
 func getType():
 	return critter.getType()
 
+func getLevel():
+	return critter.getLevel()
+
+func incrementTurn():
+	return critter.incrementTurn()

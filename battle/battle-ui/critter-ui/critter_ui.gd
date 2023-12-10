@@ -3,8 +3,8 @@ extends Node2D
 # Need to be added to use the HealthBar2D
 signal health_changed
 
-var maxHealth: int = 100
-var health := 100
+var maxHealth := 100.0
+var health := 100.0
 var _offset: Vector2 = Vector2(0, -100)
 
 

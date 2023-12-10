@@ -67,6 +67,8 @@ func startTurn():
 func _moveChosen(move):
 	selectedMove = move
 	match move.getTarget():
+		Move.targetType.SELF:
+			$Selector.setFocus([get_tree().get_nodes_in_group("p1")[p1CritterIndex]])
 		Move.targetType.SINGLE:
 			var options = get_tree().get_nodes_in_group("p2")
 			var i = 0
@@ -111,20 +113,39 @@ func endTurn():
 	# calculate damage for all
 	for action in turnActions:
 		action.printInfo()
-		var movePower = action.getMove().getPower() / 2.0
+		var movePower = action.getMove().getPower()  * min((0.3 + action.getAttacker().getLevel() / 100.0), 1.0)
 		# check physical vs range
-		var atk = action.getAttacker().getCritter().getAttackForCalc()
+		var atk
+		match action.getMove().getAttribute():
+			Move.attributeType.DIRECT:
+				atk = action.getAttacker().getCritter().getAttackForCalc()
+			Move.attributeType.RANGE:
+				atk = action.getAttacker().getCritter().getRangeAttackForCalc()
 		# check for STAB
 		for defender in action.getDefenders():
 			if rng.randf_range(0, 100) <= action.getMove().getAccuracy():
 				var randomness = rng.randf_range(.96, 1.04)
-				var def = defender.getCritter().getDefenseForCalc()
-				var typeAdvantage = typeManager.getAdvantage(action.getMove().getType(), defender.getCritter().getType())
-				defender.dealDamage(movePower * typeAdvantage * atk / def * randomness)
+				
+				
+				var def
+				match action.getMove().getAttribute():
+					Move.attributeType.DIRECT:
+						def = defender.getCritter().getDefenseForCalc()
+					Move.attributeType.RANGE:
+						def = defender.getCritter().getRangeDefenseForCalc()
+						
+				if action.getMove().getAttribute() != Move.attributeType.STATUS:
+					var typeAdvantage = typeManager.getAdvantage(action.getMove().getType(), defender.getCritter().getType())
+					defender.dealDamage(movePower * typeAdvantage * atk / def * randomness)
+				defender.getCritter().applyEffects(action.getMove().getEffects())
 			else:
 				print("Move missed")
 	# check arena conditions + 
 	# advance turn counter 1
+	for critter in get_tree().get_nodes_in_group("p1"):
+		critter.incrementTurn()
+	for critter in get_tree().get_nodes_in_group("p2"):
+		critter.incrementTurn()
 	startTurn()
 	pass
 	

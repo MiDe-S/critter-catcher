@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="Move" load_steps=5 format=3 uid="uid://d00upfwdoaoxb"]
+
+[ext_resource type="Script" path="res://moves/effects/stat-effect.gd" id="1_aq6vu"]
+[ext_resource type="Script" path="res://moves/move.gd" id="1_qgjxa"]
+[ext_resource type="Resource" uid="uid://cpmm2xqjt88x8" path="res://types/basic.tres" id="2_foh6c"]
+
+[sub_resource type="Resource" id="Resource_jdakg"]
+script = ExtResource("1_aq6vu")
+multiplier = 0.1
+stat = 5
+duration = 0
+
+[resource]
+script = ExtResource("1_qgjxa")
+name = "Block"
+type = ExtResource("2_foh6c")
+power = 0
+accuracy = 100
+description = ""
+target = 0
+attribute = 2
+effects = Array[Resource("res://moves/effects/effect.gd")]([SubResource("Resource_jdakg")])

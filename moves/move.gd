@@ -7,7 +7,9 @@ class_name Move
 @export var accuracy: int = 0
 @export var description: String = ""
 @export var target := targetType.SINGLE
-#@export var effects: Effects = Effects.EFFECT1
+@export var attribute := attributeType.DIRECT
+@export var effects: Array[Effect] = []
+@export var advantage: int
 #@export var placeholder: Effects = Effects.EFFECT1
 
 enum targetType {
@@ -16,6 +18,12 @@ enum targetType {
 	ENEMIES, # All 2 enemy
 	OTHERS, # All 3
 	ALL # All 4
+}
+
+enum attributeType {
+	DIRECT,
+	RANGE,
+	STATUS,
 }
 
 func _init(name_val = "", type_val = 0):
@@ -44,3 +52,9 @@ func getType():
 	
 func getAccuracy():
 	return accuracy
+	
+func getAttribute():
+	return attribute
+	
+func getEffects():
+	return effects

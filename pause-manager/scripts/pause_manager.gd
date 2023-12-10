@@ -65,8 +65,9 @@ func _input(event):
 			_input_event_pressed = false
 
 func _notification(what):
-	if what == NOTIFICATION_WM_WINDOW_FOCUS_OUT:
-		_pause()
+	#if what == NOTIFICATION_WM_WINDOW_FOCUS_OUT:
+	#	_pause()
+	pass
 
 func _toggle_pause() -> void:
 	if not is_paused():

@@ -6,4 +6,4 @@
 script = ExtResource("1_taql7")
 name = "Fire"
 color = "#ff7f50"
-image = "res://types/type-images/light.png"
+image = "res://types/type-images/fire.png"
