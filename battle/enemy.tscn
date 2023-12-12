@@ -12,4 +12,8 @@ playerInfo = ExtResource("2_roit1")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_rc1l7")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="Head2D" type="Sprite2D" parent="."]
+
+[node name="Body2D" type="Sprite2D" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]

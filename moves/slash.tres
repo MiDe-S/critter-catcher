@@ -12,3 +12,5 @@ accuracy = 95
 description = null
 target = null
 attribute = null
+effects = Array[Resource("res://moves/effects/effect.gd")]([])
+advantage = 0
