@@ -38,3 +38,11 @@ func find_bounds(vectors: Array):
 	
 func is_vector_inside_rect(vector: Vector2) -> bool:
 	return area.has_point(vector)
+
+func get_random_point() -> Vector2:
+	var x = area.position.x + randf_range(0, area.size.x)
+	var y = area.position.y + randf_range(0, area.size.y)
+	return Vector2(x, y)
+
+func get_spawn_cap():
+	return floor(area.size.x * area.size.y / 3500)

@@ -1,15 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://swa52up4h2sp"]
+[gd_scene load_steps=6 format=3 uid="uid://swa52up4h2sp"]
 
 [ext_resource type="TileSet" uid="uid://bhkhb116gcf8h" path="res://areas/tiles.tres" id="1_3s6dq"]
 [ext_resource type="Script" path="res://areas/area.gd" id="1_wotyu"]
 [ext_resource type="Script" path="res://areas/GrassMap.gd" id="2_gqcl4"]
+[ext_resource type="PackedScene" uid="uid://cu1sse78jdei2" path="res://critters/critter-wild.tscn" id="2_h25yi"]
 [ext_resource type="PackedScene" uid="uid://l8caa8o6ly33" path="res://battle/player.tscn" id="2_opqno"]
 
 [node name="Node2D" type="Node2D"]
 texture_filter = 1
 scale = Vector2(3, 3)
 script = ExtResource("1_wotyu")
-critter_scene = ExtResource("2_opqno")
+critter_scene = ExtResource("2_h25yi")
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource("1_3s6dq")
@@ -20,7 +21,7 @@ layer_1/name = "Grass"
 layer_1/enabled = true
 layer_1/modulate = Color(1, 1, 1, 1)
 layer_1/y_sort_enabled = false
-layer_1/y_sort_origin = 0
+layer_1/y_sort_origin = -1
 layer_1/z_index = 0
 layer_1/tile_data = PackedInt32Array(-196612, 3473409, 38, -196611, 3538945, 38, -196613, 3407873, 38, -131075, 3538945, 39, -131078, 3342337, 39, -131077, 3407873, 39, -131076, 3473409, 39, -196614, 3342337, 38, -65542, 3342337, 40, -65541, 3407873, 40, -65540, 3473409, 40, -65539, 3538945, 40)
 layer_2/name = "Tree"
@@ -38,15 +39,23 @@ format = 2
 layer_0/tile_data = PackedInt32Array(-65530, 65537, 42, -131066, 196609, 41, -196602, 196609, 41, -262138, 196609, 41, -327674, 196609, 41, -393210, 65537, 41, -65531, 327681, 43, -131067, 262145, 43, -196603, 196609, 43, -262139, 196609, 43, -327675, 327681, 43, -393211, 327681, 42, -65532, 327681, 43, -131068, 196609, 43, -196604, 327681, 40, -262140, 327681, 40, -327676, 131073, 42, -393212, 131073, 41, -65533, 327681, 42, -131069, 327681, 43, -196605, 131073, 43, -262141, 196609, 43, -327677, 262145, 43, -393213, 131073, 42, -65534, 131073, 42, -131070, 196609, 43, -196606, 327681, 43, -262142, 327681, 43, -327678, 327681, 43, -393214, 262145, 43, -65535, 1, 42, -131071, 262145, 41, -196607, 262145, 41, -262143, 262145, 41, -327679, 262145, 41, -393215, 1, 41, -458751, 1, 40, -458750, 196609, 44, -458749, 65537, 44, -458748, 65537, 44, -458747, 196609, 44, -458746, 65537, 40, 5, 196609, 49, 4, 262145, 49, 3, 262145, 49, 2, 262145, 49, 1, 1, 43, 6, 65537, 43)
 script = ExtResource("2_gqcl4")
 
-[node name="Player" parent="." instance=ExtResource("2_opqno")]
-
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
-remote_path = NodePath("../../Camera2D")
-
 [node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(-4.33333, 31.3333)
 
 [node name="CritterSpawner" type="Timer" parent="."]
-wait_time = 10.0
+wait_time = 3.0
 autostart = true
+
+[node name="YSortHelper" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="Player" parent="YSortHelper" instance=ExtResource("2_opqno")]
+position = Vector2(-4.33333, 31.3333)
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="YSortHelper/Player"]
+remote_path = NodePath("../../../Camera2D")
+
+[node name="critter-wild" parent="YSortHelper" instance=ExtResource("2_h25yi")]
+position = Vector2(28.3333, 63)
 
 [connection signal="timeout" from="CritterSpawner" to="." method="_on_critter_spawner_timeout"]

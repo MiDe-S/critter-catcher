@@ -1,6 +1,7 @@
 extends Node2D
 
-@export var critter_scene: PackedScene 
+@export var critter_scene: PackedScene
+@onready var spawn_cap = $GrassMap.get_spawn_cap()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -15,9 +16,8 @@ func _process(delta):
 
 
 func _on_critter_spawner_timeout():
-	pass # Replace with function body.
-	var critter = critter_scene.instantiate()
-	# pick random area in square
-	# set critter position to that point
-	# mob.position = mob_spawn_location.position
-	add_child(critter)
+	var critters = get_tree().get_nodes_in_group("critter")
+	if critters.size() < spawn_cap:
+		var critter = critter_scene.instantiate()
+		critter.position = $GrassMap.get_random_point()
+		$YSortHelper.add_child(critter)

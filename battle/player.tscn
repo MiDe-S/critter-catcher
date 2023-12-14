@@ -157,7 +157,7 @@ _data = {
 }
 
 [node name="Player" type="CharacterBody2D"]
-collision_mask = 11
+collision_mask = 27
 script = ExtResource("1_0efw3")
 playerInfo = ExtResource("2_tj3gp")
 
@@ -171,7 +171,6 @@ libraries = {
 }
 
 [node name="Body2D" type="Sprite2D" parent="."]
-z_index = 1
 texture_filter = 1
 texture = ExtResource("3_hcr2s")
 hframes = 4
