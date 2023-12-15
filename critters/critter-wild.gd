@@ -1,21 +1,49 @@
 extends CharacterBody2D
 
+signal battle_start
 
-const SPEED = 300.0
+const SLOW = 10.0
+const SPEED = 150.0
+const TIMER = 1
+var current_time = TIMER
+var state = MOVEMENT_STATES.IDLE
+var tracking
 
 @onready var start_position: Vector2 = get_position()
-@onready var target_position: Vector2 = generate_target()
+@onready var target_position: Vector2 = generateTarget()
+@onready var nav_agent = $NavigationAgent2D
 
-func generate_target():
-	return Vector2(randf_range(start_position.x-32, start_position.x+32), randf_range(start_position.y-32, start_position.y+32))
+enum MOVEMENT_STATES {
+	IDLE,
+	WANDER,
+	FOLLOW,
+	RUN
+} 
+
+func generateTarget():
+	var dis = randf_range(0, 20)
+	return Vector2(randf_range(start_position.x-dis, start_position.x+dis), randf_range(start_position.y-dis, start_position.y+dis))
 
 func _physics_process(delta):
-	if (get_position() - target_position).length() > 1:
-		var direction = (target_position - get_position()).normalized()
-		var acceleration_vector = direction * SPEED * delta
-		velocity += acceleration_vector
-	else:
-		target_position = generate_target()
+	match state:
+		MOVEMENT_STATES.IDLE:
+			velocity.x = move_toward(velocity.x, 0, SLOW)
+			velocity.y = move_toward(velocity.y, 0, SLOW)
+			current_time -= delta
+			if current_time < 0:
+				target_position = generateTarget()
+				state = MOVEMENT_STATES.WANDER
+		MOVEMENT_STATES.WANDER:
+			if (get_position() - target_position).length() > 1:
+				var direction = (target_position - get_position()).normalized()
+				velocity = direction * SPEED
+			else:
+				state = MOVEMENT_STATES.IDLE
+				current_time = TIMER
+		MOVEMENT_STATES.FOLLOW:
+			var direction = to_local(nav_agent.get_next_path_position()).normalized()
+			velocity = direction * SPEED
+			nav_agent.set_velocity(velocity)
 
 	if velocity == Vector2.ZERO:
 		$AnimationPlayer.stop()
@@ -29,3 +57,19 @@ func _physics_process(delta):
 		$AnimationPlayer.play("down")
 		
 	move_and_slide()
+	for i in get_slide_collision_count():
+		if get_slide_collision(i).get_collider() is Player:
+			battle_start.emit()
+
+
+
+func _on_target_detection_body_entered(body):
+	tracking = body
+	nav_agent.target_position = body.global_position
+	# if player is higher level than self, run
+	# have target range increased based on player level ? 
+	state = MOVEMENT_STATES.FOLLOW
+	$Timer.start()
+
+func _on_timer_timeout():
+	nav_agent.target_position = tracking.global_position

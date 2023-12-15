@@ -1,12 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://cu1sse78jdei2"]
+[gd_scene load_steps=12 format=3 uid="uid://cu1sse78jdei2"]
 
 [ext_resource type="Texture2D" uid="uid://dfqu6k3tyodym" path="res://critters/critter-images/critter-shadow-body.png" id="1_hdqf5"]
 [ext_resource type="Script" path="res://critters/critter-wild.gd" id="1_k6mq5"]
 [ext_resource type="Texture2D" uid="uid://vp21a012mxd8" path="res://critters/critter-images/critter-shadow-head.png" id="2_bkbqx"]
 
-[sub_resource type="Animation" id="Animation_snla8"]
-resource_name = "up"
-length = 0.5
+[sub_resource type="Animation" id="Animation_p05a6"]
+length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -14,10 +13,10 @@ tracks/0/path = NodePath("HeadSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [4, 5]
+"values": [0]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -26,10 +25,10 @@ tracks/1/path = NodePath("BodySprite:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [4, 5]
+"values": [0]
 }
 
 [sub_resource type="Animation" id="Animation_onlub"]
@@ -61,31 +60,33 @@ tracks/1/keys = {
 "values": [0, 1]
 }
 
-[sub_resource type="Animation" id="Animation_p05a6"]
-length = 0.001
+[sub_resource type="Animation" id="Animation_r5og8"]
+resource_name = "left"
+length = 0.5
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("HeadSprite:frame")
+tracks/0/path = NodePath("BodySprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [0]
+"values": [6, 7]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("BodySprite:frame")
+tracks/1/path = NodePath("HeadSprite:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [0]
+"values": [6, 7]
 }
 
 [sub_resource type="Animation" id="Animation_75d52"]
@@ -117,33 +118,32 @@ tracks/1/keys = {
 "values": [2, 3]
 }
 
-[sub_resource type="Animation" id="Animation_r5og8"]
-resource_name = "left"
+[sub_resource type="Animation" id="Animation_snla8"]
+resource_name = "up"
 length = 0.5
-loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("BodySprite:frame")
+tracks/0/path = NodePath("HeadSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [6, 7]
+"values": [4, 5]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("HeadSprite:frame")
+tracks/1/path = NodePath("BodySprite:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [6, 7]
+"values": [4, 5]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xttql"]
@@ -158,10 +158,15 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qlc1m"]
 size = Vector2(14, 4)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_rh7sn"]
+radius = 82.0061
+
 [node name="critter-wild" type="CharacterBody2D" groups=["critter"]]
 texture_filter = 1
 collision_layer = 16
-collision_mask = 26
+collision_mask = 11
+motion_mode = 1
+wall_min_slide_angle = 0.0
 script = ExtResource("1_k6mq5")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -184,3 +189,21 @@ vframes = 4
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 3)
 shape = SubResource("RectangleShape2D_qlc1m")
+
+[node name="TargetDetection" type="Area2D" parent="."]
+collision_layer = 512
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TargetDetection"]
+shape = SubResource("CircleShape2D_rh7sn")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+avoidance_enabled = true
+radius = 20.0
+avoidance_layers = 16
+avoidance_mask = 16
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.25
+
+[connection signal="body_entered" from="TargetDetection" to="." method="_on_target_detection_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
