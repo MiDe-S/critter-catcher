@@ -1,0 +1,32 @@
+[gd_scene load_steps=2 format=3 uid="uid://c2fjsnt3i2b0y"]
+
+[ext_resource type="Texture2D" uid="uid://dc75e7tvdi4ap" path="res://areas/art/Overworld.png" id="1_shgia"]
+
+[node name="house" type="Node2D"]
+texture_filter = 1
+metadata/_edit_group_ = true
+
+[node name="House" type="Sprite2D" parent="."]
+position = Vector2(0, -35)
+texture = ExtResource("1_shgia")
+region_enabled = true
+region_rect = Rect2(96, 0, 80, 80)
+
+[node name="Door" type="Sprite2D" parent="."]
+position = Vector2(0, -11)
+texture = ExtResource("1_shgia")
+region_enabled = true
+region_rect = Rect2(256, 64, 16, 32)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(0, -35)
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(7, 35, 7, 15, -7, 15, -7, 35, -31, 36, -32, -4, 31, -4, 31, 35)
+
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="."]
+position = Vector2(0, -20)
+radius = 38.0
+avoidance_layers = 2

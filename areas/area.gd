@@ -1,8 +1,10 @@
-extends Node2D
+extends ColorRect
 
 @export var spawnInfo: Array[AreaSpawnInfo]
 @export var critter_scene: PackedScene
-@onready var spawn_cap = $GrassMap.getSpawnCap()
+@export var spawn_cap := 1
+
+var total_spawned = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -14,16 +16,18 @@ func _process(delta):
 	#$GrassMap.is_vector_inside_rect($Player.get_position())
 	pass
 	
-
+func getRandomPoint():
+	var x = randf_range(0, get_size().x)
+	var y = randf_range(0, get_size().y)
+	return get_position() + Vector2(x,y)
 
 func _on_critter_spawner_timeout():
-	var critters = get_tree().get_nodes_in_group("critter")
-	if critters.size() < spawn_cap:
+	if total_spawned < spawn_cap:
 		var critter = critter_scene.instantiate()
-		# do this by layer index
-		critter.position = $GrassMap.getRandomPoint()
+		critter.position = getRandomPoint()
 		critter.connect("battle_start", _initiateCombat)
-		$YSortHelper.add_child(critter)
+		get_tree().current_scene.get_node("YSortHelper").add_child(critter)
+		total_spawned += 1
 
 func _initiateCombat():
 	print("Fight")

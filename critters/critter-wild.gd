@@ -2,8 +2,8 @@ extends CharacterBody2D
 
 signal battle_start
 
-const SLOW = 10.0
-const SPEED = 150.0
+const SLOW = 5.0
+const SPEED = 50.0
 const TIMER = 1
 var current_time = TIMER
 var state = MOVEMENT_STATES.IDLE
@@ -42,8 +42,8 @@ func _physics_process(delta):
 				current_time = TIMER
 		MOVEMENT_STATES.FOLLOW:
 			var direction = to_local(nav_agent.get_next_path_position()).normalized()
-			velocity = direction * SPEED
-			nav_agent.set_velocity(velocity)
+			var calc_velocity = direction * SPEED
+			nav_agent.set_velocity(calc_velocity)
 
 	if velocity == Vector2.ZERO:
 		$AnimationPlayer.stop()
@@ -55,12 +55,12 @@ func _physics_process(delta):
 		$AnimationPlayer.play("left")
 	elif velocity.y > 0:
 		$AnimationPlayer.play("down")
-		
 	move_and_slide()
-	for i in get_slide_collision_count():
-		if get_slide_collision(i).get_collider() is Player:
-			battle_start.emit()
 
+
+func move(velocityInput: Vector2):
+	velocity = velocityInput
+	move_and_slide()
 
 
 func _on_target_detection_body_entered(body):
@@ -73,3 +73,7 @@ func _on_target_detection_body_entered(body):
 
 func _on_timer_timeout():
 	nav_agent.target_position = tracking.global_position
+	
+func _battleStart():
+	print("hi")
+	battle_start.emit()

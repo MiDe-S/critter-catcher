@@ -26,6 +26,8 @@ var typeManager: TypeManger = TypeManger.new()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	$Player.get_node("Camera2D").enabled = false
+	
 	setUpPlayers($Player.getCritters())
 	setUpPlayers($Enemy.getCritters(), false)
 	#$Selector.setFocus(selectableOptions)

@@ -176,34 +176,42 @@ libraries = {
 }
 
 [node name="BodySprite" type="Sprite2D" parent="."]
+position = Vector2(0, -5)
 texture = ExtResource("1_hdqf5")
 hframes = 2
 vframes = 4
 
 [node name="HeadSprite" type="Sprite2D" parent="."]
-z_index = 3
+position = Vector2(0, -5)
 texture = ExtResource("2_bkbqx")
 hframes = 2
 vframes = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 3)
+position = Vector2(0, -2)
 shape = SubResource("RectangleShape2D_qlc1m")
 
 [node name="TargetDetection" type="Area2D" parent="."]
+position = Vector2(0, -5)
 collision_layer = 512
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TargetDetection"]
 shape = SubResource("CircleShape2D_rh7sn")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_desired_distance = 5.0
+target_desired_distance = 15.0
+path_postprocessing = 1
 avoidance_enabled = true
-radius = 20.0
-avoidance_layers = 16
-avoidance_mask = 16
+radius = 5.0
+avoidance_layers = 0
+avoidance_mask = 2
+debug_enabled = true
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.25
 
 [connection signal="body_entered" from="TargetDetection" to="." method="_on_target_detection_body_entered"]
+[connection signal="target_reached" from="NavigationAgent2D" to="." method="_battleStart"]
+[connection signal="velocity_computed" from="NavigationAgent2D" to="." method="move"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

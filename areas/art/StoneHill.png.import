@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b47nup2haworp"
-path="res://.godot/imported/font.png-78085f3af23be4f01281cc55320f48f7.ctex"
+uid="uid://cu70bttdqhov3"
+path="res://.godot/imported/StoneHill.png-c638ed117828d50f571b22bc1c2c1947.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://areas/art/font.png"
-dest_files=["res://.godot/imported/font.png-78085f3af23be4f01281cc55320f48f7.ctex"]
+source_file="res://areas/art/StoneHill.png"
+dest_files=["res://.godot/imported/StoneHill.png-c638ed117828d50f571b22bc1c2c1947.ctex"]
 
 [params]
 

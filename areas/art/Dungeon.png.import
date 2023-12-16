@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b40ws4eieycyp"
-path="res://.godot/imported/base_out_atlas.png-210d31dc85693be0634d92294f2ab251.ctex"
+uid="uid://cvh6s3hxhkd7w"
+path="res://.godot/imported/Dungeon.png-958f453992a12a4747aa6129e0176ede.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://areas/art/base_out_atlas.png"
-dest_files=["res://.godot/imported/base_out_atlas.png-210d31dc85693be0634d92294f2ab251.ctex"]
+source_file="res://areas/art/Dungeon.png"
+dest_files=["res://.godot/imported/Dungeon.png-958f453992a12a4747aa6129e0176ede.ctex"]
 
 [params]
 

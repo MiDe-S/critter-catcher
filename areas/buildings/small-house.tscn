@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://cuiksbbocbjhd"]
+
+[ext_resource type="Texture2D" uid="uid://dc75e7tvdi4ap" path="res://areas/art/Overworld.png" id="1_l6g4g"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u40p2"]
+size = Vector2(20, 12)
+
+[node name="small-house" type="Node2D"]
+texture_filter = 1
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -21)
+texture = ExtResource("1_l6g4g")
+region_enabled = true
+region_rect = Rect2(208, 80, 32, 48)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(0, -6)
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_u40p2")

@@ -18,6 +18,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 Pause="*res://pause-manager/prefabs/pause_manager.tscn"
+DebugMenu="*res://addons/debug_menu/debug_menu.tscn"
 
 [display]
 
@@ -28,7 +29,7 @@ window/stretch/aspect="expand"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/health_bar_2d/plugin.cfg")
+enabled=PackedStringArray("res://addons/debug_menu/plugin.cfg", "res://addons/health_bar_2d/plugin.cfg")
 
 [input]
 
@@ -66,6 +67,7 @@ move_down={
 2d_physics/layer_4="NPC"
 2d_physics/layer_5="Critter"
 2d_physics/layer_10="PlayerTarget"
+avoidance/layer_2="Obstacles"
 
 [rendering]
 
