@@ -1,0 +1,49 @@
+[gd_scene load_steps=9 format=3 uid="uid://bli4s6605nelh"]
+
+[ext_resource type="Script" path="res://battle/Battle.gd" id="1_f0pd2"]
+[ext_resource type="PackedScene" uid="uid://b7ik2644mtetq" path="res://battle/battle-ui/selector.tscn" id="2_3innm"]
+[ext_resource type="PackedScene" uid="uid://cau0um2ta1bbi" path="res://battle/battle_ui.tscn" id="3_knewc"]
+[ext_resource type="PackedScene" uid="uid://l8caa8o6ly33" path="res://battle/player.tscn" id="4_58nw4"]
+[ext_resource type="PackedScene" uid="uid://bgurn8tmt6awv" path="res://battle/enemy.tscn" id="5_tcq5x"]
+[ext_resource type="PackedScene" uid="uid://df56bqij4lnw0" path="res://battle/battle-ui/selector/selector-region.tscn" id="6_2ttlb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7g83l"]
+size = Vector2(227, 240)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e408j"]
+size = Vector2(1133, 248)
+
+[node name="SingleBattle" type="Node2D" node_paths=PackedStringArray("leftPositions", "rightPositions", "opposingSide", "all")]
+script = ExtResource("1_f0pd2")
+leftPositions = [NodePath("LeftSpawn")]
+rightPositions = [NodePath("RightSpawn")]
+opposingSide = [NodePath("OpposingSide")]
+all = [NodePath("All")]
+
+[node name="LeftSpawn" type="Node2D" parent="."]
+position = Vector2(179, 330)
+
+[node name="RightSpawn" type="Node2D" parent="."]
+position = Vector2(1071, 339)
+
+[node name="Selector" parent="." instance=ExtResource("2_3innm")]
+
+[node name="Player" parent="." instance=ExtResource("4_58nw4")]
+
+[node name="Enemy" parent="." instance=ExtResource("5_tcq5x")]
+
+[node name="BattleUI" parent="." instance=ExtResource("3_knewc")]
+
+[node name="OpposingSide" parent="." instance=ExtResource("6_2ttlb")]
+position = Vector2(1069, 341)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OpposingSide"]
+position = Vector2(-3, -9)
+shape = SubResource("RectangleShape2D_7g83l")
+
+[node name="All" parent="." instance=ExtResource("6_2ttlb")]
+position = Vector2(613, 331)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="All"]
+position = Vector2(2, -1)
+shape = SubResource("RectangleShape2D_e408j")

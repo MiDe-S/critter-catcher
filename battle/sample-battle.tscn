@@ -13,8 +13,12 @@ size = Vector2(302, 520)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1qm0m"]
 size = Vector2(1006, 461)
 
-[node name="Battle" type="Node"]
+[node name="Battle" type="Node" node_paths=PackedStringArray("leftPositions", "rightPositions", "opposingSide", "all")]
 script = ExtResource("1_krkkt")
+leftPositions = [NodePath("LeftSpawnTop"), NodePath("LeftSpawnBottom")]
+rightPositions = [NodePath("RightSpawnTop"), NodePath("RightSpawnBottom")]
+opposingSide = [NodePath("OpposingSide")]
+all = [NodePath("All")]
 
 [node name="Selector" parent="." instance=ExtResource("5_a8y1d")]
 
@@ -36,20 +40,21 @@ position = Vector2(1038, 421)
 
 [node name="Enemy" parent="." instance=ExtResource("4_4p4f5")]
 
-[node name="SelectorRegion" parent="." groups=["side"] instance=ExtResource("6_i1is2")]
+[node name="OpposingSide" parent="." instance=ExtResource("6_i1is2")]
 position = Vector2(1040, 275)
+collision_layer = 0
+collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SelectorRegion"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OpposingSide"]
 position = Vector2(1, -1)
 shape = SubResource("RectangleShape2D_jw77u")
 disabled = true
 
-[node name="SelectorRegion2" parent="." groups=["all"] instance=ExtResource("6_i1is2")]
+[node name="All" parent="." instance=ExtResource("6_i1is2")]
 position = Vector2(638, 292)
+collision_layer = 0
+collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SelectorRegion2"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="All"]
 position = Vector2(-2, 1.5)
 shape = SubResource("RectangleShape2D_1qm0m")
-
-[connection signal="selection" from="Selector" to="." method="_critterChosen"]
-[connection signal="moveChosen" from="BattleUI" to="." method="_moveChosen"]

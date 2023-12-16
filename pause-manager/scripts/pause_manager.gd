@@ -64,8 +64,8 @@ func _input(event):
 		else:
 			_input_event_pressed = false
 
-func _notification(what):
-	#if what == NOTIFICATION_WM_WINDOW_FOCUS_OUT:
+func _notification(_what):
+	#if _what == NOTIFICATION_WM_WINDOW_FOCUS_OUT:
 	#	_pause()
 	pass
 
@@ -113,19 +113,19 @@ func _resume() -> void:
 		if use_event_handlers:
 			emit_handlers(get_tree().root, false)
 
-func emit_handlers(node : Node, pause : bool = true) -> void:
+func emit_handlers(node : Node, paused : bool = true) -> void:
 	var pause_event_handler_node
 	for child in node.get_children():
 		pause_event_handler_node = child.get_node_or_null("PauseEventHandler")
 		
 		if pause_event_handler_node != null:
-			pause_event_handler_node.emit_toggle(pause)
-			if pause:
+			pause_event_handler_node.emit_toggle(paused)
+			if paused:
 				pause_event_handler_node.emit_pause()
 			else:
 				pause_event_handler_node.emit_resume()
 		
-		emit_handlers(child, pause)
+		emit_handlers(child, paused)
 
 func append_action(action: StringName) -> void:
 	if not action_names.has(action):

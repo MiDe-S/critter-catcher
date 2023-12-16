@@ -1,7 +1,10 @@
 extends CharacterBody2D
 class_name Player
 
-@export var playerInfo: Scanner
+var playerInfo
+
+func _ready():
+	playerInfo = PlayerManager.getPlayerInfo()
 
 func getCritters():
 	return playerInfo.getCritters()
@@ -9,7 +12,7 @@ func getCritters():
 const SPEED = 150.0
 const JUMP_VELOCITY = -400.0
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	# Add the gravity.
 
 	# Get the input direction and handle the movement/deceleration.
@@ -42,13 +45,3 @@ func _physics_process(delta):
 		
 	move_and_slide()
 
-func _input(event):
-	pass
-	#if event.is_action_pressed("move_down"):
-	#	$AnimatedSprite2D.play("down")
-	#elif event.is_action_pressed("move_up"):
-	#	$AnimatedSprite2D.play("up")
-	#elif event.is_action_pressed("move_left"):
-	#	$AnimatedSprite2D.play("left")
-	#elif event.is_action_pressed("move_right"):
-	#	$AnimatedSprite2D.play("right")

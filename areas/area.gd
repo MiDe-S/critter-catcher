@@ -4,17 +4,12 @@ extends ColorRect
 @export var critter_scene: PackedScene
 @export var spawn_cap := 1
 
+var battle_scene = preload("res://battle/battle-single/Battle.tscn")
 var total_spawned = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	#$GrassMap.is_vector_inside_rect($Player.get_position())
-	pass
 	
 func getRandomPoint():
 	var x = randf_range(0, get_size().x)
@@ -30,4 +25,8 @@ func _on_critter_spawner_timeout():
 		total_spawned += 1
 
 func _initiateCombat():
-	print("Fight")
+	var battle = battle_scene.instantiate()
+	var current = get_tree().current_scene
+	battle.setMapScene(current)
+	get_tree().get_root().add_child(battle)
+	get_tree().get_root().remove_child(current)

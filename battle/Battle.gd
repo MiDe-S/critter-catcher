@@ -10,10 +10,15 @@ var p1CritterIndex = 0
 var selectedMove: Move = null
 var turnActions: Array[Action]
 
-var leftPositions = ["LeftSpawnTop", "LeftSpawnBottom"]
-var rightPositions = ["RightSpawnTop", "RightSpawnBottom"]
+@export var leftPositions: Array[Node2D]
+@export var rightPositions: Array[Node2D]
+
+@export var opposingSide: Array[Node2D]
+@export var all: Array[Node2D]
 
 var typeManager: TypeManger = TypeManger.new()
+
+var _mapScene
 
 ### Turn
 ## Select Move on critter 1
@@ -24,30 +29,34 @@ var typeManager: TypeManger = TypeManger.new()
 ### Resolve turn
 ### Repeat
 
+func setMapScene(scene):
+	_mapScene = scene
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$Player.get_node("Camera2D").enabled = false
+	
+	$Selector.connect("selection", _critterChosen)
+	$BattleUI.connect("moveChosen", _moveChosen)
 	
 	setUpPlayers($Player.getCritters())
 	setUpPlayers($Enemy.getCritters(), false)
 	#$Selector.setFocus(selectableOptions)
 	startTurn()
 	# global position might work for button?
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
 
 func setUpPlayers(critters, p1: bool = true):
 	var i = 0
-	for critter in critters:
-		var critInstance = load(critterPath + critter.getName() + critterFormat).instantiate()
+	for pos in leftPositions:
+		var critter = critters[i]
+		var critInstance = load(critterPath + critter.getName().to_lower() + critterFormat).instantiate()
 		critInstance.setCritter(critter)
 		if p1:
 			critInstance.add_to_group("p1")
-			critInstance.position = get_node(leftPositions[i]).position
+			critInstance.position = leftPositions[i].position
 		else:
 			critInstance.add_to_group("p2")
-			critInstance.position = get_node(rightPositions[i]).position
+			critInstance.position = rightPositions[i].position
 			critInstance.faceLeft()
 			
 		var critUi = load(critterUIPath).instantiate()
@@ -80,9 +89,9 @@ func _moveChosen(move):
 				i += 1
 			$Selector.setFocus(options)
 		Move.targetType.ENEMIES:
-			$Selector.setFocus(get_tree().get_nodes_in_group("side"))
+			$Selector.setFocus(opposingSide)
 		Move.targetType.ALL:
-			$Selector.setFocus(get_tree().get_nodes_in_group("all"))
+			$Selector.setFocus(all)
 			
 func _critterChosen(critter):
 	var targets: Array[Node] = []
@@ -91,9 +100,9 @@ func _critterChosen(critter):
 		get_tree().get_nodes_in_group("move_button")[0].grab_focus()
 		selectedMove = null
 		return;
-	elif critter.is_in_group("side"):
+	elif critter in opposingSide:
 		targets = get_tree().get_nodes_in_group("p2")
-	elif critter.is_in_group("all"):
+	elif critter in all:
 		targets = get_tree().get_nodes_in_group("p1") + get_tree().get_nodes_in_group("p2")
 	else:
 		targets.append(critter)

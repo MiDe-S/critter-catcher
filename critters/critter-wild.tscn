@@ -206,7 +206,6 @@ avoidance_enabled = true
 radius = 5.0
 avoidance_layers = 0
 avoidance_mask = 2
-debug_enabled = true
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.25

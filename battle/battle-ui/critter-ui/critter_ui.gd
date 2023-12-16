@@ -11,9 +11,6 @@ var _offset: Vector2 = Vector2(0, -100)
 func _ready() -> void:
 	pass
 
-func _process(delta) -> void:
-	pass
-
 func initialize(nameInput, levelInput: int, maxHealthInput, sigName):
 	maxHealth = maxHealthInput
 	health = maxHealth

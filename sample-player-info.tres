@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="PlayerInfo" load_steps=3 format=3 uid="uid://c3f1qhvj053vw"]
+
+[ext_resource type="Script" path="res://player-info.gd" id="1_26ihp"]
+[ext_resource type="Resource" uid="uid://dbje1dg3hd1ha" path="res://scanners/sample-player-team.tres" id="2_5s2bn"]
+
+[resource]
+script = ExtResource("1_26ihp")
+name = ""
+team = ExtResource("2_5s2bn")

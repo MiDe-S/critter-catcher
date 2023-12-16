@@ -12,9 +12,6 @@ func _ready():
 	hide()
 	pass # Replace with function body.
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
 
 func hide():
 	for node in self.get_children():
@@ -72,10 +69,6 @@ func deactivate():
 	hide()
 	
 func getNodeSize(node):
-	if node.is_in_group("p1") or node.is_in_group("p2"):
-		return node.get_node("CollisionShape2D").shape.get_size()
-	if node.is_in_group("move_button"):
-		return node.get("size")
-	if node.is_in_group("side") or node.is_in_group("all"):
-		return node.get_node("CollisionShape2D").shape.get_size()
-	assert(false, "Unknown group in selecter options")
+	return node.get_node("CollisionShape2D").shape.get_size()
+	# TODO change to use object type
+	# assert(false, "Unknown group in selecter options")

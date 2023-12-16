@@ -1,13 +1,13 @@
 [gd_scene load_steps=4 format=3 uid="uid://bgurn8tmt6awv"]
 
-[ext_resource type="Script" path="res://player.gd" id="1_vukad"]
-[ext_resource type="Resource" uid="uid://citxi23y0y1i7" path="res://scanners/sample-enemy.tres" id="2_roit1"]
+[ext_resource type="Script" path="res://scanners/npc.gd" id="1_csgmo"]
+[ext_resource type="Resource" uid="uid://cwv0edg868gk4" path="res://scanners/sample-enemy-team.tres" id="2_wym7c"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rc1l7"]
 
 [node name="Enemy" type="CharacterBody2D"]
-script = ExtResource("1_vukad")
-playerInfo = ExtResource("2_roit1")
+script = ExtResource("1_csgmo")
+team = ExtResource("2_wym7c")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_rc1l7")
