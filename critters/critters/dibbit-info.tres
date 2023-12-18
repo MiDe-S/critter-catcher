@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="CritterInfo" load_steps=3 format=3 uid="uid://cbe8lhdunca8"]
+
+[ext_resource type="Script" path="res://critters/critter-base.gd" id="1_uk4bw"]
+[ext_resource type="Resource" uid="uid://cpmm2xqjt88x8" path="res://types/basic.tres" id="2_7vq0e"]
+
+[resource]
+script = ExtResource("1_uk4bw")
+id = 0
+name = "Dibbit"
+type = Array[Resource("res://types/type-base.gd")]([ExtResource("2_7vq0e")])
+description = ""
+catch_rate = 0
+health = 18
+attack = 19
+defense = 14
+range_attack = 16
+range_defense = 13
+speed = 30

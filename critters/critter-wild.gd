@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-signal battle_start
+signal battle_start(critterOut: Critter)
 
 const SLOW = 5.0
 const SPEED = 50.0
@@ -8,6 +8,7 @@ const TIMER = 1
 var current_time = TIMER
 var state = MOVEMENT_STATES.IDLE
 var tracking
+var critter: Critter
 
 @onready var start_position: Vector2 = get_position()
 @onready var target_position: Vector2 = generateTarget()
@@ -19,6 +20,9 @@ enum MOVEMENT_STATES {
 	FOLLOW,
 	RUN
 } 
+
+func setCritter(critterInput: Critter):
+	critter = critterInput
 
 func generateTarget():
 	var dis = randf_range(0, 20)
@@ -76,4 +80,4 @@ func _on_timer_timeout():
 	
 func _battleStart():
 	print("hi")
-	battle_start.emit()
+	battle_start.emit(critter)

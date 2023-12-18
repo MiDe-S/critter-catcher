@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://b16eo7ku65l5m"]
+[gd_scene load_steps=21 format=3 uid="uid://b16eo7ku65l5m"]
 
 [ext_resource type="Shader" path="res://areas/water.gdshader" id="1_1hq53"]
 [ext_resource type="PackedScene" uid="uid://bv4g5pkonn1tg" path="res://areas/y_sort_helper.tscn" id="1_i0np8"]
@@ -9,6 +9,11 @@
 [ext_resource type="PackedScene" uid="uid://ct38fxy8y54aa" path="res://areas/buildings/wide-castle.tscn" id="5_v543v"]
 [ext_resource type="PackedScene" uid="uid://l8caa8o6ly33" path="res://battle/player.tscn" id="8_l4tu7"]
 [ext_resource type="PackedScene" uid="uid://dyf5lh1iyf4p1" path="res://areas/spawn-area.tscn" id="9_f771t"]
+[ext_resource type="Script" path="res://areas/area-spawn-info.gd" id="10_je7of"]
+[ext_resource type="Resource" uid="uid://ghx60eun4heb" path="res://critters/critters/boud-info.tres" id="10_w2qs2"]
+[ext_resource type="Resource" uid="uid://ct3f40orubwb0" path="res://critters/critters/betajay-info.tres" id="12_rf5cj"]
+[ext_resource type="Resource" uid="uid://cbe8lhdunca8" path="res://critters/critters/dibbit-info.tres" id="13_vy4jr"]
+[ext_resource type="Resource" uid="uid://bf3cgbyv1qevj" path="res://critters/critters/millo-info.tres" id="14_7vi2e"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_e0tum"]
 shader = ExtResource("1_1hq53")
@@ -18,6 +23,41 @@ shader_parameter/FOAM_COL = Color(0.8125, 0.9609, 0.9648, 1)
 shader_parameter/distortion_speed = 2.0
 shader_parameter/tile = Vector2(35, 35)
 shader_parameter/wave_speed = 0.8
+
+[sub_resource type="Resource" id="Resource_0k0t6"]
+script = ExtResource("10_je7of")
+critter = ExtResource("10_w2qs2")
+frequency = 1.0
+levelMin = 3
+levelMax = 5
+
+[sub_resource type="Resource" id="Resource_ptu7r"]
+script = ExtResource("10_je7of")
+critter = ExtResource("12_rf5cj")
+frequency = 1.0
+levelMin = 3
+levelMax = 6
+
+[sub_resource type="Resource" id="Resource_nhab6"]
+script = ExtResource("10_je7of")
+critter = ExtResource("13_vy4jr")
+frequency = 1.0
+levelMin = 3
+levelMax = 5
+
+[sub_resource type="Resource" id="Resource_s6e8x"]
+script = ExtResource("10_je7of")
+critter = ExtResource("14_7vi2e")
+frequency = 1.0
+levelMin = 2
+levelMax = 4
+
+[sub_resource type="Resource" id="Resource_5ok5p"]
+script = ExtResource("10_je7of")
+critter = ExtResource("13_vy4jr")
+frequency = 1.0
+levelMin = 2
+levelMax = 4
 
 [node name="jade-town" type="Node2D"]
 
@@ -85,10 +125,12 @@ offset_left = 300.0
 offset_top = 540.0
 offset_right = 468.0
 offset_bottom = 827.0
+spawnInfo = Array[ExtResource("10_je7of")]([SubResource("Resource_0k0t6"), SubResource("Resource_ptu7r"), SubResource("Resource_nhab6")])
 
 [node name="Beach" parent="." instance=ExtResource("9_f771t")]
 offset_left = 24.0
 offset_top = 486.0
 offset_right = 134.0
 offset_bottom = 523.0
+spawnInfo = Array[ExtResource("10_je7of")]([SubResource("Resource_s6e8x"), SubResource("Resource_5ok5p")])
 spawn_cap = 1

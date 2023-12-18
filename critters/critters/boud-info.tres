@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="CritterInfo" load_steps=3 format=3 uid="uid://ghx60eun4heb"]
+
+[ext_resource type="Script" path="res://critters/critter-base.gd" id="1_8o1bu"]
+[ext_resource type="Resource" uid="uid://cpmm2xqjt88x8" path="res://types/basic.tres" id="2_4ahfd"]
+
+[resource]
+script = ExtResource("1_8o1bu")
+id = 0
+name = "Boud"
+type = Array[Resource("res://types/type-base.gd")]([ExtResource("2_4ahfd")])
+description = ""
+catch_rate = 0
+health = 21
+attack = 21
+defense = 21
+range_attack = 21
+range_defense = 21
+speed = 21

@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="CritterInfo" load_steps=3 format=3 uid="uid://bf3cgbyv1qevj"]
+
+[ext_resource type="Script" path="res://critters/critter-base.gd" id="1_3nkx1"]
+[ext_resource type="Resource" uid="uid://cpmm2xqjt88x8" path="res://types/basic.tres" id="2_ot63o"]
+
+[resource]
+script = ExtResource("1_3nkx1")
+id = 0
+name = "Millo"
+type = Array[Resource("res://types/type-base.gd")]([ExtResource("2_ot63o")])
+description = ""
+catch_rate = 0
+health = 25
+attack = 17
+defense = 24
+range_attack = 12
+range_defense = 24
+speed = 16

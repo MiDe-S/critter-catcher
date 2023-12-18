@@ -6,12 +6,24 @@ class_name AreaSpawnInfo
 @export var levelMin: int
 @export var levelMax: int
 
-func getRandomCritter():
-	var level = randf_range(levelMin, levelMax+1) # exclusive
-	# set baseAdd stats, min 0 max 15
-	# generate moves randomly from level list <
+func generateCritter():
+	var level = randi_range(levelMin, levelMax+1) # exclusive
+	var healthBase = randi_range(0, GlobalVariables.BASE_STAT_ADD_MAX)
+	var attackBase = randi_range(0, GlobalVariables.BASE_STAT_ADD_MAX)
+	var defenseBase = randi_range(0, GlobalVariables.BASE_STAT_ADD_MAX)
+	var rangeBase = randi_range(0, GlobalVariables.BASE_STAT_ADD_MAX)
+	var rangeDefenseBase = randi_range(0, GlobalVariables.BASE_STAT_ADD_MAX)
+	var speedBase = randi_range(0, GlobalVariables.BASE_STAT_ADD_MAX)
+	# generate moves randomly from level list
 	# get random weight
-	# get random
-	# Create critter, set critterInfo
+	var output = Critter.new()
+	output.critterInfo = critter
+	output.healthBase = healthBase
+	output.attackBase = attackBase
+	output.defenseBase = defenseBase
+	output.rangeAttackBase = rangeBase
+	output.rangeDefenseBase = rangeDefenseBase
+	output.speedBase = speedBase
+	output.level = level
 	
-	
+	return output

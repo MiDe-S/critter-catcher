@@ -30,7 +30,6 @@ func _physics_process(_delta):
 		velocity.y = directionY * SPEED
 	else:
 		velocity.y = move_toward(velocity.y, 0, SPEED)
-
 		
 	if velocity == Vector2.ZERO:
 		$AnimationPlayer.stop()

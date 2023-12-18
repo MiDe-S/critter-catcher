@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dc75e7tvdi4ap" path="res://areas/art/Overworld.png" id="2_g38h8"]
 
 [node name="wide-castle" type="Node2D"]
+texture_filter = 1
 metadata/_edit_group_ = true
 
 [node name="TileMap" type="TileMap" parent="."]

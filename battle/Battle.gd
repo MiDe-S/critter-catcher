@@ -19,7 +19,6 @@ var turnActions: Array[Action]
 var typeManager: TypeManger = TypeManger.new()
 
 var _mapScene
-
 ### Turn
 ## Select Move on critter 1
 # Select Target
@@ -31,6 +30,10 @@ var _mapScene
 
 func setMapScene(scene):
 	_mapScene = scene
+	
+func setEnemy(enemy: CharacterBody2D):
+	remove_child($Enemy)
+	add_child(enemy)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -41,7 +44,6 @@ func _ready():
 	
 	setUpPlayers($Player.getCritters())
 	setUpPlayers($Enemy.getCritters(), false)
-	#$Selector.setFocus(selectableOptions)
 	startTurn()
 	# global position might work for button?
 
@@ -77,21 +79,35 @@ func startTurn():
 	
 func _moveChosen(move):
 	selectedMove = move
-	match move.getTarget():
-		Move.targetType.SELF:
-			$Selector.setFocus([get_tree().get_nodes_in_group("p1")[p1CritterIndex]])
-		Move.targetType.SINGLE:
-			var options = get_tree().get_nodes_in_group("p2")
-			var i = 0
-			for node in get_tree().get_nodes_in_group("p1"):
-				if i != p1CritterIndex:
-					options.insert(0, node)
-				i += 1
-			$Selector.setFocus(options)
-		Move.targetType.ENEMIES:
-			$Selector.setFocus(opposingSide)
-		Move.targetType.ALL:
-			$Selector.setFocus(all)
+	# if 1v1 skip selection phase
+	if leftPositions.size() == 1:
+		match move.getTarget():
+			Move.targetType.SELF:
+				_critterChosen(get_tree().get_nodes_in_group("p1")[0])
+			Move.targetType.SINGLE:
+				_critterChosen(get_tree().get_nodes_in_group("p2")[0])
+			Move.targetType.ENEMIES:
+				_critterChosen(opposingSide[0])
+			Move.targetType.ALL:
+				_critterChosen(all[0])
+			
+				
+	else:
+		match move.getTarget():
+			Move.targetType.SELF:
+				$Selector.setFocus([get_tree().get_nodes_in_group("p1")[p1CritterIndex]])
+			Move.targetType.SINGLE:
+				var options = get_tree().get_nodes_in_group("p2")
+				var i = 0
+				for node in get_tree().get_nodes_in_group("p1"):
+					if i != p1CritterIndex:
+						options.insert(0, node)
+					i += 1
+				$Selector.setFocus(options)
+			Move.targetType.ENEMIES:
+				$Selector.setFocus(opposingSide)
+			Move.targetType.ALL:
+				$Selector.setFocus(all)
 			
 func _critterChosen(critter):
 	var targets: Array[Node] = []

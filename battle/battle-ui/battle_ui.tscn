@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cau0um2ta1bbi"]
 
-[ext_resource type="Script" path="res://battle/battle_ui.gd" id="1_6jkni"]
-[ext_resource type="Script" path="res://battle/MoveGrid.gd" id="1_016sx"]
+[ext_resource type="Script" path="res://battle/battle-ui/battle_ui.gd" id="1_6jkni"]
+[ext_resource type="Script" path="res://battle/battle-ui/move/MoveGrid.gd" id="1_016sx"]
 
 [node name="BattleUI" type="CanvasLayer"]
 script = ExtResource("1_6jkni")

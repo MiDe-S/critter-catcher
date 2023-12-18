@@ -5,3 +5,6 @@ class_name Team
 
 func getCritters():
 	return team
+
+func addCritter(critter: Critter):
+	team.append(critter)
