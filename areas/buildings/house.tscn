@@ -25,8 +25,3 @@ collision_mask = 0
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
 polygon = PackedVector2Array(7, 35, 7, 15, -7, 15, -7, 35, -31, 36, -32, -4, 31, -4, 31, 35)
-
-[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="."]
-position = Vector2(0, -20)
-radius = 38.0
-avoidance_layers = 2

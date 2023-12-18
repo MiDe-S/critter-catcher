@@ -1,9 +1,9 @@
 extends Resource
 class_name Action
 
-@export var attacker: Node
-@export var move: Move
-@export var defenders: Array[Node]
+var attacker: Node
+var move: Move
+var defenders: Array[Node]
 
 func _init(attackerInput, moveInput, defendersInput: Array[Node]):
 	attacker = attackerInput

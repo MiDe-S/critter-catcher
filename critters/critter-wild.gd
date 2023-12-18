@@ -46,8 +46,7 @@ func _physics_process(delta):
 				current_time = TIMER
 		MOVEMENT_STATES.FOLLOW:
 			var direction = to_local(nav_agent.get_next_path_position()).normalized()
-			var calc_velocity = direction * SPEED
-			nav_agent.set_velocity(calc_velocity)
+			velocity = direction * SPEED
 
 	if velocity == Vector2.ZERO:
 		$AnimationPlayer.stop()
@@ -61,12 +60,6 @@ func _physics_process(delta):
 		$AnimationPlayer.play("down")
 	move_and_slide()
 
-
-func move(velocityInput: Vector2):
-	velocity = velocityInput
-	move_and_slide()
-
-
 func _on_target_detection_body_entered(body):
 	tracking = body
 	nav_agent.target_position = body.global_position
@@ -79,5 +72,5 @@ func _on_timer_timeout():
 	nav_agent.target_position = tracking.global_position
 	
 func _battleStart():
-	print("hi")
+	print("Battle Init")
 	battle_start.emit(critter)
