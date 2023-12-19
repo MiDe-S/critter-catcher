@@ -60,7 +60,6 @@ func initialize(signal_string: String, conneted_bar_max_value) -> void:
 	"""Initialize the health bar for use in game.
 	It must be called for HealthBar2D to work.
 	"""
-	print("Info: Initialized %s %s signal" % [name, signal_string])
 	_parent = get_parent()
 	_parent.connect(signal_string, _handle_value)
 	max_value = conneted_bar_max_value

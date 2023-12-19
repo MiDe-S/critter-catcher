@@ -15,4 +15,6 @@ func startWildBattle(critter: Critter):
 	battle.setEnemy(enemy)
 	
 	get_tree().get_root().add_child(battle)
+	get_tree().set_current_scene(battle)
 	get_tree().get_root().remove_child(current)
+

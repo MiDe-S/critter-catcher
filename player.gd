@@ -9,6 +9,9 @@ func _ready():
 func getCritters():
 	return playerInfo.getCritters()
 
+func isDefeated():
+	return playerInfo.isDefeated()
+
 const SPEED = 150.0
 const JUMP_VELOCITY = -400.0
 

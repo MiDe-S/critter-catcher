@@ -30,3 +30,4 @@ func _on_critter_spawner_timeout():
 
 func _initiateCombat(critter: Critter):
 	$BattleFactory.startWildBattle(critter)
+	total_spawned -= 1

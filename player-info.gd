@@ -8,3 +8,6 @@ var current_scene: String
 
 func getCritters():
 	return team.getCritters()
+
+func isDefeated():
+	return team.isDefeated()

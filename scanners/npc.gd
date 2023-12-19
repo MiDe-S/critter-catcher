@@ -7,3 +7,6 @@ func setTeam(teamInput):
 
 func getCritters():
 	return team.getCritters()
+
+func isDefeated():
+	return team.isDefeated()

@@ -167,6 +167,7 @@ func endTurn():
 				defender.getCritter().applyEffects(action.getMove().getEffects())
 			else:
 				print("Move missed")
+		checkBattleOver()
 	# check arena conditions + 
 	# advance turn counter 1
 	for critter in get_tree().get_nodes_in_group("p1"):
@@ -175,4 +176,14 @@ func endTurn():
 		critter.incrementTurn()
 	startTurn()
 	pass
+	
+func checkBattleOver():
+	if $Player.isDefeated() or $Enemy.isDefeated():
+		endBattle()
+	
+func endBattle():
+	var current = get_tree().get_current_scene()
+	get_tree().get_root().add_child(_mapScene)
+	get_tree().set_current_scene(_mapScene)
+	current.queue_free()
 	

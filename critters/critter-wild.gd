@@ -3,7 +3,7 @@ extends CharacterBody2D
 signal battle_start(critterOut: Critter)
 
 const SLOW = 5.0
-const SPEED = 50.0
+const SPEED = 100.0
 const TIMER = 1
 var current_time = TIMER
 var state = MOVEMENT_STATES.IDLE
@@ -74,3 +74,4 @@ func _on_timer_timeout():
 func _battleStart():
 	print("Battle Init")
 	battle_start.emit(critter)
+	queue_free()
