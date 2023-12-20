@@ -3,11 +3,14 @@ class_name Team
 
 @export var team: Array[Critter]
 
-func getCritters():
+func getCritters() -> Array[Critter]:
 	return team
 
-func addCritter(critter: Critter):
-	team.append(critter)
+func addCritter(critter: Critter) -> bool:
+	if team.size() <= GlobalVariables.PARTY_SIZE:
+		team.append(critter)
+		return true
+	return false
 
 func isDefeated():
 	for critter in team:

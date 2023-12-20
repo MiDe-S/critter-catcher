@@ -8,5 +8,5 @@ func _ready():
 	pass # Replace with function body.
 
 
-func getPlayerInfo():
+func getPlayerInfo() -> PlayerInfo:
 	return playerInfo

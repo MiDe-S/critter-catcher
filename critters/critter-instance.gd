@@ -77,7 +77,7 @@ func getRangeDefenseForCalc():
 	return calcStat(critterInfo.getRangeDefense(), rangeDefenseBase, rangeDefenseAdd, rangeDefenseMultiplier)
 	
 func getSpeedForCalc():
-	return calcStat(critterInfo.speedAttack(), speedBase, speedAdd, speedMultiplier)
+	return calcStat(critterInfo.getSpeed(), speedBase, speedAdd, speedMultiplier)
 
 func calcStat(base, baseAdd, add, multiplier):
 	var baseTotal = base + baseAdd

@@ -33,6 +33,7 @@ position = Vector2(1071, 339)
 [node name="Enemy" parent="." instance=ExtResource("5_tcq5x")]
 
 [node name="BattleUI" parent="." instance=ExtResource("3_knewc")]
+isWildBattle = true
 
 [node name="OpposingSide" parent="." instance=ExtResource("6_2ttlb")]
 position = Vector2(1069, 341)

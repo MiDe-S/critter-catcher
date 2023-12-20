@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://cau0um2ta1bbi"]
+[gd_scene load_steps=4 format=3 uid="uid://cau0um2ta1bbi"]
 
 [ext_resource type="Script" path="res://battle/battle-ui/battle_ui.gd" id="1_6jkni"]
 [ext_resource type="Script" path="res://battle/battle-ui/move/MoveGrid.gd" id="1_016sx"]
+[ext_resource type="Theme" uid="uid://b1nmw3tifrb0r" path="res://battle-button-font.tres" id="3_d7621"]
 
 [node name="BattleUI" type="CanvasLayer"]
 script = ExtResource("1_6jkni")
@@ -14,6 +15,42 @@ anchor_right = 0.5
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 0
-size_flags_horizontal = 4
 columns = 2
 script = ExtResource("1_016sx")
+
+[node name="SwitchButton" type="Button" parent="."]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -100.0
+offset_right = 250.0
+grow_vertical = 0
+size_flags_horizontal = 0
+theme = ExtResource("3_d7621")
+text = "Switch"
+
+[node name="WildContainer" type="VBoxContainer" parent="."]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -250.0
+offset_top = -200.0
+grow_horizontal = 0
+grow_vertical = 0
+alignment = 1
+
+[node name="ScanButton" type="Button" parent="WildContainer"]
+layout_mode = 2
+theme = ExtResource("3_d7621")
+text = "Scan"
+
+[node name="RunButton" type="Button" parent="WildContainer"]
+layout_mode = 2
+theme = ExtResource("3_d7621")
+text = "Run"
+
+[connection signal="pressed" from="SwitchButton" to="." method="switch_pressed"]
+[connection signal="pressed" from="WildContainer/ScanButton" to="." method="scan_pressed"]
+[connection signal="pressed" from="WildContainer/RunButton" to="." method="run_pressed"]

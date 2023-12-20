@@ -40,7 +40,7 @@ func _ready():
 	$Player.get_node("Camera2D").enabled = false
 	
 	$Selector.connect("selection", _critterChosen)
-	$BattleUI.connect("moveChosen", _moveChosen)
+	$BattleUI.connect("actionChosen", _actionChosen)
 	
 	setUpPlayers($Player.getCritters())
 	setUpPlayers($Enemy.getCritters(), false)
@@ -77,6 +77,17 @@ func startTurn():
 	$BattleUI.setMoves(get_tree().get_nodes_in_group("p1")[p1CritterIndex].getMoves())
 	get_tree().get_nodes_in_group("move_button").front().grab_focus()
 	
+func _actionChosen(action):
+	if action is Move:
+		_moveChosen(action)
+	match action:
+		BattleUI.BattleUIActions.SWITCH:
+			print("switch")
+		BattleUI.BattleUIActions.RUN:
+			endBattle()
+		BattleUI.BattleUIActions.SCAN:
+			catchCritter()
+
 func _moveChosen(move):
 	selectedMove = move
 	# if 1v1 skip selection phase
@@ -176,6 +187,11 @@ func endTurn():
 		critter.incrementTurn()
 	startTurn()
 	pass
+	
+func catchCritter():
+	# switch to mini game here
+	$Player.addCritter($Enemy.getCritters()[0])
+	endBattle()
 	
 func checkBattleOver():
 	if $Player.isDefeated() or $Enemy.isDefeated():

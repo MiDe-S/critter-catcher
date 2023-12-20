@@ -22,4 +22,4 @@ func _ready():
 		add_child(button)
 
 func pressed(move):
-	get_parent().pressed(move)
+	get_parent().move_pressed(move)

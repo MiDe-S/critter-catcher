@@ -6,8 +6,11 @@ class_name PlayerInfo
 var global_position: Vector2
 var current_scene: String
 
-func getCritters():
+func getCritters() -> Array[Critter]:
 	return team.getCritters()
 
 func isDefeated():
 	return team.isDefeated()
+	
+func addCritter(critter: Critter):
+	team.addCritter(critter)

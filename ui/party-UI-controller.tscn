@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://dpyjt1nlnkfuy"]
+
+[ext_resource type="Script" path="res://ui/party-UI-controller.gd" id="1_p4fxf"]
+[ext_resource type="PackedScene" uid="uid://dtriud575tg0i" path="res://ui/party-UI.tscn" id="2_ocs06"]
+
+[node name="Party-UI-Controller" type="Node2D"]
+script = ExtResource("1_p4fxf")
+uiElement = ExtResource("2_ocs06")

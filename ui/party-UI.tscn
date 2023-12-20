@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://dtriud575tg0i"]
+
+[ext_resource type="Script" path="res://ui/party-UI.gd" id="1_gca6f"]
+
+[node name="Party-ui" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_gca6f")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+offset_left = 243.0
+offset_top = 109.0
+offset_right = 785.0
+offset_bottom = 201.0
+text = "Testing"

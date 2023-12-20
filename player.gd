@@ -1,13 +1,16 @@
 extends CharacterBody2D
 class_name Player
 
-var playerInfo
+var playerInfo: PlayerInfo
 
 func _ready():
 	playerInfo = PlayerManager.getPlayerInfo()
 
 func getCritters():
 	return playerInfo.getCritters()
+	
+func addCritter(critter: Critter):
+	playerInfo.addCritter(critter)
 
 func isDefeated():
 	return playerInfo.isDefeated()
