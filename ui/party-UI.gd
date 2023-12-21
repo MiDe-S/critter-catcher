@@ -9,7 +9,7 @@ func _ready():
 	for critter in critters:
 		var output = ""
 		output += critter.getName() + " "
-		output += str(critter.getMaxHealth()) + " "
+		output += str(critter.getHealth()) + " / " + str(critter.getMaxHealth()) + " "
 		output += str(critter.getAttackForCalc()) + " "
 		output += str(critter.getDefenseForCalc()) + " "
 		output += str(critter.getRangeAttackForCalc()) + " "

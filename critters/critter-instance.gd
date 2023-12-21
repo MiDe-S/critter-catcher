@@ -8,8 +8,6 @@ class_name Critter
 @export var experience: int
 @export var weight: int
 
-
-
 @export var healthAdd: int
 @export var attackAdd: int
 @export var defenseAdd: int
@@ -26,7 +24,9 @@ class_name Critter
 
 @export var critterInfo: CritterInfo
 
-@export var health: float = 100.0
+# done so health can be set when it is first read
+var healthInit: bool = false
+var health: float
 
 var attackMultiplier = 1.0
 var rangeAttackMultiplier = 1.0
@@ -39,7 +39,7 @@ var damageReduction = 1.0
 var currentEffects: Array[Effect] = []
 
 func initialize():
-	health = getMaxHealth()
+	setHealth(getMaxHealth())
 
 func getMoves():
 	return moves
@@ -59,7 +59,15 @@ func getDamageReduction():
 	return damageReduction
 
 func getHealth():
+	if !healthInit:
+		health = getMaxHealth()
+		healthInit = true
 	return health
+	
+func setHealth(input: float):
+	if !healthInit:
+		healthInit = true
+	health = input
 	
 func getMaxHealth():
 	return calcStat(critterInfo.getHealth(), healthBase, healthAdd, 1)

@@ -28,7 +28,6 @@ rangeAttackBase = 0
 rangeDefenseBase = 0
 speedBase = 0
 critterInfo = ExtResource("2_un71v")
-health = null
 
 [sub_resource type="Resource" id="Resource_68jkd"]
 script = ExtResource("4_yqioq")
@@ -51,7 +50,6 @@ rangeAttackBase = 0
 rangeDefenseBase = 0
 speedBase = 0
 critterInfo = ExtResource("5_owen7")
-health = null
 
 [resource]
 script = ExtResource("1_v682g")

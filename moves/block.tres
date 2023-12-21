@@ -20,4 +20,4 @@ description = ""
 target = 0
 attribute = 2
 effects = Array[Resource("res://moves/effects/effect.gd")]([SubResource("Resource_jdakg")])
-advantage = 0
+advantage = 5

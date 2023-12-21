@@ -3,7 +3,7 @@ extends ColorRect
 @export var spawnInfo: Array[AreaSpawnInfo]
 @export var critter_scene: PackedScene
 @export var spawn_cap := 1
-
+@onready
 var battle_scene = preload("res://battle/battle-single/Battle.tscn")
 var total_spawned = 0
 
@@ -14,7 +14,8 @@ func _ready():
 func getRandomPoint():
 	var x = randf_range(0, get_size().x)
 	var y = randf_range(0, get_size().y)
-	return get_position() + Vector2(x,y)
+	var pos = get_position()
+	return pos + Vector2(x,y)
 
 func _on_critter_spawner_timeout():
 	if total_spawned < spawn_cap:
