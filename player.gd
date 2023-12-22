@@ -19,6 +19,7 @@ const SPEED = 150.0
 const JUMP_VELOCITY = -400.0
 
 func _physics_process(_delta):
+	PlayerManager.currentPosition = position
 	# Add the gravity.
 
 	# Get the input direction and handle the movement/deceleration.

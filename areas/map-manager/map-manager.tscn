@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cmi1goerl3l4l"]
+
+[ext_resource type="Script" path="res://areas/map-manager/map-manager.gd" id="1_ftuvl"]
+
+[node name="MapManager" type="Node2D"]
+script = ExtResource("1_ftuvl")

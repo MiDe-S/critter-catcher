@@ -1,6 +1,7 @@
-[gd_scene load_steps=23 format=3 uid="uid://b16eo7ku65l5m"]
+[gd_scene load_steps=24 format=3 uid="uid://b16eo7ku65l5m"]
 
 [ext_resource type="Shader" path="res://areas/water.gdshader" id="1_1hq53"]
+[ext_resource type="Script" path="res://areas/map-manager/map-manager.gd" id="1_d413b"]
 [ext_resource type="PackedScene" uid="uid://bv4g5pkonn1tg" path="res://areas/y_sort_helper.tscn" id="1_i0np8"]
 [ext_resource type="TileSet" uid="uid://bhkhb116gcf8h" path="res://areas/tiles.tres" id="2_e3h5j"]
 [ext_resource type="Texture2D" uid="uid://dgo48l1bhn1yt" path="res://map-art/blank.png" id="2_efgip"]
@@ -65,9 +66,12 @@ frequency = 1.0
 levelMin = 2
 levelMax = 4
 
-[node name="jade-town" type="Node2D"]
+[node name="jade-town-F11" type="Node2D"]
+script = ExtResource("1_d413b")
+south = "res://areas/G11.tscn"
 
 [node name="Water" type="Sprite2D" parent="."]
+visible = false
 material = SubResource("ShaderMaterial_e0tum")
 position = Vector2(511, 494)
 scale = Vector2(1.418, 1.38425)
@@ -80,7 +84,6 @@ navigation_polygon = SubResource("NavigationPolygon_vydxb")
 [node name="Terrain" type="TileMap" parent="NavigationRegion2D"]
 texture_filter = 1
 tile_set = ExtResource("2_e3h5j")
-collision_animatable = true
 format = 2
 layer_0/name = "bgTrick"
 layer_0/navigation_enabled = false
@@ -116,7 +119,7 @@ position = Vector2(248, 192)
 position = Vector2(376, 192)
 
 [node name="Player" parent="YSortHelper" instance=ExtResource("8_l4tu7")]
-position = Vector2(998, 298)
+position = Vector2(345, 648)
 
 [node name="Bottom Grass" parent="." instance=ExtResource("9_f771t")]
 offset_left = 441.0
@@ -135,9 +138,3 @@ spawn_cap = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="Party-UI-Controller" parent="." instance=ExtResource("15_dyrpm")]
-
-[node name="ColorRect" type="ColorRect" parent="."]
-visible = false
-offset_right = 1024.0
-offset_bottom = 1024.0
-color = Color(1, 0.0235294, 1, 1)

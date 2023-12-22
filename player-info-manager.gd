@@ -2,6 +2,9 @@ extends Node2D
 
 @export var playerInfo: PlayerInfo
 
+var currentPosition: Vector2
+var currentScene
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	# load player from save file

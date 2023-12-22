@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://l8caa8o6ly33"]
+[gd_scene load_steps=12 format=3 uid="uid://l8caa8o6ly33"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_0efw3"]
 [ext_resource type="Texture2D" uid="uid://dyhokt31ykfhs" path="res://areas/art/NPC_test-body.png" id="3_hcr2s"]
 [ext_resource type="Texture2D" uid="uid://blyj08p02pdld" path="res://areas/art/NPC_test-head.png" id="4_mf76w"]
+[ext_resource type="Script" path="res://camera2D.gd" id="4_pgmpl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tigtw"]
 size = Vector2(6, 5)
@@ -187,3 +188,4 @@ vframes = 4
 zoom = Vector2(3, 3)
 process_callback = 0
 position_smoothing_enabled = true
+script = ExtResource("4_pgmpl")
