@@ -2,9 +2,13 @@ extends CharacterBody2D
 class_name Player
 
 var playerInfo: PlayerInfo
+const SPEED = 150.0
+
+
 
 func _ready():
 	playerInfo = PlayerManager.getPlayerInfo()
+	$TerrainDetector.connect("terrain_event", _handleTerrainEvent)
 
 func getCritters():
 	return playerInfo.getCritters()
@@ -14,9 +18,6 @@ func addCritter(critter: Critter):
 
 func isDefeated():
 	return playerInfo.isDefeated()
-
-const SPEED = 150.0
-const JUMP_VELOCITY = -400.0
 
 func _physics_process(_delta):
 	PlayerManager.currentPosition = position
@@ -51,3 +52,8 @@ func _physics_process(_delta):
 		
 	move_and_slide()
 
+func _handleTerrainEvent(key: int):
+	if (velocity.x > 0):
+		velocity.y = move_toward(velocity.y, -SPEED*1.3, SPEED*2)
+	elif velocity.x < 0:
+		velocity.y = move_toward(velocity.y, SPEED*1.3, SPEED*2)

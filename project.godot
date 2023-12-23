@@ -73,6 +73,7 @@ party_ui_toggle={
 2d_physics/layer_3="Grass"
 2d_physics/layer_4="NPC"
 2d_physics/layer_5="Critter"
+2d_physics/layer_6="HeightMap"
 2d_physics/layer_10="PlayerTarget"
 avoidance/layer_2="Obstacles"
 
