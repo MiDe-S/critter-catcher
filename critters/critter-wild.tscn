@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://cu1sse78jdei2"]
+[gd_scene load_steps=13 format=3 uid="uid://cu1sse78jdei2"]
 
 [ext_resource type="Texture2D" uid="uid://dfqu6k3tyodym" path="res://critters/critter-images/critter-shadow-body.png" id="1_hdqf5"]
 [ext_resource type="Script" path="res://critters/critter-wild.gd" id="1_k6mq5"]
 [ext_resource type="Texture2D" uid="uid://vp21a012mxd8" path="res://critters/critter-images/critter-shadow-head.png" id="2_bkbqx"]
+[ext_resource type="PackedScene" uid="uid://dl2y3fun7ei01" path="res://scanners/movement-controller.tscn" id="4_mh66i"]
 
 [sub_resource type="Animation" id="Animation_p05a6"]
 length = 0.001
@@ -208,6 +209,8 @@ debug_enabled = true
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.25
+
+[node name="MovementController" parent="." instance=ExtResource("4_mh66i")]
 
 [connection signal="body_entered" from="TargetDetection" to="." method="_on_target_detection_body_entered"]
 [connection signal="target_reached" from="NavigationAgent2D" to="." method="_battleStart"]

@@ -31,33 +31,21 @@ func generateTarget():
 func _physics_process(delta):
 	match state:
 		MOVEMENT_STATES.IDLE:
-			velocity.x = move_toward(velocity.x, 0, SLOW)
-			velocity.y = move_toward(velocity.y, 0, SLOW)
 			current_time -= delta
+			$MovementController.move(Vector2.ZERO, SLOW)
 			if current_time < 0:
 				target_position = generateTarget()
 				state = MOVEMENT_STATES.WANDER
 		MOVEMENT_STATES.WANDER:
 			if (get_position() - target_position).length() > 1:
-				var direction = (target_position - get_position()).normalized()
-				velocity = direction * SPEED
+				$MovementController.move(target_position - get_position(), SPEED)
 			else:
 				state = MOVEMENT_STATES.IDLE
 				current_time = TIMER
 		MOVEMENT_STATES.FOLLOW:
-			var direction = to_local(nav_agent.get_next_path_position()).normalized()
-			velocity = direction * SPEED
-
-	if velocity == Vector2.ZERO:
-		$AnimationPlayer.stop()
-	elif velocity.x > 0:
-		$AnimationPlayer.play("right")
-	elif velocity.y < 0:
-		$AnimationPlayer.play("up")
-	elif velocity.x < 0:
-		$AnimationPlayer.play("left")
-	elif velocity.y > 0:
-		$AnimationPlayer.play("down")
+			var direction = to_local(nav_agent.get_next_path_position())
+			$MovementController.move(direction, SPEED)
+	
 	move_and_slide()
 
 func _on_target_detection_body_entered(body):
