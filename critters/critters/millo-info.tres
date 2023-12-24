@@ -1,7 +1,20 @@
-[gd_resource type="Resource" script_class="CritterInfo" load_steps=3 format=3 uid="uid://bf3cgbyv1qevj"]
+[gd_resource type="Resource" script_class="CritterInfo" load_steps=8 format=3 uid="uid://bf3cgbyv1qevj"]
 
 [ext_resource type="Script" path="res://critters/critter-base.gd" id="1_3nkx1"]
+[ext_resource type="Resource" uid="uid://d00upfwdoaoxb" path="res://moves/block.tres" id="1_fprbe"]
+[ext_resource type="Resource" uid="uid://oyu8ijb6twy5" path="res://moves/swipe.tres" id="1_xs8ad"]
 [ext_resource type="Resource" uid="uid://cpmm2xqjt88x8" path="res://types/basic.tres" id="2_ot63o"]
+[ext_resource type="Script" path="res://moves/critter-move.gd" id="2_pv1ab"]
+
+[sub_resource type="Resource" id="Resource_ny4fn"]
+script = ExtResource("2_pv1ab")
+level = 1
+move = ExtResource("1_xs8ad")
+
+[sub_resource type="Resource" id="Resource_oaa4x"]
+script = ExtResource("2_pv1ab")
+level = 3
+move = ExtResource("1_fprbe")
 
 [resource]
 script = ExtResource("1_3nkx1")
@@ -10,6 +23,7 @@ name = "Millo"
 type = Array[Resource("res://types/type-base.gd")]([ExtResource("2_ot63o")])
 description = ""
 catch_rate = 0
+moveList = Array[ExtResource("2_pv1ab")]([SubResource("Resource_ny4fn"), SubResource("Resource_oaa4x")])
 health = 25
 attack = 17
 defense = 24

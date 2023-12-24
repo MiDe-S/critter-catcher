@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://fm5ysbdq6n12"]
+
+[ext_resource type="Shader" path="res://areas/water.gdshader" id="1_2xrw0"]
+[ext_resource type="Texture2D" uid="uid://dgo48l1bhn1yt" path="res://map-art/blank.png" id="2_byodv"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_e0tum"]
+shader = ExtResource("1_2xrw0")
+shader_parameter/WATER_COL = Color(0.04, 0.38, 0.88, 1)
+shader_parameter/WATER2_COL = Color(0.04, 0.35, 0.78, 1)
+shader_parameter/FOAM_COL = Color(0.8125, 0.9609, 0.9648, 1)
+shader_parameter/distortion_speed = 2.0
+shader_parameter/tile = Vector2(35, 35)
+shader_parameter/wave_speed = 0.8
+
+[node name="Water" type="Sprite2D"]
+material = SubResource("ShaderMaterial_e0tum")
+position = Vector2(511, 494)
+scale = Vector2(1.418, 1.38425)
+texture = ExtResource("2_byodv")
+region_rect = Rect2(48, 112, 16, 16)

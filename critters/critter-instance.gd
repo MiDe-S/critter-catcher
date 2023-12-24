@@ -8,13 +8,9 @@ class_name Critter
 @export var experience: int
 @export var weight: int
 
-@export var healthAdd: int
-@export var attackAdd: int
-@export var defenseAdd: int
-@export var rangeAttackAdd: int
-@export var rangeDefenseAdd: int
-@export var speedAdd: int
+@export var critterInfo: CritterInfo
 
+@export_category("Base Modifiers")
 @export var healthBase: int
 @export var attackBase: int
 @export var defenseBase: int
@@ -22,7 +18,14 @@ class_name Critter
 @export var rangeDefenseBase: int
 @export var speedBase: int
 
-@export var critterInfo: CritterInfo
+@export_category("Additional Modifiers")
+@export var healthAdd: int
+@export var attackAdd: int
+@export var defenseAdd: int
+@export var rangeAttackAdd: int
+@export var rangeDefenseAdd: int
+@export var speedAdd: int
+
 
 # done so health can be set when it is first read
 var healthInit: bool = false

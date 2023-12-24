@@ -1,13 +1,16 @@
 [gd_resource type="Resource" script_class="Move" load_steps=3 format=3 uid="uid://mkkq1cpocw5"]
 
 [ext_resource type="Script" path="res://moves/move.gd" id="1_jng4r"]
-[ext_resource type="Resource" uid="uid://dskw2l0imviun" path="res://types/light.tres" id="2_4r4qr"]
+[ext_resource type="Resource" uid="uid://cpmm2xqjt88x8" path="res://types/basic.tres" id="2_d8p4m"]
 
 [resource]
 script = ExtResource("1_jng4r")
 name = "Bash"
-type = ExtResource("2_4r4qr")
+type = ExtResource("2_d8p4m")
 power = 15
 accuracy = 95
 description = ""
 target = 1
+attribute = 0
+effects = Array[Resource("res://moves/effects/effect.gd")]([])
+advantage = 0

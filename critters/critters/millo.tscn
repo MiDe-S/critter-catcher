@@ -13,20 +13,19 @@ abilityIndex = 0
 level = 0
 experience = 0
 weight = 0
-healthAdd = 0
-attackAdd = 0
-defenseAdd = 0
-rangeAttackAdd = 0
-rangeDefenseAdd = 0
-speedAdd = 0
+critterInfo = ExtResource("2_220l7")
 healthBase = 0
 attackBase = 0
 defenseBase = 0
 rangeAttackBase = 0
 rangeDefenseBase = 0
 speedBase = 0
-critterInfo = ExtResource("2_220l7")
-health = 100.0
+healthAdd = 0
+attackAdd = 0
+defenseAdd = 0
+rangeAttackAdd = 0
+rangeDefenseAdd = 0
+speedAdd = 0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nmvmh"]
 size = Vector2(182, 108)

@@ -5,7 +5,7 @@ var single_scene = preload("res://battle/battle-single/Battle.tscn")
 
 func startWildBattle(critter: Critter):
 	var battle = single_scene.instantiate()
-	var current = get_tree().current_scene
+	var current = get_tree().get_nodes_in_group("area")
 	battle.setMapScene(current)
 	
 	var enemy = enemy_scene.instantiate()
@@ -13,8 +13,10 @@ func startWildBattle(critter: Critter):
 	team.addCritter(critter)
 	enemy.setTeam(team)
 	battle.setEnemy(enemy)
-	
-	get_tree().get_root().add_child(battle)
+	var root = get_tree().get_root()
+	root.add_child(battle)
 	get_tree().set_current_scene(battle)
-	get_tree().get_root().remove_child(current)
+	for c in current:
+		root.remove_child(c)
+
 

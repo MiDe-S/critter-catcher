@@ -10,9 +10,11 @@ class_name CritterInfo
 
 # Insert image/animation
 # Insert moves map of levels and moves
-# Insert evo map of levels and mon
-# Insert list of possible abilites
+# Insert evo map of levels and moves
 
+@export var moveList: Array[CritterMove]
+
+@export_category("Base Stats")
 @export var health: int
 @export var attack: int
 @export var defense: int
@@ -43,3 +45,6 @@ func getSpeed():
 	
 func getType():
 	return type
+	
+func getCritterMove():
+	return moveList

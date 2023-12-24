@@ -1,7 +1,14 @@
-[gd_resource type="Resource" script_class="CritterInfo" load_steps=3 format=3 uid="uid://cbe8lhdunca8"]
+[gd_resource type="Resource" script_class="CritterInfo" load_steps=6 format=3 uid="uid://cbe8lhdunca8"]
 
+[ext_resource type="Resource" uid="uid://oyu8ijb6twy5" path="res://moves/swipe.tres" id="1_00eg3"]
 [ext_resource type="Script" path="res://critters/critter-base.gd" id="1_uk4bw"]
 [ext_resource type="Resource" uid="uid://cpmm2xqjt88x8" path="res://types/basic.tres" id="2_7vq0e"]
+[ext_resource type="Script" path="res://moves/critter-move.gd" id="2_ytp4p"]
+
+[sub_resource type="Resource" id="Resource_k4unp"]
+script = ExtResource("2_ytp4p")
+level = 1
+move = ExtResource("1_00eg3")
 
 [resource]
 script = ExtResource("1_uk4bw")
@@ -10,6 +17,7 @@ name = "Dibbit"
 type = Array[Resource("res://types/type-base.gd")]([ExtResource("2_7vq0e")])
 description = ""
 catch_rate = 0
+moveList = Array[ExtResource("2_ytp4p")]([SubResource("Resource_k4unp")])
 health = 18
 attack = 19
 defense = 14

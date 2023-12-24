@@ -26,7 +26,7 @@ func _on_critter_spawner_timeout():
 		var i = randf_range(0, spawnInfo.size())
 		critter.setCritter(spawnInfo[i].generateCritter())
 		critter.connect("battle_start", _initiateCombat)
-		get_tree().current_scene.get_node("YSortHelper").add_child(critter)
+		get_parent().get_node("YSortHelper").add_child(critter)
 		total_spawned += 1
 
 func _initiateCombat(critter: Critter):

@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Move" load_steps=3 format=3 uid="uid://oyu8ijb6twy5"]
+
+[ext_resource type="Script" path="res://moves/move.gd" id="1_12fw7"]
+[ext_resource type="Resource" uid="uid://cpmm2xqjt88x8" path="res://types/basic.tres" id="2_vfhps"]
+
+[resource]
+script = ExtResource("1_12fw7")
+name = "Swipe"
+type = ExtResource("2_vfhps")
+power = 15
+accuracy = 95
+description = ""
+target = null
+attribute = null
+effects = Array[Resource("res://moves/effects/effect.gd")]([])
+advantage = 0

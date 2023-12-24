@@ -18,7 +18,7 @@ var turnActions: Array[Action]
 
 var typeManager: TypeManger = TypeManger.new()
 
-var _mapScene
+var _mapScenes: Array[Node]
 ### Turn
 ## Select Move on critter 1
 # Select Target
@@ -28,8 +28,8 @@ var _mapScene
 ### Resolve turn
 ### Repeat
 
-func setMapScene(scene):
-	_mapScene = scene
+func setMapScene(scene: Array[Node]):
+	_mapScenes = scene
 	
 func setEnemy(enemy: CharacterBody2D):
 	remove_child($Enemy)
@@ -199,7 +199,9 @@ func checkBattleOver():
 	
 func endBattle():
 	var current = get_tree().get_current_scene()
-	get_tree().get_root().add_child(_mapScene)
-	get_tree().set_current_scene(_mapScene)
+	for n in _mapScenes:
+		get_tree().get_root().add_child(n)
+	# GET CURRENT FROM GLOBAL PLAYER INFO
+	get_tree().set_current_scene(_mapScenes[0])
 	current.queue_free()
 	

@@ -14,7 +14,13 @@ func generateCritter():
 	var rangeBase = randi_range(0, GlobalVariables.BASE_STAT_ADD_MAX)
 	var rangeDefenseBase = randi_range(0, GlobalVariables.BASE_STAT_ADD_MAX)
 	var speedBase = randi_range(0, GlobalVariables.BASE_STAT_ADD_MAX)
-	# generate moves randomly from level list
+	
+	var moves: Array[Move] = []
+	for move in critter.getCritterMove():
+		if move.getLevel() <= level:
+			if moves.size() >= GlobalVariables.MOVE_COUNT:
+				moves.pop_front()
+			moves.append(move.getMove())
 	# get random weight
 	var output = Critter.new()
 	output.critterInfo = critter
@@ -25,5 +31,6 @@ func generateCritter():
 	output.rangeDefenseBase = rangeDefenseBase
 	output.speedBase = speedBase
 	output.level = level
+	output.moves = moves
 	
 	return output
