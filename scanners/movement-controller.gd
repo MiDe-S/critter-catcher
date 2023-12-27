@@ -42,4 +42,4 @@ func terrainEvent(key: int, speed: int):
 				velocityValue.y = move_toward(velocityValue.y, -speed*1.4, speed*2)
 			elif velocityValue.x > 0:
 				velocityValue.y = move_toward(velocityValue.y, speed*1.4, speed*2)
-	get_parent().velocity = velocityValue
+	#get_parent().velocity = velocityValue
