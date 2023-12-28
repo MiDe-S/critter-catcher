@@ -40,3 +40,12 @@ func getLevel():
 
 func incrementTurn():
 	return critter.incrementTurn()
+	
+func isDefeated() -> bool:
+	return critter.isDefeated()
+
+func getExpGiven() -> int:
+	return critter.getExpGiven()
+
+func gainExperience(exp: int) -> void:
+	return critter.gainExperience(exp)

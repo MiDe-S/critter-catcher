@@ -176,6 +176,8 @@ func endTurn():
 					var typeAdvantage = typeManager.getAdvantage(action.getMove().getType(), defender.getCritter().getType())
 					defender.dealDamage(movePower * typeAdvantage * atk / def * randomness)
 				defender.getCritter().applyEffects(action.getMove().getEffects())
+				if defender.isDefeated():
+					action.getAttacker().gainExperience(defender.getExpGiven())
 			else:
 				print("Move missed")
 		checkBattleOver()

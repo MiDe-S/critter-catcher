@@ -4,11 +4,14 @@ class_name Critter
 @export var nickname: String
 @export var moves: Array[Move]
 @export var abilityIndex: int
-@export var level: int
-@export var experience: int
+
 @export var weight: int
 
 @export var critterInfo: CritterInfo
+
+@export_category("Exp")
+@export var level: int
+@export var experience: int
 
 @export_category("Base Modifiers")
 @export var healthBase: int
@@ -98,6 +101,9 @@ func calcStat(base, baseAdd, add, multiplier):
 
 func getType():
 	return critterInfo.getType()
+	
+func isDefeated() -> bool:
+	return health <= 0
 
 func resetMultipliers():
 	#clear effects array
@@ -118,3 +124,13 @@ func incrementTurn():
 		var remove = effect.incrementTurn()
 		if remove:
 			currentEffects.erase(effect)
+			
+func gainExperience(exp: int) -> void:
+	experience += exp
+	while experience >= critterInfo.getExpNeeded(level) and level <= GlobalVariables.LEVEL_CAP:
+		experience -= critterInfo.getExpNeeded(level)
+		level += 1
+		print("Level up to: ", level)
+
+func getExpGiven() -> int:
+	return critterInfo.getExpGiven(level)

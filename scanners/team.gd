@@ -14,6 +14,6 @@ func addCritter(critter: Critter) -> bool:
 
 func isDefeated():
 	for critter in team:
-		if critter.health >= 0:
+		if !critter.isDefeated():
 			return false
 	return true

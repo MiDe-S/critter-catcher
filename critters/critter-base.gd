@@ -22,6 +22,9 @@ class_name CritterInfo
 @export var range_defense: int
 @export var speed: int
 
+const EXP_NEEDED_MODIFIER = 1.1
+const EXP_GIVEN_MODIFIER = 1.05
+
 func getName():
 	return name
 
@@ -48,3 +51,15 @@ func getType():
 	
 func getCritterMove():
 	return moveList
+	
+func getBaseStatTotal() -> int:
+	return health + attack + defense + range_attack + range_defense + speed
+	
+# How much needed to to level up @ given level
+func getExpNeeded(level: int) -> float:
+	return floor(pow(level, EXP_NEEDED_MODIFIER) * getBaseStatTotal())
+
+# How much exp this mon is worth at this level
+func getExpGiven(level: int) -> int:
+	return floor(pow(level, EXP_GIVEN_MODIFIER) * getBaseStatTotal())
+	
