@@ -14,3 +14,6 @@ func isDefeated():
 	
 func addCritter(critter: Critter):
 	team.addCritter(critter)
+
+func setTeam(teamInput: Team):
+	team = teamInput

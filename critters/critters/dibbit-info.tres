@@ -17,6 +17,7 @@ name = "Dibbit"
 type = Array[Resource("res://types/type-base.gd")]([ExtResource("2_7vq0e")])
 description = ""
 catch_rate = 0
+icon = "res://critters/critter-images/dibbit.png"
 moveList = Array[ExtResource("2_ytp4p")]([SubResource("Resource_k4unp")])
 health = 18
 attack = 19

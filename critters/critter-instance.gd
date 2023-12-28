@@ -125,12 +125,21 @@ func incrementTurn():
 		if remove:
 			currentEffects.erase(effect)
 			
-func gainExperience(exp: int) -> void:
-	experience += exp
-	while experience >= critterInfo.getExpNeeded(level) and level <= GlobalVariables.LEVEL_CAP:
-		experience -= critterInfo.getExpNeeded(level)
+func gainExperience(experienceInput: int) -> void:
+	experience += experienceInput
+	while experience >= getExpNeeded() and level <= GlobalVariables.LEVEL_CAP:
+		experience -= getExpNeeded()
 		level += 1
 		print("Level up to: ", level)
 
 func getExpGiven() -> int:
 	return critterInfo.getExpGiven(level)
+	
+func getExpNeeded() -> int:
+	return critterInfo.getExpNeeded(level)
+
+func getCritterIcon():
+	return critterInfo.getCritterIcon()
+
+func getExperience() -> int:
+	return experience

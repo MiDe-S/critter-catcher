@@ -10,6 +10,7 @@ name = "Flairurt"
 type = Array[Resource("res://types/type-base.gd")]([ExtResource("2_v7kke")])
 description = ""
 catch_rate = 0
+icon = "res://critters/critter-images/flairurt.png"
 moveList = Array[Resource("res://moves/critter-move.gd")]([])
 health = 65
 attack = 35

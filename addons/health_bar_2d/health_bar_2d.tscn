@@ -5,6 +5,7 @@
 
 [node name="HealthBar2D" type="TextureProgressBar"]
 value = 50.0
+rounded = true
 texture_under = ExtResource("2")
 texture_progress = ExtResource("2")
 tint_under = Color(0.356863, 0.356863, 0.356863, 0.603922)

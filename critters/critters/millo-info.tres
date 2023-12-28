@@ -23,6 +23,7 @@ name = "Millo"
 type = Array[Resource("res://types/type-base.gd")]([ExtResource("2_ot63o")])
 description = ""
 catch_rate = 0
+icon = "res://critters/critter-images/millo.png"
 moveList = Array[ExtResource("2_pv1ab")]([SubResource("Resource_ny4fn"), SubResource("Resource_oaa4x")])
 health = 25
 attack = 17

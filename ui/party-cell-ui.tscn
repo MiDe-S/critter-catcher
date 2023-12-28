@@ -1,0 +1,68 @@
+[gd_scene load_steps=5 format=3 uid="uid://dw5tvcgxopjc2"]
+
+[ext_resource type="PackedScene" uid="uid://bpsrn4wc8548e" path="res://addons/health_bar_2d/health_bar_2d.tscn" id="1_3nl7q"]
+[ext_resource type="Script" path="res://ui/party-cell-ui.gd" id="1_870sk"]
+[ext_resource type="Texture2D" uid="uid://cyp2i5ywuyyn1" path="res://critters/critter-images/dibbit.png" id="1_nsj4w"]
+
+[sub_resource type="Theme" id="Theme_vnnro"]
+
+[node name="PartyCellUi" type="ColorRect"]
+offset_right = 86.0
+offset_bottom = 96.0
+size_flags_vertical = 3
+mouse_default_cursor_shape = 2
+theme = SubResource("Theme_vnnro")
+color = Color(0.137255, 0.137255, 0.137255, 0.301961)
+script = ExtResource("1_870sk")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(43, 37)
+scale = Vector2(0.875, 0.875)
+texture = ExtResource("1_nsj4w")
+
+[node name="Level" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 0.908046
+anchor_right = 1.0
+anchor_bottom = 0.908046
+offset_left = -40.0
+offset_top = -23.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 16
+text = "80
+"
+horizontal_alignment = 2
+vertical_alignment = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="HealthBar" parent="." instance=ExtResource("1_3nl7q")]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.875
+anchor_right = 1.0
+anchor_bottom = 0.925
+offset_top = -1.0
+grow_horizontal = 2
+grow_vertical = 0
+nine_patch_stretch = true
+tint_under = Color(0, 0, 0, 0.603922)
+tint_progress = Color(0, 1, 0, 1)
+_static = true
+_gradient = true
+metadata/_edit_use_anchors_ = true
+
+[node name="ExpBar" parent="." instance=ExtResource("1_3nl7q")]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.925
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+nine_patch_stretch = true
+tint_under = Color(0, 0, 0, 0.603922)
+_static = true
+metadata/_edit_use_anchors_ = true

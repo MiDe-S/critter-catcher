@@ -10,6 +10,7 @@ name = "Mushurm"
 type = Array[Resource("res://types/type-base.gd")]([ExtResource("2_4d1uf")])
 description = ""
 catch_rate = 0
+icon = "res://critters/critter-images/mushurm.png"
 moveList = Array[Resource("res://moves/critter-move.gd")]([])
 health = 115
 attack = 65

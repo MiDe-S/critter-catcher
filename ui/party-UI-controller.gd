@@ -14,6 +14,5 @@ func _input(event: InputEvent):
 			element = uiElement.instantiate()
 			add_child(element)
 		elif element != null:
-			remove_child(element)
-			element.queue_free()
+			element.freeSelf()
 			element = null

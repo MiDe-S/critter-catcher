@@ -17,6 +17,7 @@ name = "Boud"
 type = Array[Resource("res://types/type-base.gd")]([ExtResource("2_4ahfd")])
 description = ""
 catch_rate = 0
+icon = "res://critters/critter-images/boud.png"
 moveList = Array[ExtResource("2_cfy7r")]([SubResource("Resource_vgrhw")])
 health = 21
 attack = 21

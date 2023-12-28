@@ -9,6 +9,9 @@ class_name CritterInfo
 @export var catch_rate: int
 
 # Insert image/animation
+@export_file("*.png") var icon:
+	set(value):
+		icon = load(value)
 # Insert moves map of levels and moves
 # Insert evo map of levels and moves
 
@@ -52,11 +55,14 @@ func getType():
 func getCritterMove():
 	return moveList
 	
+func getCritterIcon():
+	return icon
+	
 func getBaseStatTotal() -> int:
 	return health + attack + defense + range_attack + range_defense + speed
 	
 # How much needed to to level up @ given level
-func getExpNeeded(level: int) -> float:
+func getExpNeeded(level: int) -> int:
 	return floor(pow(level, EXP_NEEDED_MODIFIER) * getBaseStatTotal())
 
 # How much exp this mon is worth at this level

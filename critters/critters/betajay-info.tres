@@ -18,6 +18,7 @@ name = "Betajay"
 type = Array[Resource("res://types/type-base.gd")]([ExtResource("2_sotav"), ExtResource("3_81mqe")])
 description = ""
 catch_rate = 0
+icon = "res://critters/critter-images/betajay.png"
 moveList = Array[ExtResource("2_vhusr")]([SubResource("Resource_8h52w")])
 health = 18
 attack = 17
