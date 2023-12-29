@@ -1,11 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://c8i1re0b3m3k8"]
+[gd_scene load_steps=7 format=3 uid="uid://c8i1re0b3m3k8"]
 
 [ext_resource type="Script" path="res://areas/map-manager/map-manager.gd" id="1_6g3p3"]
 [ext_resource type="TileSet" uid="uid://bhkhb116gcf8h" path="res://areas/tiles.tres" id="1_25dhw"]
 [ext_resource type="PackedScene" uid="uid://fm5ysbdq6n12" path="res://areas/water.tscn" id="2_5rahl"]
 [ext_resource type="PackedScene" uid="uid://bv4g5pkonn1tg" path="res://areas/y_sort_helper.tscn" id="2_ribwr"]
 [ext_resource type="PackedScene" uid="uid://l8caa8o6ly33" path="res://battle/player.tscn" id="3_0u3jk"]
-[ext_resource type="PackedScene" uid="uid://dpyjt1nlnkfuy" path="res://ui/party-UI-controller.tscn" id="3_r2ruw"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_kflv6"]
 vertices = PackedVector2Array(594, 30, 610, 30, 610, 62, 158, 238, 174, 222, 626, 62, 626, 78, 10, 1014, 674, 78, 674, 94, 786, 94, 786, 110, 978, 110, 978, 126, 1014, 126, 1014, 1014, 10, 238, 158, 222, 174, 206, 190, 206, 190, 190, 206, 190, 206, 158, 222, 158, 238, 142, 222, 142, 238, 110, 254, 110, 270, 94, 254, 94, 270, 78, 286, 78, 286, 30, 302, 30, 594, 10, 302, 10)
@@ -47,5 +46,3 @@ layer_4/tile_data = PackedInt32Array(1507357, 65536, 31, 1507356, 65536, 31, 150
 
 [node name="Player" parent="YSortHelper" instance=ExtResource("3_0u3jk")]
 position = Vector2(913, 378)
-
-[node name="Party-UI-Controller" parent="." instance=ExtResource("3_r2ruw")]

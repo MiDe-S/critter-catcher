@@ -16,7 +16,7 @@ enum DIRECTIONS {
 }
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	if current_mask != 0:
 		terrain_event.emit(current_mask)
 
@@ -34,11 +34,11 @@ func tileMapCollision(body: Node2D, body_rid: RID) -> void:
 			queue.append(body_rid)
 			break
 
-func _on_body_shape_entered(body_rid, body, body_shape_index, local_shape_index):
+func _on_body_shape_entered(body_rid, body, _body_shape_index, _local_shape_index):
 	if body is TileMap:
 		tileMapCollision(body, body_rid)
 
-func _on_body_shape_exited(body_rid, body, body_shape_index, local_shape_index):
+func _on_body_shape_exited(body_rid, _body, _body_shape_index, _local_shape_index):
 	queue.erase(body_rid)
 	if queue.size() <= 0:
 		current_mask = 0 # Replace with function body.

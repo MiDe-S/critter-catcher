@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://bli4s6605nelh"]
+[gd_scene load_steps=10 format=3 uid="uid://bli4s6605nelh"]
 
 [ext_resource type="Script" path="res://battle/Battle.gd" id="1_f0pd2"]
 [ext_resource type="PackedScene" uid="uid://b7ik2644mtetq" path="res://battle/battle-ui/selector.tscn" id="2_3innm"]
+[ext_resource type="PackedScene" uid="uid://dw6aauoqraqwn" path="res://critters/critter-battle.tscn" id="2_83edl"]
 [ext_resource type="PackedScene" uid="uid://cau0um2ta1bbi" path="res://battle/battle-ui/battle_ui.tscn" id="3_knewc"]
 [ext_resource type="PackedScene" uid="uid://l8caa8o6ly33" path="res://battle/player.tscn" id="4_58nw4"]
 [ext_resource type="PackedScene" uid="uid://bgurn8tmt6awv" path="res://battle/enemy.tscn" id="5_tcq5x"]
@@ -19,6 +20,7 @@ leftPositions = [NodePath("LeftSpawn")]
 rightPositions = [NodePath("RightSpawn")]
 opposingSide = [NodePath("OpposingSide")]
 all = [NodePath("All")]
+critterBattleBase = ExtResource("2_83edl")
 
 [node name="LeftSpawn" type="Node2D" parent="."]
 position = Vector2(179, 330)

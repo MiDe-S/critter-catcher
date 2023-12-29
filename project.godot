@@ -19,8 +19,9 @@ config/icon="res://icon.svg"
 
 Pause="*res://pause-manager/prefabs/pause_manager.tscn"
 DebugMenu="*res://addons/debug_menu/debug_menu.tscn"
-PlayerManager="*res://player-manager.tscn"
-GlobalVariables="*res://globals.gd"
+PlayerManager="*res://autoload/player-manager.tscn"
+GlobalVariables="*res://autoload/globals.gd"
+SceneManager="*res://autoload/scene-manager.tscn"
 
 [display]
 

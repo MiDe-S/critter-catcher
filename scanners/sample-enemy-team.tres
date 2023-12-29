@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scanners/team.gd" id="1_v682g"]
 [ext_resource type="Resource" uid="uid://dnufkqhtu6s60" path="res://critters/critters/flairurt-info.tres" id="2_un71v"]
 [ext_resource type="Resource" uid="uid://cghlqeyvbfbnf" path="res://moves/pyroblast.tres" id="3_h8h8d"]
-[ext_resource type="Script" path="res://critters/critter-instance.gd" id="4_yqioq"]
+[ext_resource type="Script" path="res://critters/critter.gd" id="4_yqioq"]
 [ext_resource type="Resource" uid="uid://cus20ulf3jk44" path="res://critters/critters/mushurm-info.tres" id="5_owen7"]
 [ext_resource type="Resource" uid="uid://c6vjbgaigkvtx" path="res://moves/tsunami.tres" id="6_n1utp"]
 

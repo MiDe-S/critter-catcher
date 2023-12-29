@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="CritterInfo" load_steps=8 format=3 uid="uid://bf3cgbyv1qevj"]
 
-[ext_resource type="Script" path="res://critters/critter-base.gd" id="1_3nkx1"]
+[ext_resource type="Script" path="res://critters/critter-info.gd" id="1_3nkx1"]
 [ext_resource type="Resource" uid="uid://d00upfwdoaoxb" path="res://moves/block.tres" id="1_fprbe"]
 [ext_resource type="Resource" uid="uid://oyu8ijb6twy5" path="res://moves/swipe.tres" id="1_xs8ad"]
 [ext_resource type="Resource" uid="uid://cpmm2xqjt88x8" path="res://types/basic.tres" id="2_ot63o"]

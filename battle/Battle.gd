@@ -1,7 +1,5 @@
 extends Node
-
-var critterPath = "res://critters/critters/"
-var critterFormat = ".tscn"
+class_name Battle
 
 var critterUIPath = "res://battle/battle-ui/critter-ui/critter_ui.tscn"
 # on init spawn people from people
@@ -16,9 +14,10 @@ var turnActions: Array[Action]
 @export var opposingSide: Array[Node2D]
 @export var all: Array[Node2D]
 
+@export var critterBattleBase: PackedScene
+
 var typeManager: TypeManger = TypeManger.new()
 
-var _mapScenes: Array[Node]
 ### Turn
 ## Select Move on critter 1
 # Select Target
@@ -27,9 +26,6 @@ var _mapScenes: Array[Node]
 ## Get AI Actions
 ### Resolve turn
 ### Repeat
-
-func setMapScene(scene: Array[Node]):
-	_mapScenes = scene
 	
 func setEnemy(enemy: CharacterBody2D):
 	remove_child($Enemy)
@@ -51,7 +47,7 @@ func setUpPlayers(critters, p1: bool = true):
 	var i = 0
 	for pos in leftPositions:
 		var critter = critters[i]
-		var critInstance = load(critterPath + critter.getName().to_lower() + critterFormat).instantiate()
+		var critInstance = critterBattleBase.instantiate()
 		critInstance.setCritter(critter)
 		if p1:
 			critInstance.add_to_group("p1")
@@ -200,10 +196,5 @@ func checkBattleOver():
 		endBattle()
 	
 func endBattle():
-	var current = get_tree().get_current_scene()
-	for n in _mapScenes:
-		get_tree().get_root().add_child(n)
-	# GET CURRENT FROM GLOBAL PLAYER INFO
-	get_tree().set_current_scene(_mapScenes[0])
-	current.queue_free()
+	SceneManager.endScene()
 	

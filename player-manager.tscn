@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://dnyso5n5gho7k"]
-
-[ext_resource type="Script" path="res://player-info-manager.gd" id="1_7momp"]
-[ext_resource type="Resource" uid="uid://c3f1qhvj053vw" path="res://sample-player-info.tres" id="2_j3pmh"]
-
-[node name="player-manager" type="Node2D"]
-script = ExtResource("1_7momp")
-playerInfo = ExtResource("2_j3pmh")

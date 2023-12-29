@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="CritterInfo" load_steps=3 format=3 uid="uid://d2johio30vnyj"]
 
-[ext_resource type="Script" path="res://critters/critter-base.gd" id="1_m5cmn"]
+[ext_resource type="Script" path="res://critters/critter-info.gd" id="1_m5cmn"]
 [ext_resource type="Resource" uid="uid://bwv1p0eb3idb1" path="res://types/dark.tres" id="2_i8olb"]
 
 [resource]

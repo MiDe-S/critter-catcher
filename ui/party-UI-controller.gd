@@ -16,3 +16,7 @@ func _input(event: InputEvent):
 		elif element != null:
 			element.freeSelf()
 			element = null
+
+func refresh():
+	if element != null:
+		element.refresh()

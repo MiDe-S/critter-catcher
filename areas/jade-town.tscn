@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://b16eo7ku65l5m"]
+[gd_scene load_steps=21 format=3 uid="uid://b16eo7ku65l5m"]
 
 [ext_resource type="Script" path="res://areas/map-manager/map-manager.gd" id="1_d413b"]
 [ext_resource type="PackedScene" uid="uid://bv4g5pkonn1tg" path="res://areas/y_sort_helper.tscn" id="1_i0np8"]
@@ -14,7 +14,6 @@
 [ext_resource type="Resource" uid="uid://ct3f40orubwb0" path="res://critters/critters/betajay-info.tres" id="12_rf5cj"]
 [ext_resource type="Resource" uid="uid://cbe8lhdunca8" path="res://critters/critters/dibbit-info.tres" id="13_vy4jr"]
 [ext_resource type="Resource" uid="uid://bf3cgbyv1qevj" path="res://critters/critters/millo-info.tres" id="14_7vi2e"]
-[ext_resource type="PackedScene" uid="uid://dpyjt1nlnkfuy" path="res://ui/party-UI-controller.tscn" id="15_dyrpm"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_vydxb"]
 vertices = PackedVector2Array(806, 330, 818, 330, 818, 562, 754, 562, 554, 522, 554, 454, 818, 174, 818, 230, 774, 230, 650, 202, 802, 174, 802, 94, 650, 102, 754, 94, 242, 78, 306, 78, 306, 94, 298, 134, 198, 134, 422, 102, 398, 94, 398, 78, 462, 78, 462, 62, 674, 62, 674, 78, 754, 78, 422, 134, 326, 134, 326, 202, 298, 202, 774, 282, 806, 282, 454, 454, 454, 522, 426, 522, 426, 454, 754, 610, 642, 610, 642, 674, 626, 674, 626, 678, 470, 678, 470, 694, 406, 694, 302, 610, 442, 794, 442, 730, 506, 730, 610, 1014, 506, 714, 626, 714, 610, 722, 626, 722, 442, 1014, 442, 806, 406, 794, 406, 806, 406, 1014, 302, 1014, 198, 682, 278, 682, 278, 714, 166, 714, 166, 678, 198, 610, 162, 678, 162, 670, 154, 670, 154, 666, 150, 666, 150, 630, 146, 630, 146, 622, 138, 622, 138, 618, 134, 618, 134, 566, 130, 566, 130, 558, 326, 454, 326, 522, 122, 558, 122, 554, 118, 554, 118, 454, 114, 454, 114, 446, 198, 202, 106, 446, 106, 442, 86, 442, 86, 438, 82, 438, 82, 430, 74, 430, 74, 426, 70, 426, 70, 374, 66, 374, 66, 366, 58, 366, 58, 362, 38, 362, 38, 342, 34, 342, 34, 334, 26, 334, 26, 330, 22, 330, 22, 198, 26, 198, 26, 194, 34, 194, 34, 186, 38, 186, 38, 166, 42, 166, 42, 162, 50, 162, 50, 154, 54, 154, 54, 134, 58, 134, 58, 130, 66, 130, 66, 122, 70, 122, 70, 102, 74, 102, 74, 98, 82, 98, 82, 90, 86, 90, 86, 86, 118, 86, 118, 90, 142, 90, 142, 78, 158, 78, 158, 62, 242, 62)
@@ -122,5 +121,3 @@ offset_bottom = 713.0
 spawnInfo = Array[ExtResource("10_je7of")]([SubResource("Resource_s6e8x"), SubResource("Resource_5ok5p")])
 spawn_cap = 1
 metadata/_edit_use_anchors_ = true
-
-[node name="Party-UI-Controller" parent="." instance=ExtResource("15_dyrpm")]

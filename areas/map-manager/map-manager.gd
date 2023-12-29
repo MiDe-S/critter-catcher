@@ -32,7 +32,7 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	if !$YSortHelper.has_node("Player"):
 		return
 	var pos = $YSortHelper/Player.get_position()

@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="CritterInfo" load_steps=6 format=3 uid="uid://cbe8lhdunca8"]
 
 [ext_resource type="Resource" uid="uid://oyu8ijb6twy5" path="res://moves/swipe.tres" id="1_00eg3"]
-[ext_resource type="Script" path="res://critters/critter-base.gd" id="1_uk4bw"]
+[ext_resource type="Script" path="res://critters/critter-info.gd" id="1_uk4bw"]
 [ext_resource type="Resource" uid="uid://cpmm2xqjt88x8" path="res://types/basic.tres" id="2_7vq0e"]
 [ext_resource type="Script" path="res://moves/critter-move.gd" id="2_ytp4p"]
 

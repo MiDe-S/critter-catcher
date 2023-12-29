@@ -44,7 +44,7 @@ func clear():
 	for n in container.get_children():
 		n.queue_free()
 
-func changePartyOrder(y: int, critter: Critter) -> void:
+func changePartyOrder() -> void:
 	# reorder team based on y positions
 	var team := Team.new()
 	var child_nodes = container.get_children()

@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://dw6aauoqraqwn"]
+
+[ext_resource type="Script" path="res://critters/critter-instance.gd" id="1_1ym76"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_roc58"]
+size = Vector2(100, 100)
+
+[node name="CritterBattle" type="Area2D"]
+scale = Vector2(2, 2)
+script = ExtResource("1_1ym76")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_roc58")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]

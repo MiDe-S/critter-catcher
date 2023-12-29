@@ -3,7 +3,7 @@ extends ColorRect
 signal health
 signal exp
 
-signal orderChanged(y: int, critter: Critter)
+signal orderChanged()
 
 @export var critter: Critter
 
@@ -15,7 +15,7 @@ func _ready():
 	if critter != null and !isInit:
 		initialize(critter)
 
-func _process(delta):
+func _process(_delta):
 	if dragging:
 		global_position = get_viewport().get_mouse_position()
 
@@ -37,7 +37,7 @@ func _gui_input(event) -> void:
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			dragging = event.pressed
 			if !dragging:
-				orderChanged.emit(global_position.y, critter)
+				orderChanged.emit()
 		
 
 func getCritter() -> Critter:
