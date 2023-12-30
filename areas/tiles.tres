@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=58 format=3 uid="uid://bhkhb116gcf8h"]
+[gd_resource type="TileSet" load_steps=59 format=3 uid="uid://bhkhb116gcf8h"]
 
 [ext_resource type="Texture2D" uid="uid://dc75e7tvdi4ap" path="res://areas/art/Overworld.png" id="1_c6gqo"]
 [ext_resource type="Texture2D" uid="uid://di8xk17ti77lh" path="res://areas/art/OverworldSand.png" id="2_ae1mk"]
@@ -59,6 +59,13 @@ vertices = PackedVector2Array(-8, 8, -8, -4, 4, -4, 4, 8, 8, 8)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(0, 3, 4)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-8, -4, 4, -4, 4, 8, 8, 8, -8, 8)])
 source_geometry_group_name = &"navigation_polygon_source_group"
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_e4he1"]
+vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)])
+source_geometry_group_name = &"navigation_polygon_source_group"
+agent_radius = 0.0
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_nc76q"]
 vertices = PackedVector2Array(-4, -8, 8, -8, 8, 8, -4, 8)
@@ -6107,6 +6114,7 @@ texture = ExtResource("1_c6gqo")
 31:21/0/physics_layer_0/angular_velocity = 0.0
 31:21/0/physics_layer_1/linear_velocity = Vector2(0, 0)
 31:21/0/physics_layer_1/angular_velocity = 0.0
+31:21/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_e4he1")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7cjdt"]
 texture = ExtResource("2_m5nqw")

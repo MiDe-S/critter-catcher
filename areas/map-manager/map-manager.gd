@@ -114,3 +114,6 @@ func removePlayer() -> CharacterBody2D:
 	var player = $YSortHelper/Player
 	$YSortHelper.remove_child(player)
 	return player
+
+func get_navigation_map():
+	$NavigationRegion2D.get_navigation_map()

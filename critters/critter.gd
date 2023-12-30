@@ -94,9 +94,9 @@ func getSpeedForCalc():
 	return calcStat(critterInfo.getSpeed(), speedBase, speedAdd, speedMultiplier)
 
 func calcStat(base, baseAdd, add, multiplier):
-	var baseTotal = base + baseAdd
+	var baseTotal = base + baseAdd / GlobalVariables.BASE_STAT_ADD_MAX * 0.2 + 1
 	var additional = add / 100.0 * 0.25 + 1
-	var lvl = level / 100.0 * 1 + 0.3
+	var lvl = level / 100.0 * 2 + 0.3
 	return lvl * baseTotal * additional * multiplier
 
 func getType():

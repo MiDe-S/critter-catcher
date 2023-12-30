@@ -20,6 +20,7 @@ func getRandomPoint():
 func _on_critter_spawner_timeout():
 	if total_spawned < spawn_cap:
 		var critter = critter_scene.instantiate()
+		critter.initialize(get_parent().get_node("NavigationRegion2D"))
 		critter.position = getRandomPoint()
 		
 		# consider frequency later
