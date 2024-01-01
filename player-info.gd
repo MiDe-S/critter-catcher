@@ -3,7 +3,7 @@ class_name PlayerInfo
 
 @export var name: String
 @export var team: Team
-var global_position: Vector2
+var local_position: Vector2
 var current_scene: String
 
 func getCritters() -> Array[Critter]:
@@ -17,3 +17,15 @@ func addCritter(critter: Critter):
 
 func setTeam(teamInput: Team):
 	team = teamInput
+
+func setCurrentScene(scene: String):
+	current_scene = scene
+	
+func setPlayerPosition(pos: Vector2):
+	local_position = pos
+
+func getCurrentScene() -> String:
+	return current_scene
+	
+func getPlayerPosition() -> Vector2:
+	return local_position

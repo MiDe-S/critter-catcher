@@ -2,6 +2,7 @@ extends Area2D
 class_name CritterInstance
 
 signal healthUpdater
+signal battleMessage(msg: String)
 
 @export var critter: Critter
 
@@ -33,6 +34,7 @@ func getSigName():
 
 func dealDamage(healthInput: float):
 	var dmg = healthInput * critter.getDamageReduction()
+	battleMessage.emit("Health was " + str(critter.getHealth()) + " now " + str(snappedf(critter.getHealth() - dmg, .01)) + ": " + str(snappedf(dmg, .01)) + " damage")
 	healthUpdater.emit(dmg)
 	critter.health -= dmg
 	
@@ -52,4 +54,7 @@ func getExpGiven() -> int:
 	return critter.getExpGiven()
 
 func gainExperience(experience: int) -> void:
-	return critter.gainExperience(experience)
+	var oldLevel = getLevel()
+	var newLevel = critter.gainExperience(experience)
+	if newLevel != oldLevel:
+		battleMessage.emit(getName() + " leveled up to " + str(newLevel) + ".")

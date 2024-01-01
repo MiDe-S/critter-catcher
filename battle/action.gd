@@ -10,7 +10,7 @@ func _init(attackerInput, moveInput, defendersInput: Array[Node]):
 	move = moveInput
 	defenders = defendersInput
 
-func printInfo():
+func actionInfo() -> String:
 	var output = ""
 	output += attacker.getName()
 	output += " used "
@@ -18,7 +18,8 @@ func printInfo():
 	output += " against "
 	for critter in defenders:
 		output += critter.getName() + ", "
-	print(output)
+	output[-2] = "." # change last comma to period
+	return output
 	
 func getMove():
 	return move

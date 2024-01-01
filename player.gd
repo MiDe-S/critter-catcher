@@ -18,7 +18,7 @@ func isDefeated():
 	return playerInfo.isDefeated()
 
 func _physics_process(_delta):
-	PlayerManager.currentPosition = position
+	PlayerManager.setPlayerPosition(position)
 
 	var directionX = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
 	var directionY = Input.get_action_strength("move_down") - Input.get_action_strength("move_up")

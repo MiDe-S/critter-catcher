@@ -102,6 +102,7 @@ func transferPlayer(scene: Node, posTransfer: Vector2, cameraOffsetVector: Vecto
 	player.position -= posTransfer
 	scene.addPlayer(player)
 	get_tree().set_current_scene(scene)
+	PlayerManager.setCurrentScene(get_tree().current_scene.get_scene_file_path())
 	# fix for camera jumping
 	player.get_node("Camera2D").offset = cameraOffsetVector * player.get_node("Camera2D").get_position_smoothing_speed()
 	scene.set("z_index", 0)

@@ -24,7 +24,6 @@ func initialize(nameInput, levelInput: int, maxHealthInput, sigName):
 	get_parent().connect(sigName, updateHealth)
 	
 func updateHealth(healthInput: float):
-	print("Health was " + str(health) + " now " + str(health - healthInput) + ": " + str(healthInput) + " damage")
 	health -= healthInput
 	health_changed.emit(health)
 	

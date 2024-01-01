@@ -51,6 +51,23 @@ layout_mode = 2
 theme = ExtResource("3_d7621")
 text = "Run"
 
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = 378.0
+offset_top = 449.0
+offset_right = 897.0
+offset_bottom = 536.0
+color = Color(1, 1, 1, 0.0352941)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 16
+scroll_following = true
+
 [connection signal="pressed" from="SwitchButton" to="." method="switch_pressed"]
 [connection signal="pressed" from="WildContainer/ScanButton" to="." method="scan_pressed"]
 [connection signal="pressed" from="WildContainer/RunButton" to="." method="run_pressed"]

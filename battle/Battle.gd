@@ -60,7 +60,7 @@ func setUpPlayers(critters, p1: bool = true):
 		var critUi = load(critterUIPath).instantiate()
 		critInstance.add_child(critUi)
 		critUi.initialize(critter.getName(), critter.getLevel(), critter.getMaxHealth(), critInstance.getSigName())
-		
+		critInstance.connect("battleMessage", printText)
 		self.add_child(critInstance)
 		i += 1
 
@@ -146,7 +146,7 @@ func endTurn():
 	# determine who goes first with speed + effects
 	# calculate damage for all
 	for action in turnActions:
-		action.printInfo()
+		$BattleUI.printText(action.actionInfo())
 		var movePower = action.getMove().getPower()  * min((0.3 + action.getAttacker().getLevel() / 100.0), 1.0)
 		# check physical vs range
 		var atk
@@ -159,8 +159,6 @@ func endTurn():
 		for defender in action.getDefenders():
 			if rng.randf_range(0, 100) <= action.getMove().getAccuracy():
 				var randomness = rng.randf_range(.96, 1.04)
-				
-				
 				var def
 				match action.getMove().getAttribute():
 					Move.attributeType.DIRECT:
@@ -173,9 +171,10 @@ func endTurn():
 					defender.dealDamage(movePower * typeAdvantage * atk / def * randomness)
 				defender.getCritter().applyEffects(action.getMove().getEffects())
 				if defender.isDefeated():
+					$BattleUI.printText(defender.getName() + " was defeated. " + action.getAttacker().getName() + " gained " + str(defender.getExpGiven()) + " exp.")
 					action.getAttacker().gainExperience(defender.getExpGiven())
 			else:
-				print("Move missed")
+				$BattleUI.printText("Move missed")
 		checkBattleOver()
 	# check arena conditions + 
 	# advance turn counter 1
@@ -198,3 +197,5 @@ func checkBattleOver():
 func endBattle():
 	SceneManager.endScene()
 	
+func printText(msg: String):
+	$BattleUI.printText(msg)

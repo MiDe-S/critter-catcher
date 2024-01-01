@@ -4,6 +4,7 @@ class_name BattleUI
 signal actionChosen(event)
 
 @export var isWildBattle := false
+@export var debugMode := false
 
 enum BattleUIActions {
 	SWITCH,
@@ -39,3 +40,8 @@ func _toggleWildBattleUI():
 		$WildContainer.show()
 	else:
 		$WildContainer.hide()
+
+func printText(msg: String):
+	$ColorRect/RichTextLabel.add_text(msg + '\n')
+	if debugMode:
+		print(msg)
