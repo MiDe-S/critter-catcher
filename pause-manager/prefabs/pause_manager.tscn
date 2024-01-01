@@ -1,8 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://cd5tolsiqaeo7"]
+[gd_scene load_steps=3 format=3 uid="uid://cd5tolsiqaeo7"]
 
+[ext_resource type="Script" path="res://pause-manager/scripts/pause_manager-menu.gd" id="1_tdidu"]
 [ext_resource type="Script" path="res://pause-manager/scripts/pause_manager.gd" id="1_wdn7o"]
 
-[node name="PauseManager" type="Node2D"]
+[node name="CanvasLayer" type="CanvasLayer"]
+layer = 2
+script = ExtResource("1_tdidu")
+
+[node name="PauseManager" type="Node2D" parent="."]
 process_mode = 3
 editor_description = "Pause Tree:
 	When 'true', the property 'get_tree().paused' will be changed to 'true' when paused and changed to 'false' when resumed.
@@ -28,3 +33,108 @@ Keys:
 	Array of keys, when Input Map is not needed.
 	By default, there's only the 'Escape' key from keyboard."
 script = ExtResource("1_wdn7o")
+
+[node name="Panel" type="Panel" parent="."]
+process_mode = 2
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -250.0
+offset_right = 128.0
+offset_bottom = 250.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+
+[node name="Resume" type="Button" parent="Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.496094
+anchor_top = 0.168
+anchor_right = 0.496094
+anchor_bottom = 0.168
+offset_left = -63.0
+offset_top = -24.0
+offset_right = 65.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Resume
+"
+metadata/_edit_use_anchors_ = true
+
+[node name="Save" type="Button" parent="Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.496094
+anchor_top = 0.322
+anchor_right = 0.496094
+anchor_bottom = 0.322
+offset_left = -63.0
+offset_top = -24.0
+offset_right = 65.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Save"
+metadata/_edit_use_anchors_ = true
+
+[node name="Load" type="Button" parent="Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.507813
+anchor_top = 0.49
+anchor_right = 0.507813
+anchor_bottom = 0.49
+offset_left = -66.0
+offset_top = -24.0
+offset_right = 62.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Load"
+metadata/_edit_use_anchors_ = true
+
+[node name="Settings" type="Button" parent="Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.515625
+anchor_top = 0.656
+anchor_right = 0.515625
+anchor_bottom = 0.656
+offset_left = -68.0
+offset_top = -24.0
+offset_right = 60.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Settings"
+metadata/_edit_use_anchors_ = true
+
+[node name="Exit" type="Button" parent="Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.828
+anchor_right = 0.5
+anchor_bottom = 0.828
+offset_left = -64.0
+offset_top = -24.0
+offset_right = 64.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Exit
+"
+metadata/_edit_use_anchors_ = true
+
+[connection signal="toggle" from="PauseManager" to="." method="_on_pause_manager_toggle"]
+[connection signal="pressed" from="Panel/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="Panel/Save" to="." method="_on_save_pressed"]
+[connection signal="pressed" from="Panel/Load" to="." method="_on_load_pressed"]
+[connection signal="pressed" from="Panel/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="Panel/Exit" to="." method="_on_exit_pressed"]

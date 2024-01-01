@@ -17,7 +17,7 @@ func _ready():
 
 func _process(_delta):
 	if dragging:
-		global_position = get_viewport().get_mouse_position()
+		global_position = get_viewport().get_mouse_position() - get_size() / 2
 
 func initialize(critterInput: Critter):
 	critter = critterInput
