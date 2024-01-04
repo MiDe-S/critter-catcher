@@ -31,6 +31,10 @@ func startScene(newScene: Node) -> void:
 		# show UI elements
 		# refresh UI elements
 		return
+	if oldScene is MapManager and newScene is MapManager:
+		# show UI elements
+		# refresh UI elements
+		return
 	assert(false, "No scenes configured for going to" + str(oldScene.get_class()) + " from " + str(newScene.get_class()))
 		
 func endScene() -> void:
@@ -46,3 +50,14 @@ func endScene() -> void:
 		# GET CURRENT FROM GLOBAL PLAYER INFO
 		get_tree().set_current_scene(_mapScenes[0])
 		oldScene.queue_free()
+
+func reloadGame() -> void:
+	# set player pos from player info
+	# start scene from player info
+	_mapScenes = get_tree().get_nodes_in_group("area")
+	var root = get_tree().get_root()
+	for c in _mapScenes:
+		if !c.is_in_group("ui"):
+			root.remove_child(c)
+	get_tree().change_scene_to_file(PlayerManager.getCurrentScene())
+	get_tree().get_current_scene().setPlayerPosition(PlayerManager.gtPlayerPosition())

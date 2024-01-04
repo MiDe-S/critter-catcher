@@ -3,8 +3,8 @@ class_name PlayerInfo
 
 @export var name: String
 @export var team: Team
-var local_position: Vector2
-var current_scene: String
+@export var local_position: Vector2
+@export var current_scene: String
 
 func getCritters() -> Array[Critter]:
 	return team.getCritters()

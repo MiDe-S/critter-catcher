@@ -118,3 +118,6 @@ func removePlayer() -> CharacterBody2D:
 
 func get_navigation_map():
 	$NavigationRegion2D.get_navigation_map()
+
+func setPlayerPosition(pos: Vector2) -> void:
+	$YSortHelper/Player.position = pos

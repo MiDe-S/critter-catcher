@@ -17,10 +17,10 @@ func _on_resume_pressed():
 	$PauseManager._toggle_pause()
 
 func _on_save_pressed():
-	print("Saved")
+	PlayerManager.saveGame()
 
 func _on_load_pressed():
-	print("Loaded")
+	PlayerManager.loadGame()
 
 func _on_settings_pressed():
 	print("Settings")
