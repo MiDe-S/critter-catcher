@@ -32,5 +32,6 @@ func loadGame() -> void:
 	if ResourceLoader.exists(FILE_PATH):
 		var player = ResourceLoader.load(FILE_PATH)
 		if player is PlayerInfo: # Check that the data is valid
-			playerInfo = player
+			print(PlayerManager.getPlayerPosition(), player.getPlayerPosition())
+			playerInfo = player.duplicate(true)
 			SceneManager.reloadGame()

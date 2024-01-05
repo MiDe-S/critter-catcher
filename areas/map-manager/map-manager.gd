@@ -29,6 +29,9 @@ var westScene: MapManager
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	playerInfo = PlayerManager.getPlayerInfo()
+	# Load position from manager
+	if has_node("YSortHelper/Player"):
+		$YSortHelper/Player.position = PlayerManager.getPlayerPosition()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

@@ -55,9 +55,10 @@ func reloadGame() -> void:
 	# set player pos from player info
 	# start scene from player info
 	_mapScenes = get_tree().get_nodes_in_group("area")
+	_mapScenes.erase(get_tree().get_current_scene())
 	var root = get_tree().get_root()
+	get_tree().change_scene_to_file(PlayerManager.getCurrentScene())
+	await get_tree().tree_changed # find better method
 	for c in _mapScenes:
 		if !c.is_in_group("ui"):
-			root.remove_child(c)
-	get_tree().change_scene_to_file(PlayerManager.getCurrentScene())
-	get_tree().get_current_scene().setPlayerPosition(PlayerManager.gtPlayerPosition())
+			c.queue_free()
