@@ -7,6 +7,7 @@ var playerInfo: PlayerInfo
 func _ready():
 	playerInfo = PlayerManager.getPlayerInfo()
 	$TerrainDetector.connect("terrain_event", _handleTerrainEvent)
+	$MovementController.connect("Facing", _updateRayCast)
 
 func getCritters():
 	return playerInfo.getCritters()
@@ -27,3 +28,6 @@ func _physics_process(_delta):
 
 func _handleTerrainEvent(key: int):
 	$MovementController.terrainEvent(key, SPEED)
+
+func _updateRayCast(facing: MovementController.Directions):
+	$ShapeCast2D.setFacing(facing)

@@ -23,6 +23,11 @@ PlayerManager="*res://autoload/player-manager.tscn"
 GlobalVariables="*res://autoload/globals.gd"
 SceneManager="*res://autoload/scene-manager.tscn"
 
+[debug]
+
+gdscript/warnings/int_as_enum_without_cast=0
+gdscript/warnings/int_as_enum_without_match=0
+
 [display]
 
 window/size/viewport_width=1280

@@ -1,6 +1,18 @@
 extends Node2D
+class_name MovementController
+
+signal Facing(facing: Directions)
 
 @onready var animationPlayer = get_parent().get_node("AnimationPlayer")
+
+var facing: Directions = -1 # so default isn't 0
+
+enum Directions {
+	RIGHT,
+	UP,
+	DOWN,
+	LEFT
+}
 
 func move(direction: Vector2, speed: int):
 	var velocityValue = get_parent().velocity
@@ -21,13 +33,25 @@ func move(direction: Vector2, speed: int):
 	if velocityValue == Vector2.ZERO:
 		animationPlayer.stop()
 	elif velocityValue.x > 0:
-		animationPlayer.play("right")
+		if facing != Directions.RIGHT:
+			facing = Directions.RIGHT
+			animationPlayer.play("right")
+			Facing.emit(facing)
 	elif velocityValue.y < 0:
-		animationPlayer.play("up")
+		if facing != Directions.UP:
+			facing = Directions.UP
+			animationPlayer.play("up")
+			Facing.emit(facing)
 	elif velocityValue.x < 0:
-		animationPlayer.play("left")
+		if facing != Directions.LEFT:
+			facing = Directions.LEFT
+			animationPlayer.play("left")
+			Facing.emit(facing)
 	elif velocityValue.y > 0:
-		animationPlayer.play("down")
+		if facing != Directions.DOWN:
+			facing = Directions.DOWN
+			animationPlayer.play("down")
+			Facing.emit(facing)
 		
 func terrainEvent(key: int, speed: int):
 	var velocityValue = get_parent().velocity
