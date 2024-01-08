@@ -27,7 +27,7 @@ var typeManager: TypeManger = TypeManger.new()
 ### Resolve turn
 ### Repeat
 	
-func setEnemy(enemy: CharacterBody2D):
+func setEnemy(enemy: NPC):
 	remove_child($Enemy)
 	add_child(enemy)
 

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://areas/area.gd" id="1_ultut"]
 [ext_resource type="PackedScene" uid="uid://cu1sse78jdei2" path="res://critters/critter-wild.tscn" id="2_evhvy"]
-[ext_resource type="Script" path="res://battle/battle-factory.gd" id="3_n8uc0"]
+[ext_resource type="PackedScene" uid="uid://crr05l1k7bkb" path="res://battle/battle-factory.tscn" id="3_v6rb6"]
 
 [node name="ColorRect" type="ColorRect"]
 offset_right = 40.0
@@ -17,7 +17,6 @@ metadata/_edit_group_ = true
 wait_time = 5.0
 autostart = true
 
-[node name="BattleFactory" type="Node" parent="."]
-script = ExtResource("3_n8uc0")
+[node name="BattleFactory" parent="." instance=ExtResource("3_v6rb6")]
 
 [connection signal="timeout" from="Timer" to="." method="_on_critter_spawner_timeout"]

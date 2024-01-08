@@ -1,6 +1,8 @@
 extends CharacterBody2D
 class_name Player
 
+@onready var ray = $ShapeCast2D
+
 const SPEED = 150
 var playerInfo: PlayerInfo
 
@@ -30,4 +32,10 @@ func _handleTerrainEvent(key: int):
 	$MovementController.terrainEvent(key, SPEED)
 
 func _updateRayCast(facing: MovementController.Directions):
-	$ShapeCast2D.setFacing(facing)
+	ray.setFacing(facing)
+	
+func _input(event):
+	if event.is_action_pressed("overworld_interact"):
+		if ray.is_colliding():
+			ray.interactClosest()
+			print("Start Battle")
