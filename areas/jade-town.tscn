@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://c2fjsnt3i2b0y" path="res://areas/buildings/house.tscn" id="3_h8wbo"]
 [ext_resource type="PackedScene" uid="uid://cuiksbbocbjhd" path="res://areas/buildings/small-house.tscn" id="4_607ej"]
 [ext_resource type="PackedScene" uid="uid://ct38fxy8y54aa" path="res://areas/buildings/wide-castle.tscn" id="5_v543v"]
-[ext_resource type="PackedScene" uid="uid://l8caa8o6ly33" path="res://battle/player.tscn" id="8_l4tu7"]
+[ext_resource type="PackedScene" uid="uid://l8caa8o6ly33" path="res://player/player.tscn" id="8_l4tu7"]
 [ext_resource type="PackedScene" uid="uid://dyf5lh1iyf4p1" path="res://areas/spawn-area.tscn" id="9_f771t"]
 [ext_resource type="Script" path="res://areas/area-spawn-info.gd" id="10_je7of"]
 [ext_resource type="Resource" uid="uid://ghx60eun4heb" path="res://critters/critters/boud-info.tres" id="10_w2qs2"]

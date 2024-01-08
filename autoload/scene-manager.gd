@@ -35,7 +35,7 @@ func startScene(newScene: Node) -> void:
 		# show UI elements
 		# refresh UI elements
 		return
-	assert(false, "No scenes configured for going to" + str(oldScene.get_class()) + " from " + str(newScene.get_class()))
+	assert(false, "No scenes configured for going to " + str(oldScene.get_class()) + " from " + str(newScene.get_class()))
 		
 func endScene() -> void:
 	var oldScene = get_tree().current_scene

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://battle/Battle.gd" id="1_krkkt"]
 [ext_resource type="PackedScene" uid="uid://dw6aauoqraqwn" path="res://critters/critter-battle.tscn" id="2_5ol6y"]
-[ext_resource type="PackedScene" uid="uid://l8caa8o6ly33" path="res://battle/player.tscn" id="3_1paof"]
+[ext_resource type="PackedScene" uid="uid://l8caa8o6ly33" path="res://player/player.tscn" id="3_1paof"]
 [ext_resource type="PackedScene" uid="uid://cau0um2ta1bbi" path="res://battle/battle-ui/battle_ui.tscn" id="3_oknn5"]
 [ext_resource type="PackedScene" uid="uid://bgurn8tmt6awv" path="res://battle/enemy.tscn" id="4_4p4f5"]
 [ext_resource type="PackedScene" uid="uid://b7ik2644mtetq" path="res://battle/battle-ui/selector.tscn" id="5_a8y1d"]

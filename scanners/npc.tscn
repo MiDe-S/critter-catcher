@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scanners/npc.gd" id="1_5xwed"]
 [ext_resource type="Texture2D" uid="uid://biukij2j0k343" path="res://areas/art/log.png" id="1_t0ory"]
-[ext_resource type="PackedScene" uid="uid://crr05l1k7bkb" path="res://battle/battle-factory.tscn" id="3_vnekw"]
+[ext_resource type="PackedScene" uid="uid://crr05l1k7bkb" path="res://battle/battle-factory/battle-factory.tscn" id="3_vnekw"]
 [ext_resource type="PackedScene" uid="uid://ds8jctibfvxof" path="res://scanners/interactable.tscn" id="4_wfq08"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jhk3g"]

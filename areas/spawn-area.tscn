@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://areas/area.gd" id="1_ultut"]
 [ext_resource type="PackedScene" uid="uid://cu1sse78jdei2" path="res://critters/critter-wild.tscn" id="2_evhvy"]
-[ext_resource type="PackedScene" uid="uid://crr05l1k7bkb" path="res://battle/battle-factory.tscn" id="3_v6rb6"]
+[ext_resource type="PackedScene" uid="uid://crr05l1k7bkb" path="res://battle/battle-factory/battle-factory.tscn" id="3_v6rb6"]
 
 [node name="ColorRect" type="ColorRect"]
 offset_right = 40.0
