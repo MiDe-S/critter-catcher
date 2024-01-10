@@ -9,6 +9,7 @@ func _input(event: InputEvent):
 		return
 
 	if event.is_action_pressed("party_ui_toggle"):
+		print(get_tree().get_current_scene())
 		showUi = !showUi
 		if showUi and element == null:
 			element = uiElement.instantiate()

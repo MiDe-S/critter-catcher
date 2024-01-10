@@ -29,6 +29,7 @@ class_name Critter
 @export var rangeDefenseAdd: int
 @export var speedAdd: int
 
+@export var alive: bool = true
 
 # done so health can be set when it is first read
 var healthInit: bool = false
@@ -46,6 +47,7 @@ var currentEffects: Array[Effect] = []
 
 func initialize():
 	setHealth(getMaxHealth())
+	alive = true
 
 func getMoves():
 	return moves
@@ -74,6 +76,10 @@ func setHealth(input: float):
 	if !healthInit:
 		healthInit = true
 	health = input
+	if health < 0:
+		alive = false
+	else:
+		alive = true
 	
 func getMaxHealth():
 	return calcStat(critterInfo.getHealth(), healthBase, healthAdd, 1)
@@ -103,7 +109,7 @@ func getType():
 	return critterInfo.getType()
 	
 func isDefeated() -> bool:
-	return health <= 0
+	return !alive
 
 func resetMultipliers():
 	#clear effects array

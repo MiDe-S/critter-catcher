@@ -36,7 +36,7 @@ func dealDamage(healthInput: float):
 	var dmg = healthInput * critter.getDamageReduction()
 	battleMessage.emit("Health was " + str(critter.getHealth()) + " now " + str(snappedf(critter.getHealth() - dmg, .01)) + ": " + str(snappedf(dmg, .01)) + " damage")
 	healthUpdater.emit(dmg)
-	critter.health -= dmg
+	critter.setHealth(critter.getHealth() - dmg)
 	
 func getType():
 	return critter.getType()

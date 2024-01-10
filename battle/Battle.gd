@@ -64,8 +64,6 @@ func setUpPlayers(critters, p1: bool = true):
 		self.add_child(critInstance)
 		i += 1
 
-
-
 			
 func startTurn():
 	p1CritterIndex = 0
@@ -175,7 +173,7 @@ func endTurn():
 					action.getAttacker().gainExperience(defender.getExpGiven())
 			else:
 				$BattleUI.printText("Move missed")
-		checkBattleOver()
+		checkForDefeatedCritters()
 	# check arena conditions + 
 	# advance turn counter 1
 	for critter in get_tree().get_nodes_in_group("p1"):
@@ -190,9 +188,43 @@ func catchCritter():
 	$Player.addCritter($Enemy.getCritters()[0])
 	endBattle()
 	
+func checkForDefeatedCritters():
+	for p1Critter in get_tree().get_nodes_in_group("p1"):
+		if p1Critter.isDefeated():
+			# Give player option to switch
+			pass
+	
+	for p2Critter in get_tree().get_nodes_in_group("p2"):
+		if p2Critter.isDefeated():
+			printText(p2Critter.getName() + " is defeated.")
+			# Add AI picking logic
+			for crit in $Enemy.getCritters():
+				if !crit.isDefeated():
+					switchCritter(crit, p2Critter.position, false)
+					p2Critter.queue_free()
+	# if any in group p1 or p2 is defeated
+	checkBattleOver()
+	
 func checkBattleOver():
 	if $Player.isDefeated() or $Enemy.isDefeated():
 		endBattle()
+	
+func switchCritter(critter: Critter, pos: Vector2, p1: bool = true):
+	var critInstance = critterBattleBase.instantiate()
+	critInstance.setCritter(critter)
+	if p1:
+		critInstance.add_to_group("p1")
+		critInstance.position = pos
+	else:
+		critInstance.add_to_group("p2")
+		critInstance.position = pos
+		critInstance.faceLeft()
+		
+	var critUi = load(critterUIPath).instantiate()
+	critInstance.add_child(critUi)
+	critUi.initialize(critter.getName(), critter.getLevel(), critter.getMaxHealth(), critInstance.getSigName())
+	critInstance.connect("battleMessage", printText)
+	self.add_child(critInstance)
 	
 func endBattle():
 	SceneManager.endScene()

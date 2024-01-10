@@ -45,4 +45,4 @@ layer_4/tile_data = PackedInt32Array(1507357, 65536, 31, 1507356, 65536, 31, 150
 [node name="YSortHelper" parent="." instance=ExtResource("2_ribwr")]
 
 [node name="Player" parent="YSortHelper" instance=ExtResource("3_0u3jk")]
-position = Vector2(913, 378)
+position = Vector2(338, 64)

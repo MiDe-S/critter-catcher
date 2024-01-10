@@ -89,5 +89,5 @@ func _check_target_distance() -> void:
 	while length < points.size():
 		distance += points[length - 1].distance_to(points[length])
 		length += 1
-	if distance <= $TargetDetection/CollisionShape2D.get_shape().get_radius():
+	if distance >= $TargetDetection/CollisionShape2D.get_shape().get_radius():
 		state = MOVEMENT_STATES.FOLLOW

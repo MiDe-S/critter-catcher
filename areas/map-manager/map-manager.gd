@@ -13,6 +13,8 @@ class_name MapManager
 @export_file("*.tscn") var west:
 	set(value):
 		west = load(value)
+		
+@export var debugMode = true
 
 @onready var mapSize = GlobalVariables.AREA_PIXEL_SIZE
 @onready var cameraSize: Vector2 = get_viewport().size / 3
@@ -30,7 +32,7 @@ var westScene: MapManager
 func _ready():
 	playerInfo = PlayerManager.getPlayerInfo()
 	# Load position from manager
-	if has_node("YSortHelper/Player"):
+	if has_node("YSortHelper/Player") and !debugMode:
 		$YSortHelper/Player.position = PlayerManager.getPlayerPosition()
 
 

@@ -47,18 +47,21 @@ func endScene() -> void:
 			if n.is_in_group("ui"):
 				n.refresh()
 			get_tree().get_root().add_child(n)
-		# GET CURRENT FROM GLOBAL PLAYER INFO
-		get_tree().set_current_scene(_mapScenes[0])
+			if n.get_scene_file_path() == PlayerManager.getCurrentScene():
+				get_tree().set_current_scene(n)
+
 		oldScene.queue_free()
 
 func reloadGame() -> void:
 	# set player pos from player info
 	# start scene from player info
 	_mapScenes = get_tree().get_nodes_in_group("area")
-	_mapScenes.erase(get_tree().get_current_scene())
 	var root = get_tree().get_root()
-	get_tree().change_scene_to_file(PlayerManager.getCurrentScene())
-	await get_tree().tree_changed # find better method
+	# Switch to empty scene so currentScene isn't deleted
+	var blank = Node2D.new()
+	get_tree().get_root().add_child(blank)
+	get_tree().set_current_scene(blank)
 	for c in _mapScenes:
 		if !c.is_in_group("ui"):
 			c.queue_free()
+	get_tree().change_scene_to_file(PlayerManager.getCurrentScene())

@@ -7,3 +7,5 @@
 script = ExtResource("1_26ihp")
 name = ""
 team = ExtResource("2_5s2bn")
+local_position = Vector2(0, 0)
+current_scene = ""

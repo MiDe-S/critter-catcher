@@ -38,6 +38,7 @@ defenseAdd = 0
 rangeAttackAdd = 0
 rangeDefenseAdd = 0
 speedAdd = 0
+alive = true
 
 [sub_resource type="Resource" id="Resource_gkrfp"]
 script = ExtResource("8_n8bsl")
@@ -60,6 +61,7 @@ defenseAdd = 0
 rangeAttackAdd = 0
 rangeDefenseAdd = 0
 speedAdd = 0
+alive = true
 
 [sub_resource type="Resource" id="Resource_32gxg"]
 script = ExtResource("6_tbxuo")
