@@ -61,7 +61,10 @@ func initialize(signal_string: String, conneted_bar_max_value) -> void:
 	It must be called for HealthBar2D to work.
 	"""
 	_parent = get_parent()
-	_parent.connect(signal_string, self._handle_value)
+	if _parent.has_signal(signal_string):
+		_parent.connect(signal_string, self._handle_value)
+	else:
+		print("healthbar2D has parent with no matching signal")
 	max_value = conneted_bar_max_value
 	value = max_value
 

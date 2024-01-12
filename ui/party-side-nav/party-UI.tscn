@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://dtriud575tg0i"]
 
-[ext_resource type="Script" path="res://ui/party-UI.gd" id="1_gca6f"]
-[ext_resource type="Script" path="res://ui/party-side-nav.gd" id="2_jncni"]
-[ext_resource type="PackedScene" uid="uid://dw5tvcgxopjc2" path="res://ui/party-cell-ui.tscn" id="2_jod35"]
+[ext_resource type="Script" path="res://ui/party-side-nav/party-UI.gd" id="1_xny40"]
+[ext_resource type="PackedScene" uid="uid://dw5tvcgxopjc2" path="res://ui/party-side-nav/party-cell-ui.tscn" id="2_4hp7w"]
+[ext_resource type="Script" path="res://ui/party-side-nav/party-side-nav.gd" id="3_b1kaj"]
 
 [sub_resource type="Curve2D" id="Curve2D_luouc"]
 _data = {
@@ -17,8 +17,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_gca6f")
-cellScene = ExtResource("2_jod35")
+script = ExtResource("1_xny40")
+cellScene = ExtResource("2_4hp7w")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -36,7 +36,7 @@ curve = SubResource("Curve2D_luouc")
 position = Vector2(1426, 300)
 rotates = false
 loop = false
-script = ExtResource("2_jncni")
+script = ExtResource("3_b1kaj")
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer/Path2D/PathFollow2D"]
 anchors_preset = 8

@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://dw5tvcgxopjc2"]
 
-[ext_resource type="PackedScene" uid="uid://bpsrn4wc8548e" path="res://addons/health_bar_2d/health_bar_2d.tscn" id="1_3nl7q"]
-[ext_resource type="Script" path="res://ui/party-cell-ui.gd" id="1_870sk"]
-[ext_resource type="Texture2D" uid="uid://cyp2i5ywuyyn1" path="res://critters/critter-images/dibbit.png" id="1_nsj4w"]
+[ext_resource type="Script" path="res://ui/party-side-nav/party-cell-ui.gd" id="1_r3yac"]
+[ext_resource type="Texture2D" uid="uid://cyp2i5ywuyyn1" path="res://critters/critter-images/dibbit.png" id="2_wdfwu"]
+[ext_resource type="PackedScene" uid="uid://bpsrn4wc8548e" path="res://addons/health_bar_2d/health_bar_2d.tscn" id="3_xfkpw"]
 
 [sub_resource type="Theme" id="Theme_vnnro"]
 
@@ -13,12 +13,12 @@ size_flags_vertical = 3
 mouse_default_cursor_shape = 2
 theme = SubResource("Theme_vnnro")
 color = Color(0.137255, 0.137255, 0.137255, 0.301961)
-script = ExtResource("1_870sk")
+script = ExtResource("1_r3yac")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 position = Vector2(43, 37)
 scale = Vector2(0.875, 0.875)
-texture = ExtResource("1_nsj4w")
+texture = ExtResource("2_wdfwu")
 
 [node name="Level" type="Label" parent="."]
 layout_mode = 1
@@ -38,7 +38,7 @@ horizontal_alignment = 2
 vertical_alignment = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="HealthBar" parent="." instance=ExtResource("1_3nl7q")]
+[node name="HealthBar" parent="." instance=ExtResource("3_xfkpw")]
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.875
@@ -53,7 +53,7 @@ tint_progress = Color(0, 1, 0, 1)
 _gradient = true
 metadata/_edit_use_anchors_ = true
 
-[node name="ExpBar" parent="." instance=ExtResource("1_3nl7q")]
+[node name="ExpBar" parent="." instance=ExtResource("3_xfkpw")]
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.925
@@ -63,4 +63,5 @@ grow_horizontal = 2
 grow_vertical = 0
 nine_patch_stretch = true
 tint_under = Color(0, 0, 0, 0.603922)
+tint_progress = Color(0.141176, 0.329412, 0.513726, 1)
 metadata/_edit_use_anchors_ = true

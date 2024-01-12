@@ -17,3 +17,6 @@ func isDefeated() -> bool:
 		if !critter.isDefeated():
 			return false
 	return true
+
+func size() -> int:
+	return team.size()

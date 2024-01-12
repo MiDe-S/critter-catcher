@@ -1,0 +1,21 @@
+extends CanvasLayer
+
+@export var cellScene: PackedScene
+@export var team: Team
+
+@onready var gridContainer := $PanelContainer/MarginContainer/GridContainer
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	team = 	PlayerManager.getPlayerInfo().getTeam()
+	for i in range(0, GlobalVariables.PARTY_SIZE):
+		var cell := cellScene.instantiate()
+		if team != null and team.size() > i:
+			cell.setCritter(team.getCritters()[i])
+		gridContainer.add_child(cell)
+
+func freeSelf():
+	queue_free()
+	
+func refresh():
+	print("Implement Refresh")

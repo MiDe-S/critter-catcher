@@ -1,22 +1,32 @@
 extends Node2D
 
-@export var uiElement: PackedScene
+@export var uiElements: Array[PackedScene]
 var showUi = false
 var element = null
+var current: int = 0
 
 func _input(event: InputEvent):
 	if !event.is_action("party_ui_toggle"):
 		return
 
 	if event.is_action_pressed("party_ui_toggle"):
-		print(get_tree().get_current_scene())
-		showUi = !showUi
-		if showUi and element == null:
-			element = uiElement.instantiate()
+
+		# Start
+		if !showUi and current == 0:
+			element = uiElements[current].instantiate()
 			add_child(element)
-		elif element != null:
-			element.freeSelf()
-			element = null
+			showUi = true
+		if showUi:
+			if current < uiElements.size():
+				if element != null:
+					element.freeSelf()
+				element = uiElements[current].instantiate()
+				add_child(element)
+				current += 1
+			elif element != null:
+				element.freeSelf()
+				element = null
+				current = 0
 
 func refresh():
 	if element != null:

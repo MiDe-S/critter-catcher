@@ -49,7 +49,7 @@ func initialize():
 	setHealth(getMaxHealth())
 	alive = true
 
-func getMoves():
+func getMoves() -> Array[Move]:
 	return moves
 	
 func getNickname():
