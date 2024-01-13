@@ -1,6 +1,6 @@
 extends Node
 
-signal selection(index)
+signal selection(obj: Node)
 
 var optionsNodes = []
 var options = []
@@ -27,10 +27,10 @@ func select(index: int):
 		index = 0
 	var coords = options[index]
 	
-	$TopLeft.set_position(coords[0])
-	$TopRight.set_position(coords[1])
-	$BottomLeft.set_position(coords[2])
-	$BottomRight.set_position(coords[3])
+	$TopLeft.set_global_position(coords[0])
+	$TopRight.set_global_position(coords[1])
+	$BottomLeft.set_global_position(coords[2])
+	$BottomRight.set_global_position(coords[3])
 	currentSelected = index
 
 func setFocus(focusableList, index: int = 0):
@@ -43,26 +43,27 @@ func setFocus(focusableList, index: int = 0):
 		var scaleX = node.get_scale().y
 		var scaleY = node.get_scale().y
 		var size = getNodeSize(node)
-		var x = node.get_global_position().x
-		var y = node.get_global_position().y
+		var pos = getNodePosition(node)
 		
-		coords.append(Vector2(x - scaleX * size.x / 2, y - scaleY * size.y / 2))
-		coords.append(Vector2(x + scaleX * size.x / 2, y - scaleY * size.y / 2))
-		coords.append(Vector2(x - scaleX * size.x / 2, y + scaleY * size.y / 2))
-		coords.append(Vector2(x + scaleX * size.x / 2, y + scaleY * size.y / 2))
+		coords.append(Vector2(pos.x - scaleX * size.x / 2, pos.y - scaleY * size.y / 2))
+		coords.append(Vector2(pos.x + scaleX * size.x / 2, pos.y - scaleY * size.y / 2))
+		coords.append(Vector2(pos.x - scaleX * size.x / 2, pos.y + scaleY * size.y / 2))
+		coords.append(Vector2(pos.x + scaleX * size.x / 2, pos.y + scaleY * size.y / 2))
 		options.append(coords)
 	select(index)
 	
-func _input(event):
-	if active:
+func _unhandled_input(event):
+	if active and event is InputEventKey:
+		get_tree().get_root().set_input_as_handled()
 		if event.is_action_pressed("ui_left") or event.is_action_pressed("ui_right") or event.is_action_pressed("ui_down") or event.is_action_pressed("ui_up"):
 			select(currentSelected + 1)
-		if event.is_action_pressed("ui_accept"):
+		if event.is_action_released("ui_accept"):
 			deactivate()
 			selection.emit(optionsNodes[currentSelected])
 		if event.is_action_pressed("ui_back"):
 			deactivate()
 			selection.emit(null)
+
 
 func deactivate():
 	active = false
@@ -75,3 +76,9 @@ func getNodeSize(node):
 		return node.get_size()
 	# TODO change to use object type
 	assert(false, "Unknown group in selecter options")
+
+func getNodePosition(node) -> Vector2:
+	if node is PanelContainer:
+		# pos is top left corner, return center
+		return node.get_global_position() + node.get_size() / 2
+	return node.get_global_position()

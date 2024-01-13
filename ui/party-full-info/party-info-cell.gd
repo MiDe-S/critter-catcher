@@ -44,3 +44,6 @@ func initialize():
 		output += move.getName() + "\n"
 	output = output.rstrip("\n") # remove extra \n from end
 	moveLabel.text = output
+
+func getCritter() -> Critter:
+	return critter

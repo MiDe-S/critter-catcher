@@ -25,6 +25,7 @@ func _ready():
 	_toggleWildBattleUI()
 	moveGrid.connect("pressedMove", move_pressed)
 	container.connect("back", _partyInfoBack)
+	container.connect("switch", _switchCritter)
 
 	
 func move_pressed(move):
@@ -33,14 +34,14 @@ func move_pressed(move):
 func switch_pressed():
 	container.show()
 	container.refresh()
+	container.startSelector()
 	_toggleButtons()
-	actionChosen.emit(BattleUIActions.SWITCH)
 	
 func scan_pressed():
-	actionChosen.emit(BattleUIActions.SCAN)
+	actionChosen.emit(BattleUIActions.SCAN, null)
 	
 func run_pressed():
-	actionChosen.emit(BattleUIActions.RUN)
+	actionChosen.emit(BattleUIActions.RUN, null)
 	
 func setWildBattle(isWild: bool):
 	isWildBattle = isWild
@@ -62,3 +63,8 @@ func printText(msg: String):
 func _partyInfoBack():
 	_toggleButtons()
 	container.hide()
+	
+func _switchCritter(critter: Critter):
+	_partyInfoBack()
+	if critter != null:
+		actionChosen.emit(BattleUIActions.SWITCH, critter)

@@ -21,4 +21,4 @@ icon_alignment = 1
 expand_icon = true
 script = ExtResource("2_dobhc")
 
-[connection signal="pressed" from="." to="." method="_on_pressed"]
+[connection signal="button_up" from="." to="." method="_on_pressed"]

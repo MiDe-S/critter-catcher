@@ -3,9 +3,9 @@ class_name Action
 
 var attacker: Node
 var move: Move
-var defenders: Array[Node]
+var defenders: Array[Variant]
 
-func _init(attackerInput, moveInput, defendersInput: Array[Node]):
+func _init(attackerInput, moveInput, defendersInput: Array[Variant]):
 	attacker = attackerInput
 	move = moveInput
 	defenders = defendersInput
@@ -13,9 +13,12 @@ func _init(attackerInput, moveInput, defendersInput: Array[Node]):
 func actionInfo() -> String:
 	var output = ""
 	output += attacker.getName()
-	output += " used "
-	output += move.getName()
-	output += " against "
+	if move == null:
+		output += " switched to "
+	else:
+		output += " used "
+		output += move.getName()
+		output += " against "
 	for critter in defenders:
 		output += critter.getName() + ", "
 	output[-2] = "." # change last comma to period

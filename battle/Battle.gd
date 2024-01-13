@@ -35,13 +35,12 @@ func setEnemy(enemy: NPC):
 func _ready():
 	$Player.get_node("Camera2D").enabled = false
 	
-	$Selector.connect("selection", _critterChosen)
-	$BattleUI.connect("actionChosen", _actionChosen)
+	$Selector.selection.connect(_critterChosen)
+	$BattleUI.actionChosen.connect(_actionChosen)
 	
 	setUpPlayers($Player.getCritters())
 	setUpPlayers($Enemy.getCritters(), false)
 	startTurn()
-	# global position might work for button?
 
 func setUpPlayers(critters, p1: bool = true):
 	var i = 0
@@ -71,12 +70,14 @@ func startTurn():
 	$BattleUI.setMoves(get_tree().get_nodes_in_group("p1")[p1CritterIndex].getMoves())
 	get_tree().get_nodes_in_group("move_button").front().grab_focus()
 	
-func _actionChosen(action):
+func _actionChosen(action, metadata = null):
 	if action is Move:
 		_moveChosen(action)
 	match action:
 		BattleUI.BattleUIActions.SWITCH:
-			print("switch")
+			turnActions.append(Action.new(get_tree().get_nodes_in_group("p1")[p1CritterIndex], null, [metadata]))
+			handleNextCritterTurn()
+			
 		BattleUI.BattleUIActions.RUN:
 			endBattle()
 		BattleUI.BattleUIActions.SCAN:
@@ -145,6 +146,10 @@ func endTurn():
 	# calculate damage for all
 	for action in turnActions:
 		$BattleUI.printText(action.actionInfo())
+		if action.getMove() == null:
+			switchCritter(action.getDefenders()[0], get_tree().get_nodes_in_group("p1").find(action.getAttacker()), true)
+			continue
+
 		var movePower = action.getMove().getPower()  * min((0.3 + action.getAttacker().getLevel() / 100.0), 1.0)
 		# check physical vs range
 		var atk
@@ -193,15 +198,16 @@ func checkForDefeatedCritters():
 		if p1Critter.isDefeated():
 			# Give player option to switch
 			pass
-	
+			
+	var index = 0
 	for p2Critter in get_tree().get_nodes_in_group("p2"):
 		if p2Critter.isDefeated():
 			printText(p2Critter.getName() + " is defeated.")
 			# Add AI picking logic
 			for crit in $Enemy.getCritters():
 				if !crit.isDefeated():
-					switchCritter(crit, p2Critter.position, false)
-					p2Critter.queue_free()
+					switchCritter(crit, index, false)
+		index += 1
 	# if any in group p1 or p2 is defeated
 	checkBattleOver()
 	
@@ -209,7 +215,15 @@ func checkBattleOver():
 	if $Player.isDefeated() or $Enemy.isDefeated():
 		endBattle()
 	
-func switchCritter(critter: Critter, pos: Vector2, p1: bool = true):
+func switchCritter(critter: Critter, activeIndex: int, p1: bool = true):
+	var pos: Vector2
+	if p1:
+		pos = get_tree().get_nodes_in_group("p1")[activeIndex].get_position()
+		get_tree().get_nodes_in_group("p1")[activeIndex].free()
+	else:
+		pos = get_tree().get_nodes_in_group("p2")[activeIndex].get_position()
+		get_tree().get_nodes_in_group("p2")[activeIndex].free()
+
 	var critInstance = critterBattleBase.instantiate()
 	critInstance.setCritter(critter)
 	if p1:
