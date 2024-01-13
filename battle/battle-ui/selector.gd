@@ -69,6 +69,9 @@ func deactivate():
 	hide()
 	
 func getNodeSize(node):
-	return node.get_node("CollisionShape2D").shape.get_size()
+	if node.has_node("CollisionShape2D"):
+		return node.get_node("CollisionShape2D").shape.get_size()
+	if node is PanelContainer:
+		return node.get_size()
 	# TODO change to use object type
-	# assert(false, "Unknown group in selecter options")
+	assert(false, "Unknown group in selecter options")

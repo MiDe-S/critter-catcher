@@ -1,5 +1,7 @@
 extends CanvasLayer
 
+signal back
+
 @export var cellScene: PackedScene
 @export var team: Team
 
@@ -7,15 +9,26 @@ extends CanvasLayer
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	var cellList = []
 	team = 	PlayerManager.getPlayerInfo().getTeam()
 	for i in range(0, GlobalVariables.PARTY_SIZE):
 		var cell := cellScene.instantiate()
 		if team != null and team.size() > i:
 			cell.setCritter(team.getCritters()[i])
 		gridContainer.add_child(cell)
+	#startSelector()
 
 func freeSelf():
 	queue_free()
 	
 func refresh():
 	print("Implement Refresh")
+	
+func startSelector():
+	$Selector.setFocus(gridContainer.get_children())
+	
+func _emitInfo():
+	startSelector()
+	
+func _emitBack():
+	back.emit()

@@ -63,5 +63,4 @@ grow_horizontal = 2
 grow_vertical = 0
 nine_patch_stretch = true
 tint_under = Color(0, 0, 0, 0.603922)
-tint_progress = Color(0.141176, 0.329412, 0.513726, 1)
 metadata/_edit_use_anchors_ = true

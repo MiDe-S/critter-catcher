@@ -1,52 +1,69 @@
-[gd_scene load_steps=4 format=3 uid="uid://cau0um2ta1bbi"]
+[gd_scene load_steps=5 format=3 uid="uid://cau0um2ta1bbi"]
 
 [ext_resource type="Script" path="res://battle/battle-ui/battle_ui.gd" id="1_6jkni"]
 [ext_resource type="Script" path="res://battle/battle-ui/move/MoveGrid.gd" id="1_016sx"]
 [ext_resource type="Theme" uid="uid://b1nmw3tifrb0r" path="res://battle-button-font.tres" id="3_d7621"]
+[ext_resource type="PackedScene" uid="uid://c0e4ju8bbbtsh" path="res://ui/party-full-info/party-info-container.tscn" id="4_aofar"]
 
 [node name="BattleUI" type="CanvasLayer"]
 script = ExtResource("1_6jkni")
 
-[node name="MoveGrid" type="GridContainer" parent="."]
+[node name="ButtonContainer" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="MoveGrid" type="GridContainer" parent="ButtonContainer"]
+layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
+offset_left = 620.0
+offset_top = 680.0
+offset_right = 620.0
+offset_bottom = 680.0
 grow_horizontal = 2
 grow_vertical = 0
 columns = 2
 script = ExtResource("1_016sx")
 
-[node name="SwitchButton" type="Button" parent="."]
+[node name="SwitchButton" type="Button" parent="ButtonContainer"]
+layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_top = -100.0
+offset_top = 580.0
 offset_right = 250.0
+offset_bottom = 680.0
 grow_vertical = 0
 size_flags_horizontal = 0
 theme = ExtResource("3_d7621")
 text = "Switch"
 
-[node name="WildContainer" type="VBoxContainer" parent="."]
+[node name="WildContainer" type="VBoxContainer" parent="ButtonContainer"]
+layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -250.0
-offset_top = -200.0
+offset_left = 990.0
+offset_top = 480.0
+offset_right = 1240.0
+offset_bottom = 680.0
 grow_horizontal = 0
 grow_vertical = 0
 alignment = 1
 
-[node name="ScanButton" type="Button" parent="WildContainer"]
+[node name="ScanButton" type="Button" parent="ButtonContainer/WildContainer"]
 layout_mode = 2
 theme = ExtResource("3_d7621")
 text = "Scan"
 
-[node name="RunButton" type="Button" parent="WildContainer"]
+[node name="RunButton" type="Button" parent="ButtonContainer/WildContainer"]
 layout_mode = 2
 theme = ExtResource("3_d7621")
 text = "Run"
@@ -68,6 +85,9 @@ grow_vertical = 2
 theme_override_font_sizes/normal_font_size = 16
 scroll_following = true
 
-[connection signal="pressed" from="SwitchButton" to="." method="switch_pressed"]
-[connection signal="pressed" from="WildContainer/ScanButton" to="." method="scan_pressed"]
-[connection signal="pressed" from="WildContainer/RunButton" to="." method="run_pressed"]
+[node name="Container" parent="." instance=ExtResource("4_aofar")]
+visible = false
+
+[connection signal="pressed" from="ButtonContainer/SwitchButton" to="." method="switch_pressed"]
+[connection signal="pressed" from="ButtonContainer/WildContainer/ScanButton" to="." method="scan_pressed"]
+[connection signal="pressed" from="ButtonContainer/WildContainer/RunButton" to="." method="run_pressed"]

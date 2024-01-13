@@ -1,4 +1,5 @@
 extends PanelContainer
+class_name PartyInfoCell
 
 signal health
 signal exp

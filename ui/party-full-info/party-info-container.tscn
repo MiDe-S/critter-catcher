@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://c0e4ju8bbbtsh"]
+[gd_scene load_steps=6 format=3 uid="uid://c0e4ju8bbbtsh"]
 
 [ext_resource type="Script" path="res://ui/party-full-info/party-info-container.gd" id="1_32sdh"]
 [ext_resource type="PackedScene" uid="uid://dpskkqum3sflt" path="res://ui/party-full-info/party-info-cell.tscn" id="2_gbupy"]
 [ext_resource type="Resource" uid="uid://dbje1dg3hd1ha" path="res://scanners/sample-player-team.tres" id="3_l7m8j"]
+[ext_resource type="Theme" uid="uid://b1nmw3tifrb0r" path="res://battle-button-font.tres" id="4_mqhi7"]
+[ext_resource type="PackedScene" uid="uid://b7ik2644mtetq" path="res://battle/battle-ui/selector.tscn" id="5_qtyo8"]
 
 [node name="Container" type="CanvasLayer" groups=["area", "ui"]]
 script = ExtResource("1_32sdh")
@@ -32,3 +34,48 @@ layout_mode = 2
 theme_override_constants/h_separation = 15
 theme_override_constants/v_separation = 15
 columns = 3
+
+[node name="Swap" type="Button" parent="."]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -96.0
+offset_right = 172.0
+grow_vertical = 0
+theme = ExtResource("4_mqhi7")
+text = "Swap
+"
+
+[node name="Info" type="Button" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -65.5
+offset_top = -96.0
+offset_right = 65.5
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("4_mqhi7")
+text = "Info
+"
+
+[node name="Back" type="Button" parent="."]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -156.0
+offset_top = -96.0
+grow_horizontal = 0
+grow_vertical = 0
+theme = ExtResource("4_mqhi7")
+text = "Back
+"
+
+[node name="Selector" parent="." instance=ExtResource("5_qtyo8")]
+
+[connection signal="pressed" from="Info" to="." method="_emitInfo"]
+[connection signal="pressed" from="Back" to="." method="_emitBack"]

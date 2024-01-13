@@ -1,5 +1,7 @@
 extends GridContainer
 
+signal pressedMove(move: Move)
+
 var move_button = preload("res://battle/battle-ui/move/move_button.tscn")
 
 func setMoveButtons(moves):
@@ -22,4 +24,4 @@ func _ready():
 		add_child(button)
 
 func pressed(move):
-	get_parent().move_pressed(move)
+	pressedMove.emit(move)
