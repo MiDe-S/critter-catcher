@@ -16,7 +16,7 @@ enum statTypes {
 	DAMAGE_REDUCTION
 }
 
-func incrementTurn():
+func incrementTurn() -> bool:
 	if duration >= 0:
 		duration -= 1
 		if duration < 0:
@@ -24,7 +24,7 @@ func incrementTurn():
 			return false
 	return true
 	
-func applyEffect(critterInput: Critter):
+func applyEffect(critterInput: Critter) -> void:
 	critter = critterInput
 	match stat:
 		statTypes.ATTACK:
@@ -40,7 +40,7 @@ func applyEffect(critterInput: Critter):
 		statTypes.DAMAGE_REDUCTION:
 			critter.damageReduction *= multiplier
 	
-func removeEffect():
+func removeEffect() -> void:
 	match stat:
 		statTypes.ATTACK:
 			critter.attackMultiplier /= multiplier

@@ -4,9 +4,9 @@ class_name Effect
 func incrementTurn():
 	pass
 	
-func applyEffect(critter: Critter):
+func applyEffect(critter: Critter) -> void:
 	pass
 	
-func removeEffect():
+func removeEffect() -> void:
 	pass
 

@@ -1,10 +1,10 @@
 extends Node
 class_name Battle
 
-var critterUIPath = "res://battle/battle-ui/critter-ui/critter_ui.tscn"
+var critterUIPath := "res://battle/battle-ui/critter-ui/critter_ui.tscn"
 # on init spawn people from people
 
-var p1CritterIndex = 0
+var p1CritterIndex := 0
 var selectedMove: Move = null
 var turnActions: Array[Action]
 
@@ -15,6 +15,8 @@ var turnActions: Array[Action]
 @export var all: Array[Node2D]
 
 @export var critterBattleBase: PackedScene
+
+var enemy
 
 var typeManager: TypeManger = TypeManger.new()
 
@@ -27,22 +29,26 @@ var typeManager: TypeManger = TypeManger.new()
 ### Resolve turn
 ### Repeat
 	
-func setEnemy(enemy: NPC):
+func setEnemy(enemyInput: NPC) -> void:
 	remove_child($Enemy)
-	add_child(enemy)
+	add_child(enemyInput)
+	enemy = enemyInput
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
+func _ready() -> void:
 	$Player.get_node("Camera2D").enabled = false
 	
 	$Selector.selection.connect(_critterChosen)
 	$BattleUI.actionChosen.connect(_actionChosen)
 	
+	if enemy == null:
+		enemy = $Enemy
+	
 	setUpPlayers($Player.getCritters())
-	setUpPlayers($Enemy.getCritters(), false)
+	setUpPlayers(enemy.getCritters(), false)
 	startTurn()
 
-func setUpPlayers(critters, p1: bool = true):
+func setUpPlayers(critters, p1: bool = true) -> void:
 	var i = 0
 	for pos in leftPositions:
 		var critter = critters[i]
@@ -64,13 +70,13 @@ func setUpPlayers(critters, p1: bool = true):
 		i += 1
 
 			
-func startTurn():
+func startTurn() -> void:
 	p1CritterIndex = 0
 	turnActions = []
 	$BattleUI.setMoves(get_tree().get_nodes_in_group("p1")[p1CritterIndex].getMoves())
 	get_tree().get_nodes_in_group("move_button").front().grab_focus()
 	
-func _actionChosen(action, metadata = null):
+func _actionChosen(action, metadata = null) -> void:
 	if action is Move:
 		_moveChosen(action)
 	match action:
@@ -83,7 +89,7 @@ func _actionChosen(action, metadata = null):
 		BattleUI.BattleUIActions.SCAN:
 			catchCritter()
 
-func _moveChosen(move):
+func _moveChosen(move: Move) -> void:
 	selectedMove = move
 	# if 1v1 skip selection phase
 	if leftPositions.size() == 1:
@@ -115,7 +121,7 @@ func _moveChosen(move):
 			Move.targetType.ALL:
 				$Selector.setFocus(all)
 			
-func _critterChosen(critter):
+func _critterChosen(critter) -> void:
 	var targets: Array[Node] = []
 	if critter == null:
 		# nothing selected, refocus button
@@ -132,7 +138,7 @@ func _critterChosen(critter):
 	turnActions.append(action)
 	handleNextCritterTurn()
 
-func handleNextCritterTurn():
+func handleNextCritterTurn() -> void:
 	p1CritterIndex += 1
 	if p1CritterIndex >= get_tree().get_nodes_in_group("p1").size():
 		endTurn()
@@ -140,7 +146,7 @@ func handleNextCritterTurn():
 	$BattleUI.setMoves(get_tree().get_nodes_in_group("p1")[p1CritterIndex].getMoves())
 	get_tree().get_nodes_in_group("move_button").front().grab_focus()
 	
-func endTurn():
+func endTurn() -> void:
 	var rng = RandomNumberGenerator.new()
 	# determine who goes first with speed + effects
 	# calculate damage for all
@@ -188,12 +194,12 @@ func endTurn():
 	startTurn()
 	pass
 	
-func catchCritter():
+func catchCritter() -> void:
 	# switch to mini game here
-	$Player.addCritter($Enemy.getCritters()[0])
+	$Player.addCritter(enemy.getCritters()[0])
 	endBattle()
 	
-func checkForDefeatedCritters():
+func checkForDefeatedCritters() -> void:
 	for p1Critter in get_tree().get_nodes_in_group("p1"):
 		if p1Critter.isDefeated():
 			# Give player option to switch
@@ -204,18 +210,18 @@ func checkForDefeatedCritters():
 		if p2Critter.isDefeated():
 			printText(p2Critter.getName() + " is defeated.")
 			# Add AI picking logic
-			for crit in $Enemy.getCritters():
+			for crit in enemy.getCritters():
 				if !crit.isDefeated():
 					switchCritter(crit, index, false)
 		index += 1
 	# if any in group p1 or p2 is defeated
 	checkBattleOver()
 	
-func checkBattleOver():
-	if $Player.isDefeated() or $Enemy.isDefeated():
+func checkBattleOver() -> void:
+	if $Player.isDefeated() or enemy.isDefeated():
 		endBattle()
 	
-func switchCritter(critter: Critter, activeIndex: int, p1: bool = true):
+func switchCritter(critter: Critter, activeIndex: int, p1: bool = true) -> void:
 	var pos: Vector2
 	if p1:
 		pos = get_tree().get_nodes_in_group("p1")[activeIndex].get_position()
@@ -240,8 +246,8 @@ func switchCritter(critter: Critter, activeIndex: int, p1: bool = true):
 	critInstance.connect("battleMessage", printText)
 	self.add_child(critInstance)
 	
-func endBattle():
+func endBattle() -> void:
 	SceneManager.endScene()
 	
-func printText(msg: String):
+func printText(msg: String) -> void:
 	$BattleUI.printText(msg)

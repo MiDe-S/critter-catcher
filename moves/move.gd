@@ -26,35 +26,35 @@ enum attributeType {
 	STATUS,
 }
 
-func _init(name_val = ""):
+func _init(name_val = "") -> void:
 	name = name_val
 	
-func getName():
+func getName() -> String:
 	return name
 	
-func getTypeColor():
+func getTypeColor() -> String:
 	if type != null:
 		return type.getColor();
 	else:
 		return "#000000"
 		
-func getTypeIcon():
+func getTypeIcon() -> String:
 	return type.getIcon();
 	
-func getTarget():
+func getTarget() -> targetType:
 	return target
 	
-func getPower():
+func getPower() -> int:
 	return power
 	
-func getType():
+func getType() -> Type:
 	return type
 	
-func getAccuracy():
+func getAccuracy() -> int:
 	return accuracy
 	
-func getAttribute():
+func getAttribute() -> attributeType:
 	return attribute
 	
-func getEffects():
+func getEffects() -> Array[Effect]:
 	return effects

@@ -5,7 +5,7 @@ var attacker: Node
 var move: Move
 var defenders: Array[Variant]
 
-func _init(attackerInput, moveInput, defendersInput: Array[Variant]):
+func _init(attackerInput, moveInput, defendersInput: Array[Variant]) -> void:
 	attacker = attackerInput
 	move = moveInput
 	defenders = defendersInput
@@ -24,7 +24,7 @@ func actionInfo() -> String:
 	output[-2] = "." # change last comma to period
 	return output
 	
-func getMove():
+func getMove() -> Move:
 	return move
 
 func getAttacker():

@@ -1,7 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://ds8jctibfvxof"]
+[gd_scene load_steps=3 format=3 uid="uid://ds8jctibfvxof"]
 
 [ext_resource type="Texture2D" uid="uid://d2wvcobnbcyfn" path="res://scanners/usable.png" id="1_evet0"]
+[ext_resource type="Script" path="res://scanners/interactable.gd" id="2_ithi7"]
 
 [node name="Interactable" type="Sprite2D"]
 scale = Vector2(0.02, 0.02)
 texture = ExtResource("1_evet0")
+script = ExtResource("2_ithi7")

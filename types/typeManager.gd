@@ -9,11 +9,11 @@ func read_json(file_path):
 	return JSON.parse_string(file.get_as_text())
 
 
-func _init():
+func _init() -> void:
 	#load enum from file
 	typeMap = read_json(fp)
 	
-func getAdvantage(attackType: Type, defenseType: Array[Type]):
+func getAdvantage(attackType: Type, defenseType: Array[Type]) -> float:
 	var output = 1
 	for type in defenseType:
 		output = output * typeMap[attackType.getName()][type.getName()]

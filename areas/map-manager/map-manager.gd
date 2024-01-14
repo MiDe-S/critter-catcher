@@ -14,9 +14,9 @@ class_name MapManager
 	set(value):
 		west = load(value)
 		
-@export var debugMode = true
+@export var debugMode := true
 
-@onready var mapSize = GlobalVariables.AREA_PIXEL_SIZE
+@onready var mapSize := GlobalVariables.AREA_PIXEL_SIZE
 @onready var cameraSize: Vector2 = get_viewport().size / 3
 
 var playerInfo
@@ -29,7 +29,7 @@ var westScene: MapManager
 
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
+func _ready() -> void:
 	playerInfo = PlayerManager.getPlayerInfo()
 	# Load position from manager
 	if has_node("YSortHelper/Player") and !debugMode:
@@ -37,7 +37,7 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
+func _process(_delta) -> void:
 	if !$YSortHelper.has_node("Player"):
 		return
 	var pos = $YSortHelper/Player.get_position()
@@ -95,13 +95,13 @@ func _process(_delta):
 		westScene = null
 
 		
-func createNeighbor(sceneNode: Node, posTransfer: Vector2):
+func createNeighbor(sceneNode: Node, posTransfer: Vector2) -> void:
 	sceneNode.position = position + posTransfer
 	sceneNode.removePlayer()
 	sceneNode.set("z_index", -1)
 	get_tree().get_root().add_child(sceneNode)
 		
-func transferPlayer(scene: Node, posTransfer: Vector2, cameraOffsetVector: Vector2):
+func transferPlayer(scene: Node, posTransfer: Vector2, cameraOffsetVector: Vector2) -> void:
 	var player = removePlayer()
 	# set relative position
 	player.position -= posTransfer
@@ -113,7 +113,7 @@ func transferPlayer(scene: Node, posTransfer: Vector2, cameraOffsetVector: Vecto
 	scene.set("z_index", 0)
 	set("z_index", -1)
 	
-func addPlayer(player: CharacterBody2D):
+func addPlayer(player: CharacterBody2D) -> void:
 	$YSortHelper.add_child(player)
 	
 func removePlayer() -> CharacterBody2D:
@@ -122,7 +122,7 @@ func removePlayer() -> CharacterBody2D:
 	return player
 
 func get_navigation_map():
-	$NavigationRegion2D.get_navigation_map()
+	return $NavigationRegion2D.get_navigation_map()
 
 func setPlayerPosition(pos: Vector2) -> void:
 	$YSortHelper/Player.position = pos

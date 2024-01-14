@@ -1,29 +1,19 @@
 extends CanvasLayer
 
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
-	pass
-
-func _on_pause_manager_toggle(paused):
+func _on_pause_manager_toggle(paused: bool) -> void:
 	$Panel.set_visible(paused)
 
-func _on_resume_pressed():
+func _on_resume_pressed() -> void:
 	$PauseManager._toggle_pause()
 
-func _on_save_pressed():
+func _on_save_pressed() -> void:
 	PlayerManager.saveGame()
 
-func _on_load_pressed():
+func _on_load_pressed() -> void:
 	PlayerManager.loadGame()
 
-func _on_settings_pressed():
+func _on_settings_pressed() -> void:
 	print("Settings")
 
-func _on_exit_pressed():
+func _on_exit_pressed() -> void:
 	get_tree().quit() # Replace with function body.

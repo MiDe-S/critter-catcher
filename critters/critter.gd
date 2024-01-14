@@ -35,44 +35,44 @@ class_name Critter
 var healthInit: bool = false
 var health: float
 
-var attackMultiplier = 1.0
-var rangeAttackMultiplier = 1.0
-var defenseMultiplier = 1.0
-var rangeDefenseMultiplier = 1.0
-var speedMultiplier = 1.0
+var attackMultiplier := 1.0
+var rangeAttackMultiplier := 1.0
+var defenseMultiplier := 1.0
+var rangeDefenseMultiplier := 1.0
+var speedMultiplier := 1.0
 
-var damageReduction = 1.0
+var damageReduction := 1.0
 
 var currentEffects: Array[Effect] = []
 
-func initialize():
+func initialize() -> void:
 	setHealth(getMaxHealth())
 	alive = true
 
 func getMoves() -> Array[Move]:
 	return moves
 	
-func getNickname():
+func getNickname() -> String:
 	if nickname == null:
 		return critterInfo.getName()
 	return nickname
 
-func getName():
+func getName() -> String:
 	return critterInfo.getName()
 
-func getLevel():
+func getLevel() -> int:
 	return level
 	
-func getDamageReduction():
+func getDamageReduction() -> float:
 	return damageReduction
 
-func getHealth():
+func getHealth() -> float:
 	if !healthInit:
 		health = getMaxHealth()
 		healthInit = true
 	return health
 	
-func setHealth(input: float):
+func setHealth(input: float) -> void:
 	if !healthInit:
 		healthInit = true
 	health = input
@@ -81,37 +81,37 @@ func setHealth(input: float):
 	else:
 		alive = true
 	
-func getMaxHealth():
+func getMaxHealth() -> float:
 	return calcStat(critterInfo.getHealth(), healthBase, healthAdd, 1)
 	
-func getAttackForCalc():
+func getAttackForCalc() -> float:
 	return calcStat(critterInfo.getAttack(), attackBase, attackAdd, attackMultiplier)
 	
-func getDefenseForCalc():
+func getDefenseForCalc() -> float:
 	return calcStat(critterInfo.getDefense(), defenseBase, defenseAdd, defenseMultiplier)
 
-func getRangeAttackForCalc():
+func getRangeAttackForCalc() -> float:
 	return calcStat(critterInfo.getRangeAttack(), rangeAttackBase, rangeAttackAdd, rangeAttackMultiplier)
 
-func getRangeDefenseForCalc():
+func getRangeDefenseForCalc() -> float:
 	return calcStat(critterInfo.getRangeDefense(), rangeDefenseBase, rangeDefenseAdd, rangeDefenseMultiplier)
 	
-func getSpeedForCalc():
+func getSpeedForCalc() -> float:
 	return calcStat(critterInfo.getSpeed(), speedBase, speedAdd, speedMultiplier)
 
-func calcStat(base, baseAdd, add, multiplier):
-	var baseTotal = base + baseAdd / GlobalVariables.BASE_STAT_ADD_MAX * 0.2 + 1
-	var additional = add / 100.0 * 0.25 + 1
-	var lvl = level / 100.0 * 2 + 0.3
+func calcStat(base: int, baseAdd: int, add: int, multiplier: float) -> float:
+	var baseTotal := base + baseAdd / GlobalVariables.BASE_STAT_ADD_MAX * 0.2 + 1
+	var additional := add / 100.0 * 0.25 + 1
+	var lvl := level / 100.0 * 2 + 0.3
 	return lvl * baseTotal * additional * multiplier
 
-func getType():
+func getType() -> Array[Type]:
 	return critterInfo.getType()
 	
 func isDefeated() -> bool:
 	return !alive
 
-func resetMultipliers():
+func resetMultipliers() -> void:
 	#clear effects array
 	attackMultiplier = 1.0
 	rangeAttackMultiplier = 1.0
@@ -120,12 +120,12 @@ func resetMultipliers():
 	speedMultiplier = 1.0
 	damageReduction = 1.0
 
-func applyEffects(effects: Array[Effect]):
+func applyEffects(effects: Array[Effect]) -> void:
 	for effect in effects:
 		effect.applyEffect(self)
 		currentEffects.append(effect)
 
-func incrementTurn():
+func incrementTurn() -> void:
 	for effect in currentEffects:
 		var remove = effect.incrementTurn()
 		if remove:

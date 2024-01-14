@@ -9,7 +9,7 @@ class_name PlayerInfo
 func getCritters() -> Array[Critter]:
 	return team.getCritters()
 
-func isDefeated():
+func isDefeated() -> bool:
 	return team.isDefeated()
 	
 func addCritter(critter: Critter):
@@ -18,13 +18,13 @@ func addCritter(critter: Critter):
 func getTeam() -> Team:
 	return team
 
-func setTeam(teamInput: Team):
+func setTeam(teamInput: Team) -> void:
 	team = teamInput
 
-func setCurrentScene(scene: String):
+func setCurrentScene(scene: String) -> void:
 	current_scene = scene
 	
-func setPlayerPosition(pos: Vector2):
+func setPlayerPosition(pos: Vector2) -> void:
 	local_position = pos
 
 func getCurrentScene() -> String:

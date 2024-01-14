@@ -4,7 +4,7 @@ signal pressedMove(move: Move)
 
 var move_button = preload("res://battle/battle-ui/move/move_button.tscn")
 
-func setMoveButtons(moves):
+func setMoveButtons(moves) -> void:
 	var i = 0
 	for move in moves:
 		get_children()[i].setMove(moves[i])
@@ -13,15 +13,15 @@ func setMoveButtons(moves):
 		for j in range(i, GlobalVariables.MOVE_COUNT):
 			get_children()[j].setEmpty()
 	
-func clearMoveButtons():
+func clearMoveButtons() -> void:
 	pass
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
+func _ready() -> void:
 	for i in range(0, GlobalVariables.MOVE_COUNT):
 		var button = move_button.instantiate()
 		button.add_to_group("move_button")
 		add_child(button)
 
-func pressed(move):
+func pressed(move) -> void:
 	pressedMove.emit(move)

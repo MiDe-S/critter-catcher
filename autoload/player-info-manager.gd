@@ -5,17 +5,17 @@ extends Node2D
 const FILE_PATH := "user://game1.res"
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
+func _ready() -> void:
 	# load player from save file
 	pass # Replace with function body.
 
 func getPlayerInfo() -> PlayerInfo:
 	return playerInfo
 
-func setCurrentScene(scene: String):
+func setCurrentScene(scene: String) -> void:
 	playerInfo.setCurrentScene(scene)
 	
-func setPlayerPosition(local_position: Vector2):
+func setPlayerPosition(local_position: Vector2) -> void:
 	playerInfo.setPlayerPosition(local_position)
 
 func getCurrentScene() -> String:
@@ -25,7 +25,7 @@ func getPlayerPosition() -> Vector2:
 	return playerInfo.getPlayerPosition()
 	
 func saveGame() -> void:
-	var result = ResourceSaver.save(playerInfo, FILE_PATH)
+	var result := ResourceSaver.save(playerInfo, FILE_PATH)
 	assert(result == OK, "Failed to save")
 	
 func loadGame() -> void:

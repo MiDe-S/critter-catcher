@@ -3,6 +3,12 @@ class_name NPC
 
 @export var team: Team
 
+@onready var interactable = $Interactable
+
+func _ready():
+	if interactable != null:
+		interactable.interacted.connect(interact)
+
 func setTeam(teamInput):
 	team = teamInput
 
@@ -16,11 +22,4 @@ func isDefeated():
 	return team.isDefeated()
 
 func interact():
-	print("Here me roar")
 	$BattleFactory.startScannerBattle(self)
-
-func seen():
-	$Interactable.show()
-	
-func unseen():
-	$Interactable.hide()

@@ -5,11 +5,11 @@ class_name Type
 @export var color: String
 @export_file("*.png") var image: String
 
-func getColor():
+func getColor() -> String:
 	return color
 	
-func getIcon():
+func getIcon() -> String:
 	return image
 
-func getName():
+func getName() -> String:
 	return name

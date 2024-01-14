@@ -28,28 +28,28 @@ class_name CritterInfo
 const EXP_NEEDED_MODIFIER = 1.1
 const EXP_GIVEN_MODIFIER = 1.05
 
-func getName():
+func getName() -> String:
 	return name
 
-func getHealth():
+func getHealth() -> int:
 	return health
 
-func getAttack():
+func getAttack() -> int:
 	return attack
 	
-func getDefense():
+func getDefense() -> int:
 	return defense
 
-func getRangeAttack():
+func getRangeAttack() -> int:
 	return range_attack
 	
-func getRangeDefense():
+func getRangeDefense() -> int:
 	return range_defense
 	
-func getSpeed():
+func getSpeed() -> int:
 	return speed
 	
-func getType():
+func getType() -> Array[Type]:
 	return type
 	
 func getCritterMove():

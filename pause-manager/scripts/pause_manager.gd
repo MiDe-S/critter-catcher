@@ -49,13 +49,13 @@ const VERSION = "1.1.0"
 var _paused: bool = false
 var _input_event_pressed: bool = false
 
-func _process(_delta):
+func _process(_delta: float) -> void:
 	if use_input_map:
 		for action_name in action_names:
 			if Input.is_action_just_pressed(action_name):
 				_toggle_pause()
 
-func _input(event):
+func _input(event) -> void:
 	if not use_input_map and event is InputEventKey:
 		if event.pressed:
 			if not _input_event_pressed:
@@ -64,7 +64,7 @@ func _input(event):
 		else:
 			_input_event_pressed = false
 
-func _notification(_what):
+func _notification(_what) -> void:
 	#if _what == NOTIFICATION_WM_WINDOW_FOCUS_OUT:
 	#	_pause()
 	pass
@@ -144,10 +144,10 @@ func set_paused(value: bool) -> void:
 func is_paused() -> bool:
 	return _paused
 
-func set_pause_tree(value: bool):
+func set_pause_tree(value: bool) -> void:
 	pause_tree = value
 
-func is_pause_tree():
+func is_pause_tree() -> bool:
 	return pause_tree
 
 func set_pause_groups(value: bool) -> void:

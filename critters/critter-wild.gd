@@ -2,11 +2,11 @@ extends CharacterBody2D
 
 signal battle_start(critterOut: Critter)
 
-const SLOW = 5.0
-const SPEED = 100.0
-const TIMER = 1
-var current_time = TIMER
-var state = MOVEMENT_STATES.IDLE
+const SLOW := 5.0
+const SPEED := 100.0
+const TIMER := 1
+var current_time: float = TIMER
+var state := MOVEMENT_STATES.IDLE
 var tracking
 var critter: Critter
 
@@ -24,17 +24,17 @@ enum MOVEMENT_STATES {
 	RUN
 } 
 
-func initialize(nav_region: Node):
+func initialize(nav_region: Node) -> void:
 	region = nav_region
 
-func setCritter(critterInput: Critter):
+func setCritter(critterInput: Critter) -> void:
 	critter = critterInput
 
-func generateTarget():
-	var dis = randf_range(0, 20)
+func generateTarget() -> Vector2:
+	var dis: float = randf_range(0, 20)
 	return Vector2(randf_range(start_position.x-dis, start_position.x+dis), randf_range(start_position.y-dis, start_position.y+dis))
 
-func _physics_process(delta):
+func _physics_process(delta: float) -> void:
 	match state:
 		MOVEMENT_STATES.IDLE:
 			current_time -= delta
@@ -54,24 +54,24 @@ func _physics_process(delta):
 	
 	move_and_slide()
 
-func _on_target_detection_body_entered(body):
+func _on_target_detection_body_entered(body) -> void:
 	tracking = body
 	nav_agent.set_target_position(tracking.global_position)
 	$Timer.start()
 	# if player is higher level than self, run
 	# have target range increased based on player level ? 
 
-func _on_target_detection_body_exited(body):
+func _on_target_detection_body_exited(body) -> void:
 	if body == tracking and state != MOVEMENT_STATES.FOLLOW:
 		tracking = null
 		$Timer.stop()
 
-func _on_timer_timeout():
+func _on_timer_timeout() -> void:
 	nav_agent.set_target_position(tracking.global_position)
 	if state != MOVEMENT_STATES.FOLLOW:
 		_check_target_distance()
 	
-func _battleStart():
+func _battleStart() -> void:
 	print("Battle Init")
 	battle_start.emit(critter)
 	queue_free()
@@ -84,8 +84,8 @@ func _check_target_distance() -> void:
 	tracking.global_position,
 	true
 	)
-	var length = 1
-	var distance = 0.0
+	var length: int = 1
+	var distance: float = 0.0
 	while length < points.size():
 		distance += points[length - 1].distance_to(points[length])
 		length += 1
