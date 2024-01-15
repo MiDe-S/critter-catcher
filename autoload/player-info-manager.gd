@@ -30,7 +30,7 @@ func saveGame() -> void:
 	
 func loadGame() -> void:
 	if ResourceLoader.exists(FILE_PATH):
-		var player = ResourceLoader.load(FILE_PATH)
+		var player := ResourceLoader.load(FILE_PATH)
 		if player is PlayerInfo: # Check that the data is valid
 			print(PlayerManager.getPlayerPosition(), player.getPlayerPosition())
 			playerInfo = player.duplicate(true)

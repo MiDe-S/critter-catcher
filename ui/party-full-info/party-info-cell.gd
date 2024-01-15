@@ -18,16 +18,16 @@ signal exp
 var isInit := false
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
+func _ready() -> void:
 	if critter != null and isInit:
 		initialize()
 
-func setCritter(critterInput: Critter):
+func setCritter(critterInput: Critter) -> void:
 	critter = critterInput
 	isInit = true
 	
 
-func initialize():
+func initialize() -> void:
 	nameLabel.text = critter.getName()
 	levelLabel.text = str(critter.getLevel())
 	critterSprite.texture = critter.getCritterIcon()

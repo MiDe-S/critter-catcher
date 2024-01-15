@@ -1,15 +1,19 @@
 extends Node2D
 class_name MapManager
 
+@warning_ignore("untyped_declaration")
 @export_file("*.tscn") var north:
 	set(value):
 		north = load(value)
+@warning_ignore("untyped_declaration")
 @export_file("*.tscn") var east:
 	set(value):
 		east = load(value)
+@warning_ignore("untyped_declaration")
 @export_file("*.tscn") var south:
 	set(value):
 		south = load(value)
+@warning_ignore("untyped_declaration")
 @export_file("*.tscn") var west:
 	set(value):
 		west = load(value)
@@ -19,7 +23,7 @@ class_name MapManager
 @onready var mapSize := GlobalVariables.AREA_PIXEL_SIZE
 @onready var cameraSize: Vector2 = get_viewport().size / 3
 
-var playerInfo
+var playerInfo: PlayerInfo
 
 var northScene: MapManager
 var eastScene: MapManager
@@ -37,10 +41,10 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta) -> void:
+func _process(_delta: float) -> void:
 	if !$YSortHelper.has_node("Player"):
 		return
-	var pos = $YSortHelper/Player.get_position()
+	var pos: Vector2 = $YSortHelper/Player.get_position()
 	
 	# North
 	if pos.y < cameraSize.y:
@@ -102,7 +106,7 @@ func createNeighbor(sceneNode: Node, posTransfer: Vector2) -> void:
 	get_tree().get_root().add_child(sceneNode)
 		
 func transferPlayer(scene: Node, posTransfer: Vector2, cameraOffsetVector: Vector2) -> void:
-	var player = removePlayer()
+	var player: Player = removePlayer()
 	# set relative position
 	player.position -= posTransfer
 	scene.addPlayer(player)
@@ -117,11 +121,11 @@ func addPlayer(player: CharacterBody2D) -> void:
 	$YSortHelper.add_child(player)
 	
 func removePlayer() -> CharacterBody2D:
-	var player = $YSortHelper/Player
+	var player: Player = $YSortHelper/Player
 	$YSortHelper.remove_child(player)
 	return player
 
-func get_navigation_map():
+func get_navigation_map() -> RID:
 	return $NavigationRegion2D.get_navigation_map()
 
 func setPlayerPosition(pos: Vector2) -> void:

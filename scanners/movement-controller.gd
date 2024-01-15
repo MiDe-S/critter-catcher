@@ -3,7 +3,7 @@ class_name MovementController
 
 signal Facing(facing: Directions)
 
-@onready var animationPlayer = get_parent().get_node("AnimationPlayer")
+@onready var animationPlayer: AnimationPlayer = get_parent().get_node("AnimationPlayer")
 
 var facing: Directions = -1 # so default isn't 0
 
@@ -14,8 +14,8 @@ enum Directions {
 	LEFT
 }
 
-func move(direction: Vector2, speed: int):
-	var velocityValue = get_parent().velocity
+func move(direction: Vector2, speed: int) -> void:
+	var velocityValue: Vector2 = get_parent().velocity
 			
 	if direction.x:
 		velocityValue.x = direction.x * speed
@@ -53,8 +53,8 @@ func move(direction: Vector2, speed: int):
 			animationPlayer.play("down")
 			Facing.emit(facing)
 		
-func terrainEvent(key: int, speed: int):
-	var velocityValue = get_parent().velocity
+func terrainEvent(key: int, speed: int) -> void:
+	var velocityValue: Vector2 = get_parent().velocity
 	match key:
 		TerrainDetector.DIRECTIONS.EAST:
 			if velocityValue.x > 0:

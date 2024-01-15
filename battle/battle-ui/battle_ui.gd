@@ -1,7 +1,7 @@
 extends CanvasLayer
 class_name BattleUI
 
-signal actionChosen(event)
+signal actionChosen(event: BattleUIActions, metadata: Variant)
 
 @export var isWildBattle := false
 @export var debugMode := false
@@ -17,7 +17,7 @@ enum BattleUIActions {
 	RUN
 }
 
-func setMoves(moves) -> void:
+func setMoves(moves: Array[Move]) -> void:
 	moveGrid.setMoveButtons(moves)
 
 # Called when the node enters the scene tree for the first time.
@@ -28,7 +28,7 @@ func _ready() -> void:
 	container.connect("switch", _switchCritter)
 
 	
-func move_pressed(move) -> void:
+func move_pressed(move: Move) -> void:
 	actionChosen.emit(move)
 	
 func switch_pressed() -> void:
@@ -55,7 +55,7 @@ func _toggleWildBattleUI() -> void:
 func _toggleButtons() -> void:
 	buttonContainer.visible = !buttonContainer.visible
 
-func printText(msg: String):
+func printText(msg: String) -> void:
 	$ColorRect/RichTextLabel.add_text(msg + '\n')
 	if debugMode:
 		print(msg)
@@ -68,3 +68,6 @@ func _switchCritter(critter: Critter) -> void:
 	_partyInfoBack()
 	if critter != null:
 		actionChosen.emit(BattleUIActions.SWITCH, critter)
+
+func setIsWild(isWild: bool) -> void:
+	isWildBattle = isWild

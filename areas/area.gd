@@ -19,12 +19,12 @@ func getRandomPoint() -> Vector2:
 
 func _on_critter_spawner_timeout() -> void:
 	if total_spawned < spawn_cap:
-		var critter = critter_scene.instantiate()
+		var critter := critter_scene.instantiate()
 		critter.initialize(get_parent().get_node("NavigationRegion2D"))
 		critter.position = getRandomPoint()
 		
 		# consider frequency later
-		var i = randf_range(0, spawnInfo.size())
+		var i := randf_range(0, spawnInfo.size())
 		critter.setCritter(spawnInfo[i].generateCritter())
 		critter.connect("battle_start", _initiateCombat)
 		get_parent().get_node("YSortHelper").add_child(critter)

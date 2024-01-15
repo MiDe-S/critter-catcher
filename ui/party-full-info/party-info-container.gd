@@ -9,31 +9,30 @@ signal switch(critter: Critter)
 @onready var gridContainer := $PanelContainer/MarginContainer/GridContainer
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
-	var cellList = []
+func _ready() -> void:
 	team = PlayerManager.getPlayerInfo().getTeam()
-	for i in range(0, GlobalVariables.PARTY_SIZE):
+	for i: int in range(0, GlobalVariables.PARTY_SIZE):
 		var cell := cellScene.instantiate()
 		if team != null and team.size() > i:
 			cell.setCritter(team.getCritters()[i])
 		gridContainer.add_child(cell)
 	$Selector.connect("selection", _critterChosen)
 
-func freeSelf():
+func freeSelf() -> void:
 	queue_free()
 	
-func refresh():
+func refresh() -> void:
 	print("Implement Refresh")
 	
-func startSelector():
+func startSelector() -> void:
 	$Selector.setFocus(gridContainer.get_children())
 	
-func _emitInfo():
+func _emitInfo() -> void:
 	print("ImplementCritterInfo")
 	
-func _emitBack():
+func _emitBack() -> void:
 	back.emit()
 	
-func _critterChosen(critter: Node):
+func _critterChosen(critter: Node) -> void:
 	switch.emit(critter.getCritter())
 	

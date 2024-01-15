@@ -1,17 +1,17 @@
 extends Resource
 class_name Action
 
-var attacker: Node
+var attacker: CritterInstance
 var move: Move
-var defenders: Array[Variant]
+var defenders: Array[CritterInstance]
 
-func _init(attackerInput, moveInput, defendersInput: Array[Variant]) -> void:
+func _init(attackerInput: CritterInstance, moveInput: Move, defendersInput: Array[CritterInstance]) -> void:
 	attacker = attackerInput
 	move = moveInput
 	defenders = defendersInput
 
 func actionInfo() -> String:
-	var output = ""
+	var output := ""
 	output += attacker.getName()
 	if move == null:
 		output += " switched to "
@@ -27,8 +27,8 @@ func actionInfo() -> String:
 func getMove() -> Move:
 	return move
 
-func getAttacker():
+func getAttacker() -> CritterInstance:
 	return attacker
 	
-func getDefenders():
+func getDefenders() -> Array[CritterInstance]:
 	return defenders

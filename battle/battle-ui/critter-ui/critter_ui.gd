@@ -1,4 +1,5 @@
 extends Node2D
+class_name CritterUI
 
 # Need to be added to use the HealthBar2D
 signal health_changed
@@ -11,7 +12,7 @@ var _offset: Vector2 = Vector2(0, -100)
 func _ready() -> void:
 	pass
 
-func initialize(nameInput, levelInput: int, maxHealthInput, sigName):
+func initialize(nameInput: String, levelInput: int, maxHealthInput: float, sigName: String) -> void:
 	maxHealth = maxHealthInput
 	health = maxHealth
 	
@@ -23,7 +24,7 @@ func initialize(nameInput, levelInput: int, maxHealthInput, sigName):
 	
 	get_parent().connect(sigName, updateHealth)
 	
-func updateHealth(healthInput: float):
+func updateHealth(healthInput: float) -> void:
 	health -= healthInput
 	health_changed.emit(health)
 	

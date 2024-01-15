@@ -26,7 +26,7 @@ enum attributeType {
 	STATUS,
 }
 
-func _init(name_val = "") -> void:
+func _init(name_val := "") -> void:
 	name = name_val
 	
 func getName() -> String:

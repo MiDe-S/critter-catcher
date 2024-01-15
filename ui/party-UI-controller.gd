@@ -1,11 +1,11 @@
 extends Node2D
 
 @export var uiElements: Array[PackedScene]
-var showUi = false
-var element = null
+var showUi := false
+var element: Variant = null
 var current: int = 0
 
-func _input(event: InputEvent):
+func _input(event: InputEvent) -> void:
 	if !event.is_action("party_ui_toggle"):
 		return
 
@@ -28,6 +28,6 @@ func _input(event: InputEvent):
 				element = null
 				current = 0
 
-func refresh():
+func refresh() -> void:
 	if element != null:
 		element.refresh()

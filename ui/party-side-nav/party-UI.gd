@@ -4,18 +4,18 @@ extends Control
 @onready var container := $CanvasLayer/Path2D/PathFollow2D/ColorRect
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
+func _ready() -> void:
 	refresh()
 
-func refresh():
+func refresh() -> void:
 	clear()
-	var critters = PlayerManager.getPlayerInfo().getCritters()
+	var critters: Array[Critter] = PlayerManager.getPlayerInfo().getCritters()
 	var cell_size: Vector2
 	$CanvasLayer/Label.text = "Team:\n"
 	var i := 0
-	for critter in critters:
+	for critter: Critter in critters:
 		# debug info
-		var output = ""
+		var output := ""
 		output += critter.getName() + " "
 		output += "Lvl." + str(critter.getLevel()) + " "
 		output += str(critter.getHealth()) + " / " + str(critter.getMaxHealth()) + " | "
@@ -24,13 +24,13 @@ func refresh():
 		output += str(critter.getRangeAttackForCalc()) + " | "
 		output += str(critter.getRangeDefenseForCalc()) + " | "
 		output += str(critter.getSpeedForCalc()) + " | "
-		for move in critter.getMoves():
+		for move: Move in critter.getMoves():
 			output += move.getName() + " "
 		output += "\n"
 		$CanvasLayer/Label.text += output
 		
 		# create cell
-		var cell = cellScene.instantiate()
+		var cell := cellScene.instantiate()
 		cell.initialize(critter)
 		cell.connect("orderChanged", changePartyOrder)
 		container.add_child(cell)
@@ -40,19 +40,22 @@ func refresh():
 		cell_size = cell.size
 	container.size = cell_size * Vector2(1, GlobalVariables.PARTY_SIZE)
 
-func clear():
+func clear() -> void:
 	for n in container.get_children():
 		n.queue_free()
 
 func changePartyOrder() -> void:
 	# reorder team based on y positions
 	var team := Team.new()
-	var child_nodes = container.get_children()
-	child_nodes.sort_custom(func(a, b): return a.global_position.y < b.global_position.y)
+	var child_nodes := container.get_children()
+	child_nodes.sort_custom(sortCellsByHeight)
 	for node in child_nodes:
 		team.addCritter(node.getCritter())
 	PlayerManager.getPlayerInfo().setTeam(team)
 	refresh()
+	
+func sortCellsByHeight(a: Variant, b: Variant) -> bool:
+	return a.global_position.y < b.global_position.y
 
 func freeSelf() -> void:
 	$CanvasLayer/Path2D/PathFollow2D.reverse = true

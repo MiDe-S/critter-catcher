@@ -9,6 +9,7 @@ class_name CritterInfo
 @export var catch_rate: int
 
 # Insert image/animation
+@warning_ignore("untyped_declaration")
 @export_file("*.png") var icon:
 	set(value):
 		icon = load(value)
@@ -52,10 +53,10 @@ func getSpeed() -> int:
 func getType() -> Array[Type]:
 	return type
 	
-func getCritterMove():
+func getCritterMove() -> Array[CritterMove]:
 	return moveList
 	
-func getCritterIcon():
+func getCritterIcon() -> Texture2D:
 	return icon
 	
 func getBaseStatTotal() -> int:

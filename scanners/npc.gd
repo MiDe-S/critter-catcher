@@ -3,23 +3,21 @@ class_name NPC
 
 @export var team: Team
 
-@onready var interactable = $Interactable
+func _ready() -> void:
+	if has_node("Interactable"):
+		$Interactable.interacted.connect(interact)
 
-func _ready():
-	if interactable != null:
-		interactable.interacted.connect(interact)
-
-func setTeam(teamInput):
+func setTeam(teamInput: Team) -> void:
 	team = teamInput
 
 func getTeam() -> Team:
 	return team
 
-func getCritters():
+func getCritters() -> Array[Critter]:
 	return team.getCritters()
 
-func isDefeated():
+func isDefeated() -> bool:
 	return team.isDefeated()
 
-func interact():
+func interact() -> void:
 	$BattleFactory.startScannerBattle(self)

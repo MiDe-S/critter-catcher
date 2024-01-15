@@ -100,7 +100,7 @@ func getSpeedForCalc() -> float:
 	return calcStat(critterInfo.getSpeed(), speedBase, speedAdd, speedMultiplier)
 
 func calcStat(base: int, baseAdd: int, add: int, multiplier: float) -> float:
-	var baseTotal := base + baseAdd / GlobalVariables.BASE_STAT_ADD_MAX * 0.2 + 1
+	var baseTotal := base + float(baseAdd) / GlobalVariables.BASE_STAT_ADD_MAX * 0.2 + 1
 	var additional := add / 100.0 * 0.25 + 1
 	var lvl := level / 100.0 * 2 + 0.3
 	return lvl * baseTotal * additional * multiplier
@@ -127,7 +127,7 @@ func applyEffects(effects: Array[Effect]) -> void:
 
 func incrementTurn() -> void:
 	for effect in currentEffects:
-		var remove = effect.incrementTurn()
+		var remove: bool = effect.incrementTurn()
 		if remove:
 			currentEffects.erase(effect)
 			
@@ -144,7 +144,7 @@ func getExpGiven() -> int:
 func getExpNeeded() -> int:
 	return critterInfo.getExpNeeded(level)
 
-func getCritterIcon():
+func getCritterIcon() -> Texture2D:
 	return critterInfo.getCritterIcon()
 
 func getExperience() -> int:

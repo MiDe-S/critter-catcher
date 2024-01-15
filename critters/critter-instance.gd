@@ -18,7 +18,8 @@ func getMoves() -> Array[Move]:
 	
 func setCritter(critterInput: Critter) -> void:
 	critter = critterInput
-	$Sprite2D.set_texture(critter.getCritterIcon())
+	if has_node("Sprite2D"):
+		$Sprite2D.set_texture(critter.getCritterIcon())
 
 func getCritter() -> Critter:
 	return critter
@@ -33,8 +34,8 @@ func getSigName() -> String:
 	return "healthUpdater"
 
 func dealDamage(healthInput: float) -> void:
-	var dmg = healthInput * critter.getDamageReduction()
-	battleMessage.emit("Health was " + str(critter.getHealth()) + " now " + str(snappedf(critter.getHealth() - dmg, .01)) + ": " + str(snappedf(dmg, .01)) + " damage")
+	var dmg: float = healthInput * critter.getDamageReduction()
+	battleMessage.emit("Health was " + str(snappedf(critter.getHealth(), .01)) + " now " + str(snappedf(critter.getHealth() - dmg, .01)) + ": " + str(snappedf(dmg, .01)) + " damage")
 	healthUpdater.emit(dmg)
 	critter.setHealth(critter.getHealth() - dmg)
 	
@@ -54,7 +55,7 @@ func getExpGiven() -> int:
 	return critter.getExpGiven()
 
 func gainExperience(experience: int) -> void:
-	var oldLevel = getLevel()
-	var newLevel = critter.gainExperience(experience)
+	var oldLevel := getLevel()
+	var newLevel := critter.gainExperience(experience)
 	if newLevel != oldLevel:
 		battleMessage.emit(getName() + " leveled up to " + str(newLevel) + ".")

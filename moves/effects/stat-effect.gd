@@ -1,7 +1,7 @@
 extends Effect
 class_name StatEffect
 
-@export var multiplier = 1.0
+@export var multiplier := 1.0
 @export var stat := statTypes.ATTACK
 @export var duration: int
 

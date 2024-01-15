@@ -7,12 +7,12 @@ const SPEED := 100.0
 const TIMER := 1
 var current_time: float = TIMER
 var state := MOVEMENT_STATES.IDLE
-var tracking
+var tracking: Variant
 var critter: Critter
 
 @onready var start_position: Vector2 = get_position()
 @onready var target_position: Vector2 = generateTarget()
-@onready var nav_agent = $NavigationAgent2D
+@onready var nav_agent := $NavigationAgent2D
 
 # DEBUG ONLY, NOT AN EXPORT
 @export var region: NavigationRegion2D 
@@ -49,19 +49,19 @@ func _physics_process(delta: float) -> void:
 				state = MOVEMENT_STATES.IDLE
 				current_time = TIMER
 		MOVEMENT_STATES.FOLLOW:
-			var direction = to_local(nav_agent.get_next_path_position())
+			var direction: Vector2 = to_local(nav_agent.get_next_path_position())
 			$MovementController.move(direction, SPEED)
 	
 	move_and_slide()
 
-func _on_target_detection_body_entered(body) -> void:
+func _on_target_detection_body_entered(body: Variant) -> void:
 	tracking = body
 	nav_agent.set_target_position(tracking.global_position)
 	$Timer.start()
 	# if player is higher level than self, run
 	# have target range increased based on player level ? 
 
-func _on_target_detection_body_exited(body) -> void:
+func _on_target_detection_body_exited(body: Variant) -> void:
 	if body == tracking and state != MOVEMENT_STATES.FOLLOW:
 		tracking = null
 		$Timer.stop()
@@ -89,5 +89,5 @@ func _check_target_distance() -> void:
 	while length < points.size():
 		distance += points[length - 1].distance_to(points[length])
 		length += 1
-	if distance >= $TargetDetection/CollisionShape2D.get_shape().get_radius():
+	if distance <= $TargetDetection/CollisionShape2D.get_shape().get_radius():
 		state = MOVEMENT_STATES.FOLLOW

@@ -2,11 +2,11 @@ extends GridContainer
 
 signal pressedMove(move: Move)
 
-var move_button = preload("res://battle/battle-ui/move/move_button.tscn")
+var move_button := preload("res://battle/battle-ui/move/move_button.tscn")
 
-func setMoveButtons(moves) -> void:
-	var i = 0
-	for move in moves:
+func setMoveButtons(moves: Array[Move]) -> void:
+	var i := 0
+	for move: Move in moves:
 		get_children()[i].setMove(moves[i])
 		i += 1
 	if i < GlobalVariables.MOVE_COUNT:
@@ -19,9 +19,9 @@ func clearMoveButtons() -> void:
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	for i in range(0, GlobalVariables.MOVE_COUNT):
-		var button = move_button.instantiate()
+		var button := move_button.instantiate()
 		button.add_to_group("move_button")
 		add_child(button)
 
-func pressed(move) -> void:
+func pressed(move: Move) -> void:
 	pressedMove.emit(move)

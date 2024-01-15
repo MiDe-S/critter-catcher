@@ -12,7 +12,7 @@ func getCritters() -> Array[Critter]:
 func isDefeated() -> bool:
 	return team.isDefeated()
 	
-func addCritter(critter: Critter):
+func addCritter(critter: Critter) -> void:
 	team.addCritter(critter)
 
 func getTeam() -> Team:

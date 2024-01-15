@@ -14,9 +14,9 @@ var turnActions: Array[Action]
 @export var opposingSide: Array[Node2D]
 @export var all: Array[Node2D]
 
-@export var critterBattleBase: PackedScene
+var critterBattleBase: PackedScene = load("res://critters/critter-battle.tscn")
 
-var enemy
+var enemy: NPC
 
 var typeManager: TypeManger = TypeManger.new()
 
@@ -48,11 +48,11 @@ func _ready() -> void:
 	setUpPlayers(enemy.getCritters(), false)
 	startTurn()
 
-func setUpPlayers(critters, p1: bool = true) -> void:
-	var i = 0
+func setUpPlayers(critters: Array[Critter], p1: bool = true) -> void:
+	var i := 0
 	for pos in leftPositions:
-		var critter = critters[i]
-		var critInstance = critterBattleBase.instantiate()
+		var critter: Critter = critters[i]
+		var critInstance: CritterInstance = critterBattleBase.instantiate()
 		critInstance.setCritter(critter)
 		if p1:
 			critInstance.add_to_group("p1")
@@ -62,7 +62,7 @@ func setUpPlayers(critters, p1: bool = true) -> void:
 			critInstance.position = rightPositions[i].position
 			critInstance.faceLeft()
 			
-		var critUi = load(critterUIPath).instantiate()
+		var critUi: CritterUI = load(critterUIPath).instantiate()
 		critInstance.add_child(critUi)
 		critUi.initialize(critter.getName(), critter.getLevel(), critter.getMaxHealth(), critInstance.getSigName())
 		critInstance.connect("battleMessage", printText)
@@ -76,12 +76,15 @@ func startTurn() -> void:
 	$BattleUI.setMoves(get_tree().get_nodes_in_group("p1")[p1CritterIndex].getMoves())
 	get_tree().get_nodes_in_group("move_button").front().grab_focus()
 	
-func _actionChosen(action, metadata = null) -> void:
+func _actionChosen(action: Variant, metadata: Variant = null) -> void:
 	if action is Move:
 		_moveChosen(action)
 	match action:
 		BattleUI.BattleUIActions.SWITCH:
-			turnActions.append(Action.new(get_tree().get_nodes_in_group("p1")[p1CritterIndex], null, [metadata]))
+			# this is bad, don't do this
+			var temp := CritterInstance.new()
+			temp.setCritter(metadata)
+			turnActions.append(Action.new(get_tree().get_nodes_in_group("p1")[p1CritterIndex], null, [temp]))
 			handleNextCritterTurn()
 			
 		BattleUI.BattleUIActions.RUN:
@@ -109,8 +112,8 @@ func _moveChosen(move: Move) -> void:
 			Move.targetType.SELF:
 				$Selector.setFocus([get_tree().get_nodes_in_group("p1")[p1CritterIndex]])
 			Move.targetType.SINGLE:
-				var options = get_tree().get_nodes_in_group("p2")
-				var i = 0
+				var options: Array[Node] = get_tree().get_nodes_in_group("p2")
+				var i := 0
 				for node in get_tree().get_nodes_in_group("p1"):
 					if i != p1CritterIndex:
 						options.insert(0, node)
@@ -121,7 +124,7 @@ func _moveChosen(move: Move) -> void:
 			Move.targetType.ALL:
 				$Selector.setFocus(all)
 			
-func _critterChosen(critter) -> void:
+func _critterChosen(critter: Variant) -> void:
 	var targets: Array[Node] = []
 	if critter == null:
 		# nothing selected, refocus button
@@ -129,12 +132,12 @@ func _critterChosen(critter) -> void:
 		selectedMove = null
 		return;
 	elif critter in opposingSide:
-		targets = get_tree().get_nodes_in_group("p2")
+		targets = get_tree().get_nodes_in_group("p2") as Array[Node]
 	elif critter in all:
-		targets = get_tree().get_nodes_in_group("p1") + get_tree().get_nodes_in_group("p2")
+		targets = get_tree().get_nodes_in_group("p1") + get_tree().get_nodes_in_group("p2") as Array[Node]
 	else:
 		targets.append(critter)
-	var action = Action.new(get_tree().get_nodes_in_group("p1")[p1CritterIndex], selectedMove, targets)
+	var action := Action.new(get_tree().get_nodes_in_group("p1")[p1CritterIndex], selectedMove, castArray(targets))
 	turnActions.append(action)
 	handleNextCritterTurn()
 
@@ -147,18 +150,17 @@ func handleNextCritterTurn() -> void:
 	get_tree().get_nodes_in_group("move_button").front().grab_focus()
 	
 func endTurn() -> void:
-	var rng = RandomNumberGenerator.new()
 	# determine who goes first with speed + effects
 	# calculate damage for all
 	for action in turnActions:
 		$BattleUI.printText(action.actionInfo())
 		if action.getMove() == null:
-			switchCritter(action.getDefenders()[0], get_tree().get_nodes_in_group("p1").find(action.getAttacker()), true)
+			switchCritter(action.getDefenders()[0].getCritter(), get_tree().get_nodes_in_group("p1").find(action.getAttacker()), true)
 			continue
 
-		var movePower = action.getMove().getPower()  * min((0.3 + action.getAttacker().getLevel() / 100.0), 1.0)
+		var movePower: float = action.getMove().getPower() * min((0.3 + action.getAttacker().getLevel() / 100.0), 1.0)
 		# check physical vs range
-		var atk
+		var atk: float
 		match action.getMove().getAttribute():
 			Move.attributeType.DIRECT:
 				atk = action.getAttacker().getCritter().getAttackForCalc()
@@ -166,9 +168,9 @@ func endTurn() -> void:
 				atk = action.getAttacker().getCritter().getRangeAttackForCalc()
 		# check for STAB
 		for defender in action.getDefenders():
-			if rng.randf_range(0, 100) <= action.getMove().getAccuracy():
-				var randomness = rng.randf_range(.96, 1.04)
-				var def
+			if randf_range(0, 100) <= action.getMove().getAccuracy():
+				var randomness := randf_range(.96, 1.04)
+				var def: float
 				match action.getMove().getAttribute():
 					Move.attributeType.DIRECT:
 						def = defender.getCritter().getDefenseForCalc()
@@ -176,7 +178,7 @@ func endTurn() -> void:
 						def = defender.getCritter().getRangeDefenseForCalc()
 						
 				if action.getMove().getAttribute() != Move.attributeType.STATUS:
-					var typeAdvantage = typeManager.getAdvantage(action.getMove().getType(), defender.getCritter().getType())
+					var typeAdvantage: float = typeManager.getAdvantage(action.getMove().getType(), defender.getCritter().getType())
 					defender.dealDamage(movePower * typeAdvantage * atk / def * randomness)
 				defender.getCritter().applyEffects(action.getMove().getEffects())
 				if defender.isDefeated():
@@ -205,7 +207,7 @@ func checkForDefeatedCritters() -> void:
 			# Give player option to switch
 			pass
 			
-	var index = 0
+	var index := 0
 	for p2Critter in get_tree().get_nodes_in_group("p2"):
 		if p2Critter.isDefeated():
 			printText(p2Critter.getName() + " is defeated.")
@@ -230,7 +232,7 @@ func switchCritter(critter: Critter, activeIndex: int, p1: bool = true) -> void:
 		pos = get_tree().get_nodes_in_group("p2")[activeIndex].get_position()
 		get_tree().get_nodes_in_group("p2")[activeIndex].free()
 
-	var critInstance = critterBattleBase.instantiate()
+	var critInstance := critterBattleBase.instantiate()
 	critInstance.setCritter(critter)
 	if p1:
 		critInstance.add_to_group("p1")
@@ -240,7 +242,7 @@ func switchCritter(critter: Critter, activeIndex: int, p1: bool = true) -> void:
 		critInstance.position = pos
 		critInstance.faceLeft()
 		
-	var critUi = load(critterUIPath).instantiate()
+	var critUi: CritterUI = load(critterUIPath).instantiate()
 	critInstance.add_child(critUi)
 	critUi.initialize(critter.getName(), critter.getLevel(), critter.getMaxHealth(), critInstance.getSigName())
 	critInstance.connect("battleMessage", printText)
@@ -251,3 +253,12 @@ func endBattle() -> void:
 	
 func printText(msg: String) -> void:
 	$BattleUI.printText(msg)
+
+func castArray(input: Array[Node]) -> Array[CritterInstance]:
+	var output: Array[CritterInstance] = []
+	for i in input:
+		output.append(i as CritterInstance)
+	return output
+
+func setIsWild(isWild: bool) -> void:
+	$BattleUI.setIsWild(isWild)

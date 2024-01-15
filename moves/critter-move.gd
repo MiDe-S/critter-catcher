@@ -4,8 +4,8 @@ class_name CritterMove
 @export_range(0,100,1) var level: int
 @export var move: Move
 
-func getMove():
+func getMove() -> Move:
 	return move
 	
-func getLevel():
+func getLevel() -> int:
 	return level

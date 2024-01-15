@@ -55,7 +55,7 @@ func _process(_delta: float) -> void:
 			if Input.is_action_just_pressed(action_name):
 				_toggle_pause()
 
-func _input(event) -> void:
+func _input(event: InputEvent) -> void:
 	if not use_input_map and event is InputEventKey:
 		if event.pressed:
 			if not _input_event_pressed:
@@ -64,7 +64,7 @@ func _input(event) -> void:
 		else:
 			_input_event_pressed = false
 
-func _notification(_what) -> void:
+func _notification(_what: int) -> void:
 	#if _what == NOTIFICATION_WM_WINDOW_FOCUS_OUT:
 	#	_pause()
 	pass
@@ -114,6 +114,7 @@ func _resume() -> void:
 			emit_handlers(get_tree().root, false)
 
 func emit_handlers(node : Node, paused : bool = true) -> void:
+	@warning_ignore("untyped_declaration")
 	var pause_event_handler_node
 	for child in node.get_children():
 		pause_event_handler_node = child.get_node_or_null("PauseEventHandler")
