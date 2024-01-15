@@ -1,6 +1,6 @@
 extends Node
 
-signal selection(obj: Node)
+signal selection(obj: Variant)
 
 var optionsNodes: Array[Variant] = []
 var options: Array[Variant] = []

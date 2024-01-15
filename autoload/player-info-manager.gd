@@ -6,8 +6,9 @@ const FILE_PATH := "user://game1.res"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	# load player from save file
-	pass # Replace with function body.
+	# load player from save file, otherwise
+	if get_tree().current_scene is MapManager:
+		playerInfo.setCurrentScene(get_tree().current_scene.get_scene_file_path())
 
 func getPlayerInfo() -> PlayerInfo:
 	return playerInfo

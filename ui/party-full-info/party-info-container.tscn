@@ -6,7 +6,7 @@
 [ext_resource type="Theme" uid="uid://b1nmw3tifrb0r" path="res://battle-button-font.tres" id="4_mqhi7"]
 [ext_resource type="PackedScene" uid="uid://b7ik2644mtetq" path="res://battle/battle-ui/selector.tscn" id="5_qtyo8"]
 
-[node name="Container" type="CanvasLayer" groups=["area", "ui"]]
+[node name="Container" type="CanvasLayer" groups=["ui"]]
 script = ExtResource("1_32sdh")
 cellScene = ExtResource("2_gbupy")
 team = ExtResource("3_l7m8j")

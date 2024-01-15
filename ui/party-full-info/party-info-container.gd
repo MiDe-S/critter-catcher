@@ -10,19 +10,24 @@ signal switch(critter: Critter)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	$Selector.connect("selection", _critterChosen)
+	refresh()
+
+
+
+func freeSelf() -> void:
+	queue_free()
+
+	
+func refresh() -> void:
+	for child in gridContainer.get_children():
+		child.free()
 	team = PlayerManager.getPlayerInfo().getTeam()
 	for i: int in range(0, GlobalVariables.PARTY_SIZE):
 		var cell := cellScene.instantiate()
 		if team != null and team.size() > i:
 			cell.setCritter(team.getCritters()[i])
 		gridContainer.add_child(cell)
-	$Selector.connect("selection", _critterChosen)
-
-func freeSelf() -> void:
-	queue_free()
-	
-func refresh() -> void:
-	print("Implement Refresh")
 	
 func startSelector() -> void:
 	var selectableCrits: Array[PartyInfoCell] = []
