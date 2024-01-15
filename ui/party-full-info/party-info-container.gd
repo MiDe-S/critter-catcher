@@ -25,7 +25,11 @@ func refresh() -> void:
 	print("Implement Refresh")
 	
 func startSelector() -> void:
-	$Selector.setFocus(gridContainer.get_children())
+	var selectableCrits: Array[PartyInfoCell] = []
+	for child in gridContainer.get_children():
+		if child.isActive() and !child.getCritter().isDefeated():
+			selectableCrits.append(child)
+	$Selector.setFocus(selectableCrits)
 	
 func _emitInfo() -> void:
 	print("ImplementCritterInfo")
@@ -34,5 +38,8 @@ func _emitBack() -> void:
 	back.emit()
 	
 func _critterChosen(critter: Node) -> void:
-	switch.emit(critter.getCritter())
+	if critter == null:
+		back.emit()
+	else:
+		switch.emit(critter.getCritter())
 	

@@ -21,6 +21,8 @@ var isInit := false
 func _ready() -> void:
 	if critter != null and isInit:
 		initialize()
+	else:
+		$MarginContainer.hide()
 
 func setCritter(critterInput: Critter) -> void:
 	critter = critterInput
@@ -47,3 +49,6 @@ func initialize() -> void:
 
 func getCritter() -> Critter:
 	return critter
+
+func isActive() -> bool:
+	return critter != null

@@ -19,4 +19,6 @@ func startScannerBattle(npc: NPC) -> void:
 	var enemy: NPC = enemy_scene.instantiate()
 	enemy.setTeam(npc.getTeam())
 	battle.setEnemy(enemy)
+	battle.setIsWild(false)
 	SceneManager.startScene(battle)
+

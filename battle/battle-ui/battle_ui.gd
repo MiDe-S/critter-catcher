@@ -34,7 +34,7 @@ func move_pressed(move: Move) -> void:
 func switch_pressed() -> void:
 	container.show()
 	container.refresh()
-	container.startSelector()
+	container.startSelector.call_deferred()
 	_toggleButtons()
 	
 func scan_pressed() -> void:

@@ -1,35 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://dpskkqum3sflt"]
+[gd_scene load_steps=5 format=3 uid="uid://dpskkqum3sflt"]
 
 [ext_resource type="Script" path="res://ui/party-full-info/party-info-cell.gd" id="1_mmgg3"]
-[ext_resource type="Resource" uid="uid://bf3cgbyv1qevj" path="res://critters/critters/millo-info.tres" id="2_f6hkh"]
-[ext_resource type="Script" path="res://critters/critter.gd" id="3_fiupm"]
-[ext_resource type="Resource" uid="uid://d00upfwdoaoxb" path="res://moves/block.tres" id="3_granu"]
 [ext_resource type="Texture2D" uid="uid://cyp2i5ywuyyn1" path="res://critters/critter-images/dibbit.png" id="4_4f7bo"]
 [ext_resource type="Script" path="res://addons/health_bar_2d/health_bar_2d.gd" id="4_vttjt"]
 [ext_resource type="Texture2D" uid="uid://cnjw8wn77f05i" path="res://addons/health_bar_2d/resources/health_bar_texture.png" id="5_l48a7"]
-
-[sub_resource type="Resource" id="Resource_y1eix"]
-script = ExtResource("3_fiupm")
-nickname = ""
-moves = Array[Resource("res://moves/move.gd")]([ExtResource("3_granu")])
-abilityIndex = 0
-weight = 0
-critterInfo = ExtResource("2_f6hkh")
-level = 17
-experience = 500
-healthBase = 0
-attackBase = 0
-defenseBase = 0
-rangeAttackBase = 0
-rangeDefenseBase = 0
-speedBase = 0
-healthAdd = 0
-attackAdd = 0
-defenseAdd = 0
-rangeAttackAdd = 0
-rangeDefenseAdd = 0
-speedAdd = 0
-alive = true
 
 [node name="PanelContainer" type="PanelContainer"]
 custom_minimum_size = Vector2(250, 250)
@@ -38,7 +12,6 @@ offset_bottom = 40.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_mmgg3")
-critter = SubResource("Resource_y1eix")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
