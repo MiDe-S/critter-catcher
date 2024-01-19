@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://c2fjsnt3i2b0y"]
+[gd_scene load_steps=3 format=3 uid="uid://c2fjsnt3i2b0y"]
 
 [ext_resource type="Texture2D" uid="uid://dc75e7tvdi4ap" path="res://areas/art/Overworld.png" id="1_shgia"]
+[ext_resource type="PackedScene" uid="uid://b3jg2x2vunpyu" path="res://areas/buildings/door.tscn" id="2_1v0yc"]
 
 [node name="house" type="Node2D"]
 texture_filter = 1
@@ -12,11 +13,7 @@ texture = ExtResource("1_shgia")
 region_enabled = true
 region_rect = Rect2(96, 0, 80, 80)
 
-[node name="Door" type="Sprite2D" parent="."]
-position = Vector2(0, -11)
-texture = ExtResource("1_shgia")
-region_enabled = true
-region_rect = Rect2(256, 64, 16, 32)
+[node name="Door" parent="." instance=ExtResource("2_1v0yc")]
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(0, -35)

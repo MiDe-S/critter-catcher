@@ -209,7 +209,7 @@ position = Vector2(0, -1.5)
 [node name="ShapeCast2D" type="ShapeCast2D" parent="."]
 shape = SubResource("CircleShape2D_y4e4e")
 target_position = Vector2(0, 22)
-collision_mask = 8
+collision_mask = 72
 script = ExtResource("7_wotct")
 
 [editable path="TerrainDetector"]

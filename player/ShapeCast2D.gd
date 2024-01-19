@@ -46,4 +46,4 @@ func interactClosest() -> void:
 	# logic to pick closest
 	if collided.is_empty():
 		assert(false, "Nothing to interact with")
-	collided[0].interact()
+	collided[0].get_node("Interactable").interact()
