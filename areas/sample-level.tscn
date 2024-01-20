@@ -45,3 +45,5 @@ team = ExtResource("7_o62ij")
 [node name="critter-wild" parent="." node_paths=PackedStringArray("region") instance=ExtResource("2_h25yi")]
 position = Vector2(-172, 68)
 region = NodePath("../NavigationRegion2D")
+
+[editable path="house"]

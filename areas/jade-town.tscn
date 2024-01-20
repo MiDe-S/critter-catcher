@@ -97,6 +97,9 @@ position = Vector2(504, 512)
 [node name="house3" parent="YSortHelper" instance=ExtResource("3_h8wbo")]
 position = Vector2(376, 512)
 
+[node name="Door" parent="YSortHelper/house3" index="1"]
+connectedScene = "res://areas/safe-house/safe-house.tscn"
+
 [node name="house" parent="YSortHelper" instance=ExtResource("3_h8wbo")]
 position = Vector2(248, 192)
 
@@ -121,3 +124,5 @@ offset_bottom = 713.0
 spawnInfo = Array[ExtResource("10_je7of")]([SubResource("Resource_s6e8x"), SubResource("Resource_5ok5p")])
 spawn_cap = 1
 metadata/_edit_use_anchors_ = true
+
+[editable path="YSortHelper/house3"]

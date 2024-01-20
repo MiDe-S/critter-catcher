@@ -27,6 +27,22 @@ func startScene(newScene: Node) -> void:
 		for c in _mapScenes:
 			root.remove_child(c)
 		return
+	if oldScene is MapManager and newScene is Building:
+		#hide ui/map elements
+		_mapScenes = get_tree().get_nodes_in_group("area")
+		var root := get_tree().get_root()
+		root.add_child(newScene)
+		get_tree().set_current_scene(newScene)
+		for c in _mapScenes:
+			if !c.is_in_group('ui'):
+				c.queue_free()
+		return
+	if oldScene is Building and newScene is MapManager:
+		var old := get_tree().current_scene
+		get_tree().get_root().add_child(newScene)
+		get_tree().set_current_scene(newScene)
+		old.queue_free()
+		return
 	if oldScene is Battle and newScene is MapManager:
 		# show UI elements
 		# refresh UI elements
@@ -51,11 +67,14 @@ func endScene() -> void:
 				get_tree().set_current_scene(n)
 
 		oldScene.queue_free()
+		
+	
 
 func reloadGame() -> void:
 	# set player pos from player info
 	# start scene from player info
 	_mapScenes = get_tree().get_nodes_in_group("area")
+	_mapScenes += get_tree().get_nodes_in_group("building")
 	# Switch to empty scene so currentScene isn't deleted
 	var blank := Node2D.new()
 	get_tree().get_root().add_child(blank)

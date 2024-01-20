@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://d2k5yxa0eo5fv"]
+
+[ext_resource type="PackedScene" uid="uid://b3jg2x2vunpyu" path="res://areas/buildings/door.tscn" id="1_depog"]
+[ext_resource type="Texture2D" uid="uid://hiiat0e1juth" path="res://areas/art/IndoorTile.png" id="2_yjmqc"]
+
+[node name="Door" instance=ExtResource("1_depog")]
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_yjmqc")
+region_rect = Rect2(48, 48, 48, 16)

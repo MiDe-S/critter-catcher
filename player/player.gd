@@ -38,4 +38,3 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("overworld_interact"):
 		if ray.is_colliding():
 			ray.interactClosest()
-			print("Start Battle")

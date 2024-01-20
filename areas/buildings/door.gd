@@ -1,17 +1,20 @@
 extends StaticBody2D
 
-@export var connectedScene: PackedScene;
+@warning_ignore("untyped_declaration")
+@export_file("*.tscn") var connectedScene:
+	set(value):
+		connectedScene = load(value)
 
 @onready var interactable := $Interactable
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
+func _ready() -> void:
 	interactable.interacted.connect(changeScene)
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-
-func changeScene():
-	print("change scene")
+func changeScene() -> void:
+	if connectedScene == null:
+		print("No scene connected")
+	else:
+		@warning_ignore("untyped_declaration")
+		var new_scene = connectedScene.instantiate()
+		SceneManager.startScene(new_scene)

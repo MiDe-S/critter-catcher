@@ -4,6 +4,7 @@
 [ext_resource type="Script" path="res://scanners/interactable.gd" id="2_ithi7"]
 
 [node name="Interactable" type="Sprite2D"]
+z_index = 1
 scale = Vector2(0.02, 0.02)
 texture = ExtResource("1_evet0")
 script = ExtResource("2_ithi7")
