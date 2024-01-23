@@ -25,6 +25,10 @@ func getCurrentScene() -> String:
 func getPlayerPosition() -> Vector2:
 	return playerInfo.getPlayerPosition()
 	
+func healParty() -> void:
+	playerInfo.healParty()
+	SceneManager.refreshUI()
+	
 func saveGame() -> void:
 	var result := ResourceSaver.save(playerInfo, FILE_PATH)
 	assert(result == OK, "Failed to save")

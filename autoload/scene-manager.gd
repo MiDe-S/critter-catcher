@@ -65,6 +65,7 @@ func _startScene(newScene: Node) -> void:
 		var old := get_tree().current_scene
 		get_tree().get_root().add_child(newScene)
 		get_tree().set_current_scene(newScene)
+		PlayerManager.setCurrentScene(get_tree().current_scene.get_scene_file_path())
 		old.queue_free()
 		return
 	if oldScene is Battle and newScene is MapManager:
@@ -107,3 +108,8 @@ func reloadGame() -> void:
 		if !c.is_in_group("ui"):
 			c.queue_free()
 	get_tree().change_scene_to_file(PlayerManager.getCurrentScene())
+
+func refreshUI() -> void:
+	for c in get_tree().get_nodes_in_group("area"):
+		if c.is_in_group("ui"):
+			c.refresh()

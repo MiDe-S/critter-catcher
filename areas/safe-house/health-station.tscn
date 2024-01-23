@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://duohjy8yseg2d"]
+
+[ext_resource type="Script" path="res://areas/safe-house/health-station.gd" id="1_0pb8f"]
+[ext_resource type="Texture2D" uid="uid://cn40thbkrbq8k" path="res://areas/custom-art/health-station.png" id="1_swbjc"]
+[ext_resource type="PackedScene" uid="uid://ds8jctibfvxof" path="res://scanners/interactable.tscn" id="3_ubren"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8w0v7"]
+size = Vector2(16, 9)
+
+[node name="Health-station" type="StaticBody2D"]
+collision_layer = 8
+collision_mask = 25
+script = ExtResource("1_0pb8f")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -20)
+texture = ExtResource("1_swbjc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -5.5)
+shape = SubResource("RectangleShape2D_8w0v7")
+
+[node name="Interactable" parent="." instance=ExtResource("3_ubren")]
+visible = false
+position = Vector2(0, -46)

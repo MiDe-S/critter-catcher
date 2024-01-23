@@ -149,3 +149,6 @@ func getCritterIcon() -> Texture2D:
 
 func getExperience() -> int:
 	return experience
+
+func healFull() -> void:
+	setHealth(getMaxHealth())

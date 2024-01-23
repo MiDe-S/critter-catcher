@@ -32,3 +32,6 @@ func getCurrentScene() -> String:
 	
 func getPlayerPosition() -> Vector2:
 	return local_position
+	
+func healParty() -> void:
+	team.healParty()

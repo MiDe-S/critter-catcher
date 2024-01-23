@@ -18,5 +18,9 @@ func isDefeated() -> bool:
 			return false
 	return true
 
+func healParty() -> void:
+	for critter in team:
+		critter.healFull()
+
 func size() -> int:
 	return team.size()

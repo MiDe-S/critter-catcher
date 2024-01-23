@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://cksmpb06qkdj"]
+[gd_scene load_steps=7 format=3 uid="uid://cksmpb06qkdj"]
 
 [ext_resource type="Script" path="res://areas/safe-house/building.gd" id="1_tfhvr"]
 [ext_resource type="TileSet" uid="uid://bhkhb116gcf8h" path="res://areas/tiles.tres" id="2_1c1xf"]
 [ext_resource type="PackedScene" uid="uid://bv4g5pkonn1tg" path="res://areas/y_sort_helper.tscn" id="2_1q53d"]
 [ext_resource type="PackedScene" uid="uid://l8caa8o6ly33" path="res://player/player.tscn" id="3_0a6uu"]
 [ext_resource type="PackedScene" uid="uid://d2k5yxa0eo5fv" path="res://areas/buildings/inside-door.tscn" id="5_pb0oe"]
+[ext_resource type="PackedScene" uid="uid://duohjy8yseg2d" path="res://areas/safe-house/health-station.tscn" id="6_580ji"]
 
 [node name="Safe-house" type="Node2D" groups=["building"]]
 script = ExtResource("1_tfhvr")
@@ -19,6 +20,9 @@ position = Vector2(128, 147)
 connectedScene = "res://areas/jade-town.tscn"
 
 [node name="YSortHelper" parent="." instance=ExtResource("2_1q53d")]
+
+[node name="Health-station" parent="YSortHelper" instance=ExtResource("6_580ji")]
+position = Vector2(205, 100)
 
 [node name="Player" parent="YSortHelper" instance=ExtResource("3_0a6uu")]
 position = Vector2(127, 137)
