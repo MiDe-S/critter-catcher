@@ -1,7 +1,7 @@
 extends TextureProgressBar
 
 # if false, health bar will only show itself when value is changed
-@export var _static:bool = false
+@export var _static:bool = true
 # if set true, health bar color will change as value decreases
 @export var _gradient:bool = false
 # time out for show/hide health bar animation
@@ -13,8 +13,10 @@ extends TextureProgressBar
 const _colors = {
 	"neutral": "#00489d",
 	"danger": "#9d0000",
+	"high_caution": "#d1ce00",
+	"low_caution": "#ffa500",
 	"success": "#009d36",
-	"caution": "#d1ce00"
+	"full": "#00ff00"
 }
 
 var _parent: Node
@@ -56,17 +58,21 @@ func _process(delta) -> void:
 	#	set_global_position(_parent.position + _offset - _center_offset)
 
 
-func initialize(signal_string: String, conneted_bar_max_value) -> void:
+func initialize(signal_string: String, connected_bar_max_value) -> void:
 	"""Initialize the health bar for use in game.
 	It must be called for HealthBar2D to work.
 	"""
 	_parent = get_parent()
-	if _parent.has_signal(signal_string):
-		_parent.connect(signal_string, self._handle_value)
-	else:
+	while _parent != null:
+		if _parent.has_signal(signal_string):
+			_parent.connect(signal_string, self._handle_value)
+			break
+		_parent = _parent.get_parent()
+	if _parent == null:
 		print("healthbar2D has parent with no matching signal")
-	max_value = conneted_bar_max_value
+	max_value = connected_bar_max_value
 	value = max_value
+	_updateColor()
 
 
 func _handle_value(val: int) -> void:
@@ -92,12 +98,16 @@ func _fade() -> void:
 func _color(val: float) -> void:
 	"""Method handles the color of health bar.
 	"""
-	if _prc(val, 30):
+	if _prc(val, 20):
 		tint_progress = _colors.danger
-	elif _prc(val, 55):
-		tint_progress = _colors.caution
-	else:
+	elif _prc(val, 40):
+		tint_progress = _colors.high_caution
+	elif _prc(val, 60):
+		tint_progress = _colors.low_caution
+	elif _prc(val, 80):
 		tint_progress = _colors.success
+	else:
+		tint_progress = _colors.full
 
 
 func _prc(val: float, percentage: int) -> bool:
@@ -116,3 +126,11 @@ func _tween(value: float) -> void:
 	tween.tween_property(
 		self, "modulate:a", value, _animation_timeout
 	)
+	
+func _updateColor() -> void:
+	if _gradient:
+		_color(value)
+		
+func set_max(input: float) -> void:
+	super(input)
+	_updateColor()

@@ -1,9 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://dpyjt1nlnkfuy"]
+[gd_scene load_steps=3 format=3 uid="uid://dpyjt1nlnkfuy"]
 
 [ext_resource type="Script" path="res://ui/party-UI-controller.gd" id="1_p4fxf"]
 [ext_resource type="PackedScene" uid="uid://dtriud575tg0i" path="res://ui/party-side-nav/party-UI.tscn" id="2_00nhm"]
-[ext_resource type="PackedScene" uid="uid://c0e4ju8bbbtsh" path="res://ui/party-full-info/party-info-container.tscn" id="3_r2s40"]
 
 [node name="Party-UI-Controller" type="Node2D" groups=["area", "ui"]]
 script = ExtResource("1_p4fxf")
-uiElements = Array[PackedScene]([ExtResource("2_00nhm"), ExtResource("3_r2s40")])
+uiElements = Array[PackedScene]([ExtResource("2_00nhm")])

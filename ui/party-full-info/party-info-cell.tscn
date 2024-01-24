@@ -101,7 +101,7 @@ texture_progress = ExtResource("5_l48a7")
 tint_under = Color(0, 0, 0, 0.603922)
 tint_progress = Color(0, 1, 0, 1)
 script = ExtResource("4_vttjt")
-_static = true
+_gradient = true
 
 [node name="Exp" type="TextureProgressBar" parent="MarginContainer/VBoxContainer/VBoxContainer"]
 layout_mode = 2
@@ -113,4 +113,3 @@ texture_progress = ExtResource("5_l48a7")
 tint_under = Color(0, 0, 0, 0.603922)
 tint_progress = Color(0.141176, 0.329412, 0.513726, 1)
 script = ExtResource("4_vttjt")
-_static = true

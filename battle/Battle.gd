@@ -64,7 +64,7 @@ func setUpPlayers(critters: Array[Critter], p1: bool = true) -> void:
 			
 		var critUi: CritterUI = load(critterUIPath).instantiate()
 		critInstance.add_child(critUi)
-		critUi.initialize(critter.getName(), critter.getLevel(), critter.getMaxHealth(), critInstance.getSigName())
+		critUi.initialize(critter, critInstance.getSigName())
 		critInstance.connect("battleMessage", printText)
 		self.add_child(critInstance)
 		i += 1
@@ -244,7 +244,7 @@ func switchCritter(critter: Critter, activeIndex: int, p1: bool = true) -> void:
 		
 	var critUi: CritterUI = load(critterUIPath).instantiate()
 	critInstance.add_child(critUi)
-	critUi.initialize(critter.getName(), critter.getLevel(), critter.getMaxHealth(), critInstance.getSigName())
+	critUi.initialize(critter, critInstance.getSigName())
 	critInstance.connect("battleMessage", printText)
 	self.add_child(critInstance)
 	

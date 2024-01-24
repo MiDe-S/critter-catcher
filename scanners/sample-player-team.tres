@@ -33,6 +33,8 @@ rangeAttackAdd = 0
 rangeDefenseAdd = 0
 speedAdd = 0
 alive = true
+health = 2.0
+healthInit = true
 
 [sub_resource type="Resource" id="Resource_frle4"]
 script = ExtResource("7_mypvt")
@@ -56,6 +58,8 @@ rangeAttackAdd = 0
 rangeDefenseAdd = 0
 speedAdd = 0
 alive = true
+health = 0.0
+healthInit = false
 
 [sub_resource type="Resource" id="Resource_1qp51"]
 script = ExtResource("7_mypvt")
@@ -79,6 +83,8 @@ rangeAttackAdd = 0
 rangeDefenseAdd = 0
 speedAdd = 0
 alive = true
+health = 0.0
+healthInit = false
 
 [resource]
 script = ExtResource("1_ygme0")

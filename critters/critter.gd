@@ -30,10 +30,10 @@ class_name Critter
 @export var speedAdd: int
 
 @export var alive: bool = true
+@export var health: float
 
 # done so health can be set when it is first read
-var healthInit: bool = false
-var health: float
+@export var healthInit: bool = false
 
 var attackMultiplier := 1.0
 var rangeAttackMultiplier := 1.0
@@ -46,14 +46,15 @@ var damageReduction := 1.0
 var currentEffects: Array[Effect] = []
 
 func initialize() -> void:
-	setHealth(getMaxHealth())
-	alive = true
+	if !healthInit:
+		setHealth(getMaxHealth())
+		alive = true
 
 func getMoves() -> Array[Move]:
 	return moves
 	
 func getNickname() -> String:
-	if nickname == null:
+	if nickname == null or nickname == '':
 		return critterInfo.getName()
 	return nickname
 

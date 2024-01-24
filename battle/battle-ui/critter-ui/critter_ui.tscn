@@ -19,7 +19,6 @@ texture_progress = ExtResource("2_ro7wa")
 tint_under = Color(0, 0, 0, 1)
 tint_progress = Color(0, 1, 0, 1)
 script = ExtResource("2_7dm2b")
-_static = true
 _gradient = true
 _offset = Vector2(16, 16)
 

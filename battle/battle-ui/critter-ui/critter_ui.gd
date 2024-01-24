@@ -12,12 +12,12 @@ var _offset: Vector2 = Vector2(0, -100)
 func _ready() -> void:
 	pass
 
-func initialize(nameInput: String, levelInput: int, maxHealthInput: float, sigName: String) -> void:
-	maxHealth = maxHealthInput
-	health = maxHealth
+func initialize(critter: Critter, sigName: String) -> void:
+	maxHealth = critter.getMaxHealth()
+	health = critter.getHealth()
 	
-	$Name.text = nameInput
-	$Level.text = "Lvl: " + str(levelInput)
+	$Name.text = critter.getNickname()
+	$Level.text = "Lvl: " + str(critter.getLevel())
 	$HealthBar2D.initialize("health_changed", health)
 	$HealthBar2D.set_max(maxHealth)
 	set_global_position(get_parent().position + _offset)
