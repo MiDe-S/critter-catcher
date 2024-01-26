@@ -72,7 +72,6 @@ func _on_timer_timeout() -> void:
 		_check_target_distance()
 	
 func _battleStart() -> void:
-	print("Battle Init")
 	battle_start.emit(critter)
 	queue_free()
 
@@ -91,3 +90,6 @@ func _check_target_distance() -> void:
 		length += 1
 	if distance <= $TargetDetection/CollisionShape2D.get_shape().get_radius():
 		state = MOVEMENT_STATES.FOLLOW
+
+func setTimer(time: float) -> void:
+	$Timer.set_wait_time(time)

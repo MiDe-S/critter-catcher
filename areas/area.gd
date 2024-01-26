@@ -9,7 +9,8 @@ var total_spawned := 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	while total_spawned <= int(spawn_cap / 2.0):
+		_on_critter_spawner_timeout()
 	
 func getRandomPoint() -> Vector2:
 	var x := randf_range(0, get_size().x)
@@ -26,6 +27,7 @@ func _on_critter_spawner_timeout() -> void:
 		# consider frequency later
 		var i := randf_range(0, spawnInfo.size())
 		critter.setCritter(spawnInfo[i].generateCritter())
+		critter.setTimer(randf_range(.10, .35))
 		critter.connect("battle_start", _initiateCombat)
 		get_parent().get_node("YSortHelper").add_child(critter)
 		total_spawned += 1

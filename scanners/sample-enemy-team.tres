@@ -29,6 +29,8 @@ rangeAttackAdd = 0
 rangeDefenseAdd = 0
 speedAdd = 0
 alive = true
+health = 0.0
+healthInit = false
 
 [sub_resource type="Resource" id="Resource_68jkd"]
 script = ExtResource("4_yqioq")
@@ -52,6 +54,8 @@ rangeAttackAdd = 0
 rangeDefenseAdd = 0
 speedAdd = 0
 alive = true
+health = 0.0
+healthInit = false
 
 [resource]
 script = ExtResource("1_v682g")
