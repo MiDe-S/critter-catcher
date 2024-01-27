@@ -2,11 +2,6 @@ extends ShapeCast2D
 
 var collided: Array[Object] = []
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	var amount: int = get_collision_count()
@@ -46,4 +41,13 @@ func interactClosest() -> void:
 	# logic to pick closest
 	if collided.is_empty():
 		assert(false, "Nothing to interact with")
-	collided[0].get_node("Interactable").interact()
+	var minVal: float
+	var closestIndex: int
+	var i: int = 0
+	for collider in collided:
+		var delta := position.distance_to(collider.position)
+		if delta < minVal:
+			minVal = delta
+			closestIndex = i
+		i += 1
+	collided[closestIndex].get_node("Interactable").interact()

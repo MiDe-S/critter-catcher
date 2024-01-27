@@ -5,6 +5,7 @@ class_name PlayerInfo
 @export var team: Team
 @export var local_position: Vector2
 @export var current_scene: String
+@export var medal_count: int
 
 func getCritters() -> Array[Critter]:
 	return team.getCritters()
