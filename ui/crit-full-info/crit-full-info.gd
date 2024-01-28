@@ -10,8 +10,8 @@ signal exp
 @onready var critName := $PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Name
 @onready var typeContainer := $PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/TypeContainer
 @onready var critImage := $PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/TextureRect
-@onready var expBar := $PanelContainer/MarginContainer/VBoxContainer/Control/ExpBar
-@onready var level := $PanelContainer/MarginContainer/VBoxContainer/Control/Label
+@onready var experience := $PanelContainer/MarginContainer/VBoxContainer/Control/Experience
+@onready var level := $PanelContainer/MarginContainer/VBoxContainer/Control/Level
 
 @onready var health := $PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/StatsContainer/Health
 @onready var atk := $PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/StatsContainer/Attack
@@ -41,8 +41,7 @@ func _ready() -> void:
 			var moveObj := moveFullInfo.instantiate()
 			moveContainer.add_child(moveObj)
 		# set exp
-		expBar.initialize("exp", critter.getExperience())
-		expBar.set_max(critter.getExpNeeded())
+		experience.text = str(critter.getExperience()) + " / " + str(critter.getExpNeeded())
 		level.text = "Level: " + str(critter.getLevel())
 		
 		# stats

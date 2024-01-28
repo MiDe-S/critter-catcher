@@ -11,9 +11,14 @@ func _on_save_pressed() -> void:
 
 func _on_load_pressed() -> void:
 	PlayerManager.loadGame()
+	_on_resume_pressed()
 
 func _on_settings_pressed() -> void:
 	print("Settings")
 
 func _on_exit_pressed() -> void:
 	get_tree().quit() # Replace with function body.
+
+func toggle_pause() -> void:
+	$PauseManager._toggle_pause()
+	$Panel.set_visible(false)

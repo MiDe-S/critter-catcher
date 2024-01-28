@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://ui/transition/bar-wipe.gd" id="1_gs5bm"]
 
 [node name="Bar-wipe" type="CanvasLayer"]
+process_mode = 3
 script = ExtResource("1_gs5bm")
 fade_time = 0.35
 

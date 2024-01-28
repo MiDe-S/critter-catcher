@@ -26,9 +26,11 @@ func endScene() -> void:
 func startTransition(transition: PackedScene) -> void:
 	var transitionScene: Transition = transition.instantiate()
 	transitionScene.screenBlack.connect(respondToTransition)
+	Pause.toggle_pause()
 	get_tree().get_root().add_child(transitionScene)
 
 func respondToTransition() -> void:
+	Pause.toggle_pause()
 	if _newScene != null:
 		_startScene(_newScene)
 		_newScene = null
@@ -57,12 +59,14 @@ func _startScene(newScene: Node) -> void:
 		var root := get_tree().get_root()
 		root.add_child(newScene)
 		get_tree().set_current_scene(newScene)
+		PlayerManager.setCurrentScene(get_tree().current_scene.get_scene_file_path())
 		for c in _mapScenes:
 			if !c.is_in_group('ui'):
 				c.queue_free()
 		return
 	if oldScene is Building and newScene is MapManager:
 		var old := get_tree().current_scene
+		#newScene.setPlayerPosition(match door in newScene from oldScene)
 		get_tree().get_root().add_child(newScene)
 		get_tree().set_current_scene(newScene)
 		PlayerManager.setCurrentScene(get_tree().current_scene.get_scene_file_path())
@@ -92,10 +96,15 @@ func _endScene() -> void:
 				get_tree().set_current_scene(n)
 
 		oldScene.queue_free()
-		
-	
 
 func reloadGame() -> void:
+	var transitionScene: Transition = transitionFadeBlack.instantiate()
+	transitionScene.screenBlack.connect(_reloadGame)
+	Pause.toggle_pause()
+	get_tree().get_root().add_child(transitionScene)
+
+func _reloadGame() -> void:
+	Pause.toggle_pause()
 	# set player pos from player info
 	# start scene from player info
 	_mapScenes = get_tree().get_nodes_in_group("area")
@@ -107,7 +116,12 @@ func reloadGame() -> void:
 	for c in _mapScenes:
 		if !c.is_in_group("ui"):
 			c.queue_free()
-	get_tree().change_scene_to_file(PlayerManager.getCurrentScene())
+	@warning_ignore("untyped_declaration")
+	var loadScene = load(PlayerManager.getCurrentScene()).instantiate()
+	loadScene.setPlayerPosition(PlayerManager.getPlayerPosition())
+	get_tree().get_root().add_child(loadScene)
+	get_tree().set_current_scene(loadScene)
+	refreshUI()
 
 func refreshUI() -> void:
 	for c in get_tree().get_nodes_in_group("area"):

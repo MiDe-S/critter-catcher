@@ -76,7 +76,7 @@ func getHealth() -> float:
 func setHealth(input: float) -> void:
 	if !healthInit:
 		healthInit = true
-	health = input
+	health = snapped(input, .1)
 	if health < 0:
 		alive = false
 	else:

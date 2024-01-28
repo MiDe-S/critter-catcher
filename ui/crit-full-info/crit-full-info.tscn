@@ -1,10 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://xycgkomvgnie"]
+[gd_scene load_steps=8 format=3 uid="uid://xycgkomvgnie"]
 
 [ext_resource type="Script" path="res://ui/crit-full-info/crit-full-info.gd" id="1_krc65"]
 [ext_resource type="Texture2D" uid="uid://clet13vdvn24e" path="res://critters/critter-images/millo.png" id="1_l82p2"]
-[ext_resource type="Script" path="res://addons/health_bar_2d/health_bar_2d.gd" id="2_klu43"]
 [ext_resource type="Resource" uid="uid://cbe8lhdunca8" path="res://critters/critters/dibbit-info.tres" id="2_q07na"]
-[ext_resource type="Texture2D" uid="uid://cnjw8wn77f05i" path="res://addons/health_bar_2d/resources/health_bar_texture.png" id="3_0l754"]
 [ext_resource type="Resource" uid="uid://d00upfwdoaoxb" path="res://moves/block.tres" id="3_cfr2x"]
 [ext_resource type="Resource" uid="uid://pjqpe1v1ow74" path="res://moves/eruption.tres" id="4_5p1gc"]
 [ext_resource type="Script" path="res://critters/critter.gd" id="5_4vvo3"]
@@ -167,24 +165,16 @@ layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.1
 
-[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/Control"]
+[node name="Level" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/Control"]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
 text = "Level 100
 "
 
-[node name="ExpBar" type="TextureProgressBar" parent="PanelContainer/MarginContainer/VBoxContainer/Control"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.119
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-nine_patch_stretch = true
-texture_under = ExtResource("3_0l754")
-texture_progress = ExtResource("3_0l754")
-tint_under = Color(0, 0, 0, 0.603922)
-tint_progress = Color(0.141176, 0.329412, 0.513726, 1)
-script = ExtResource("2_klu43")
+[node name="Experience" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/Control"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 29.0
+offset_right = 42.0
+offset_bottom = 52.0
