@@ -64,3 +64,6 @@ grow_vertical = 0
 nine_patch_stretch = true
 tint_under = Color(0, 0, 0, 0.603922)
 metadata/_edit_use_anchors_ = true
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

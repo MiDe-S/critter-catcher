@@ -58,3 +58,6 @@ func getAttribute() -> attributeType:
 	
 func getEffects() -> Array[Effect]:
 	return effects
+
+func getDescription() -> String:
+	return description

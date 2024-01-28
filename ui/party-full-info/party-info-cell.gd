@@ -30,7 +30,7 @@ func setCritter(critterInput: Critter) -> void:
 	
 
 func initialize() -> void:
-	nameLabel.text = critter.getName()
+	nameLabel.text = critter.getNickname()
 	levelLabel.text = str(critter.getLevel())
 	critterSprite.texture = critter.getCritterIcon()
 	itemLabel.text = "None"

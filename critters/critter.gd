@@ -104,7 +104,7 @@ func calcStat(base: int, baseAdd: int, add: int, multiplier: float) -> float:
 	var baseTotal := base + float(baseAdd) / GlobalVariables.BASE_STAT_ADD_MAX * 0.2 + 1
 	var additional := add / 100.0 * 0.25 + 1
 	var lvl := level / 100.0 * 2 + 0.3
-	return lvl * baseTotal * additional * multiplier
+	return snapped(lvl * baseTotal * additional * multiplier, .1)
 
 func getType() -> Array[Type]:
 	return critterInfo.getType()

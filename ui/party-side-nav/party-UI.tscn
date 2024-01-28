@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://dtriud575tg0i"]
+[gd_scene load_steps=6 format=3 uid="uid://dtriud575tg0i"]
 
 [ext_resource type="Script" path="res://ui/party-side-nav/party-UI.gd" id="1_xny40"]
 [ext_resource type="PackedScene" uid="uid://dw5tvcgxopjc2" path="res://ui/party-side-nav/party-cell-ui.tscn" id="2_4hp7w"]
 [ext_resource type="Script" path="res://ui/party-side-nav/party-side-nav.gd" id="3_b1kaj"]
+[ext_resource type="PackedScene" uid="uid://xycgkomvgnie" path="res://ui/crit-full-info/crit-full-info.tscn" id="3_lg2ox"]
 
 [sub_resource type="Curve2D" id="Curve2D_luouc"]
 _data = {
@@ -19,15 +20,9 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_xny40")
 cellScene = ExtResource("2_4hp7w")
+infoScene = ExtResource("3_lg2ox")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="Label" type="Label" parent="CanvasLayer"]
-offset_left = 243.0
-offset_top = 109.0
-offset_right = 785.0
-offset_bottom = 201.0
-text = "Testing"
 
 [node name="Path2D" type="Path2D" parent="CanvasLayer"]
 curve = SubResource("Curve2D_luouc")

@@ -1,11 +1,42 @@
-[gd_scene load_steps=4 format=3 uid="uid://xycgkomvgnie"]
+[gd_scene load_steps=10 format=3 uid="uid://xycgkomvgnie"]
 
 [ext_resource type="Script" path="res://ui/crit-full-info/crit-full-info.gd" id="1_krc65"]
 [ext_resource type="Texture2D" uid="uid://clet13vdvn24e" path="res://critters/critter-images/millo.png" id="1_l82p2"]
 [ext_resource type="Script" path="res://addons/health_bar_2d/health_bar_2d.gd" id="2_klu43"]
+[ext_resource type="Resource" uid="uid://cbe8lhdunca8" path="res://critters/critters/dibbit-info.tres" id="2_q07na"]
+[ext_resource type="Texture2D" uid="uid://cnjw8wn77f05i" path="res://addons/health_bar_2d/resources/health_bar_texture.png" id="3_0l754"]
+[ext_resource type="Resource" uid="uid://d00upfwdoaoxb" path="res://moves/block.tres" id="3_cfr2x"]
+[ext_resource type="Resource" uid="uid://pjqpe1v1ow74" path="res://moves/eruption.tres" id="4_5p1gc"]
+[ext_resource type="Script" path="res://critters/critter.gd" id="5_4vvo3"]
+
+[sub_resource type="Resource" id="Resource_fck8q"]
+script = ExtResource("5_4vvo3")
+nickname = "Cool Guy"
+moves = Array[Resource("res://moves/move.gd")]([ExtResource("3_cfr2x"), ExtResource("4_5p1gc")])
+abilityIndex = 0
+weight = 0
+critterInfo = ExtResource("2_q07na")
+level = 53
+experience = 1000
+healthBase = 0
+attackBase = 0
+defenseBase = 0
+rangeAttackBase = 0
+rangeDefenseBase = 0
+speedBase = 0
+healthAdd = 0
+attackAdd = 0
+defenseAdd = 0
+rangeAttackAdd = 0
+rangeDefenseAdd = 0
+speedAdd = 0
+alive = true
+health = 0.0
+healthInit = false
 
 [node name="Crit-full-info" type="CanvasLayer"]
 script = ExtResource("1_krc65")
+critter = SubResource("Resource_fck8q")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 anchors_preset = -1
@@ -37,29 +68,24 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 1.5
 
+[node name="Name" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Super Cool Name"
+
+[node name="TypeContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
 [node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 texture = ExtResource("1_l82p2")
+expand_mode = 1
 stretch_mode = 5
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.2
-
-[node name="TypeContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="Type" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer/TypeContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Grass"
-
-[node name="Type2" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer/TypeContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Fire"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer"]
 layout_mode = 2
@@ -92,6 +118,46 @@ layout_mode = 2
 size_flags_vertical = 3
 text = "Ability Description"
 
+[node name="StatsContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+theme_override_constants/separation = 0
+
+[node name="Spacer" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/StatsContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 4.0
+
+[node name="Health" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/StatsContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+
+[node name="Attack" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/StatsContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+
+[node name="Defense" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/StatsContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+
+[node name="Range" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/StatsContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+
+[node name="RangeDefense" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/StatsContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+
+[node name="Speed" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/StatsContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+
+[node name="Spacer2" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/StatsContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 4.0
+
 [node name="MoveContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -117,4 +183,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 nine_patch_stretch = true
+texture_under = ExtResource("3_0l754")
+texture_progress = ExtResource("3_0l754")
+tint_under = Color(0, 0, 0, 0.603922)
+tint_progress = Color(0.141176, 0.329412, 0.513726, 1)
 script = ExtResource("2_klu43")

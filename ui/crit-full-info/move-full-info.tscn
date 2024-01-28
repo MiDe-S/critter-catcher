@@ -1,12 +1,14 @@
-[gd_scene format=3 uid="uid://c5dcfos4p57ee"]
+[gd_scene load_steps=3 format=3 uid="uid://c5dcfos4p57ee"]
+
+[ext_resource type="Script" path="res://ui/crit-full-info/move-full-info.gd" id="1_5vu6o"]
+[ext_resource type="Texture2D" uid="uid://bemb67x0qrmu1" path="res://types/type-images/necrotic.png" id="2_5nnuf"]
 
 [node name="Move-full-info" type="Control"]
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+anchors_preset = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_5vu6o")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -31,9 +33,13 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="Type" type="TextureRect" parent="MarginContainer/PanelContainer/VBoxContainer/HBoxContainer"]
+texture_filter = 1
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.7
+texture = ExtResource("2_5nnuf")
+expand_mode = 2
+stretch_mode = 4
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2

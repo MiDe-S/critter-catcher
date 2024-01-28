@@ -4,6 +4,7 @@ signal health
 signal exp
 
 signal orderChanged()
+signal showCritInfo(input: Critter)
 
 @export var critter: Critter
 
@@ -42,3 +43,9 @@ func _gui_input(event: InputEvent) -> void:
 
 func getCritter() -> Critter:
 	return critter
+
+func _on_mouse_entered() -> void:
+	showCritInfo.emit(critter)
+
+func _on_mouse_exited() -> void:
+	showCritInfo.emit(null)
