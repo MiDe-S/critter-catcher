@@ -18,3 +18,6 @@ func changeScene() -> void:
 		@warning_ignore("untyped_declaration")
 		var new_scene = connectedScene.instantiate()
 		SceneManager.startScene(new_scene)
+
+func getConnectedScene() -> PackedScene:
+	return connectedScene

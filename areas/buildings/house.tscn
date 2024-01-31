@@ -13,7 +13,7 @@ texture = ExtResource("1_shgia")
 region_enabled = true
 region_rect = Rect2(96, 0, 80, 80)
 
-[node name="Door" parent="." instance=ExtResource("2_1v0yc")]
+[node name="Door" parent="." groups=["entry_way"] instance=ExtResource("2_1v0yc")]
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(0, -35)

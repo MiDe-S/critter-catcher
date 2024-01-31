@@ -66,10 +66,14 @@ func _startScene(newScene: Node) -> void:
 		return
 	if oldScene is Building and newScene is MapManager:
 		var old := get_tree().current_scene
-		#newScene.setPlayerPosition(match door in newScene from oldScene)
 		get_tree().get_root().add_child(newScene)
 		get_tree().set_current_scene(newScene)
 		PlayerManager.setCurrentScene(get_tree().current_scene.get_scene_file_path())
+		var doors := get_tree().get_nodes_in_group("entry_way")
+		for door in doors:
+			if door.getConnectedScene() != null:
+				if oldScene.get_scene_file_path() == door.getConnectedScene().instantiate().get_scene_file_path():
+					newScene.setPlayerPosition(door.get_global_position() + Vector2(0, 10))
 		old.queue_free()
 		return
 	if oldScene is Battle and newScene is MapManager:
