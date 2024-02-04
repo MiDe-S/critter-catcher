@@ -152,7 +152,9 @@ func handleNextCritterTurn() -> void:
 func endTurn() -> void:
 	# determine who goes first with speed + effects
 	# calculate damage for all
-	for action in turnActions:
+	turnActions.sort_custom(sortTurnActions)
+	while !turnActions.is_empty():
+		var action := turnActions[0]
 		$BattleUI.printText(action.actionInfo())
 		if action.getMove() == null:
 			switchCritter(action.getDefenders()[0].getCritter(), get_tree().get_nodes_in_group("p1").find(action.getAttacker()), true)
@@ -186,6 +188,8 @@ func endTurn() -> void:
 					action.getAttacker().gainExperience(defender.getExpGiven())
 			else:
 				$BattleUI.printText("Move missed")
+		turnActions.erase(action)
+		turnActions.sort_custom(sortTurnActions)
 		checkForDefeatedCritters()
 	# check arena conditions + 
 	# advance turn counter 1
@@ -262,3 +266,16 @@ func castArray(input: Array[Node]) -> Array[CritterInstance]:
 
 func setIsWild(isWild: bool) -> void:
 	$BattleUI.setIsWild(isWild)
+
+func sortTurnActions(a: Action, b: Action) -> bool:
+	if a.getMove().getAdvantage() == b.getMove().getAdvantage():
+		if a.getAttacker().getSpeedForCalc() > b.getAttacker().getSpeedForCalc():
+			return true
+		else:
+			return false
+	elif a.getMove().getAdvantage() > b.getMove().getAdvantage():
+		return true
+	else:
+		return false
+
+	

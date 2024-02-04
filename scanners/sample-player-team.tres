@@ -14,7 +14,7 @@
 [sub_resource type="Resource" id="Resource_bik3l"]
 script = ExtResource("7_mypvt")
 nickname = ""
-moves = Array[Resource("res://moves/move.gd")]([ExtResource("3_li8sm")])
+moves = Array[Resource("res://moves/move.gd")]([ExtResource("3_li8sm"), ExtResource("6_2ndps")])
 abilityIndex = 0
 weight = 0
 critterInfo = ExtResource("10_7t478")

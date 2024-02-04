@@ -61,3 +61,6 @@ func getEffects() -> Array[Effect]:
 
 func getDescription() -> String:
 	return description
+
+func getAdvantage() -> int:
+	return advantage

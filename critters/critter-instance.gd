@@ -59,3 +59,6 @@ func gainExperience(experience: int) -> void:
 	var newLevel := critter.gainExperience(experience)
 	if newLevel != oldLevel:
 		battleMessage.emit(getName() + " leveled up to " + str(newLevel) + ".")
+
+func getSpeedForCalc() -> float:
+	return critter.getSpeedForCalc()
