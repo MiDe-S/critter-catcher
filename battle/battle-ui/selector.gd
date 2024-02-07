@@ -83,3 +83,6 @@ func getNodePosition(node: Variant) -> Vector2:
 		# pos is top left corner, return center
 		return node.get_global_position() + node.get_size() / 2
 	return node.get_global_position()
+
+func getCurrentSelection() -> Variant:
+	return optionsNodes[currentSelected]

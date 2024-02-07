@@ -4,9 +4,12 @@ signal back
 signal switch(critter: Critter)
 
 @export var cellScene: PackedScene
+@export var infoScene: PackedScene
 @export var team: Team
 
 @onready var gridContainer := $PanelContainer/MarginContainer/GridContainer
+
+var showInfo: bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -37,10 +40,22 @@ func startSelector() -> void:
 	$Selector.setFocus(selectableCrits)
 	
 func _emitInfo() -> void:
-	print("ImplementCritterInfo")
+	showInfo = true
+	var info := infoScene.instantiate()
+	info.setCritter($Selector.getCurrentSelection().getCritter())
+	add_child(info)
+		
+func hideInfo() -> void:
+	showInfo = false
+	for n in get_children():
+		if n is CritterInfoUI:
+			n.queue_free()
 	
 func _emitBack() -> void:
-	back.emit()
+	if !showInfo:
+		back.emit()
+	else:
+		hideInfo()
 	
 func _critterChosen(critter: Node) -> void:
 	if critter == null:

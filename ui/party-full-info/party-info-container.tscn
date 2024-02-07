@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://c0e4ju8bbbtsh"]
+[gd_scene load_steps=7 format=3 uid="uid://c0e4ju8bbbtsh"]
 
 [ext_resource type="Script" path="res://ui/party-full-info/party-info-container.gd" id="1_32sdh"]
 [ext_resource type="PackedScene" uid="uid://dpskkqum3sflt" path="res://ui/party-full-info/party-info-cell.tscn" id="2_gbupy"]
+[ext_resource type="PackedScene" uid="uid://xycgkomvgnie" path="res://ui/crit-full-info/crit-full-info.tscn" id="3_3lopb"]
 [ext_resource type="Resource" uid="uid://dbje1dg3hd1ha" path="res://scanners/sample-player-team.tres" id="3_l7m8j"]
 [ext_resource type="Theme" uid="uid://b1nmw3tifrb0r" path="res://battle-button-font.tres" id="4_mqhi7"]
 [ext_resource type="PackedScene" uid="uid://b7ik2644mtetq" path="res://battle/battle-ui/selector.tscn" id="5_qtyo8"]
@@ -9,6 +10,7 @@
 [node name="Container" type="CanvasLayer" groups=["ui"]]
 script = ExtResource("1_32sdh")
 cellScene = ExtResource("2_gbupy")
+infoScene = ExtResource("3_3lopb")
 team = ExtResource("3_l7m8j")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
