@@ -1,4 +1,5 @@
 extends ColorRect
+class_name SideNavCell
 
 signal health
 signal exp

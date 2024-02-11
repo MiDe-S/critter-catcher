@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://dtriud575tg0i"]
+[gd_scene load_steps=7 format=3 uid="uid://dtriud575tg0i"]
 
 [ext_resource type="Script" path="res://ui/party-side-nav/party-UI.gd" id="1_xny40"]
 [ext_resource type="PackedScene" uid="uid://dw5tvcgxopjc2" path="res://ui/party-side-nav/party-cell-ui.tscn" id="2_4hp7w"]
 [ext_resource type="Script" path="res://ui/party-side-nav/party-side-nav.gd" id="3_b1kaj"]
 [ext_resource type="PackedScene" uid="uid://xycgkomvgnie" path="res://ui/crit-full-info/crit-full-info.tscn" id="3_lg2ox"]
+[ext_resource type="PackedScene" uid="uid://b7ik2644mtetq" path="res://battle/battle-ui/selector.tscn" id="5_qtgrh"]
 
 [sub_resource type="Curve2D" id="Curve2D_luouc"]
 _data = {
@@ -48,3 +49,12 @@ grow_vertical = 2
 size_flags_horizontal = 4
 mouse_filter = 2
 color = Color(1, 1, 1, 0.145098)
+
+[node name="Selector" parent="CanvasLayer/Path2D/PathFollow2D" instance=ExtResource("5_qtgrh")]
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+offset_left = 1161.0
+offset_top = 604.0
+offset_right = 1260.0
+offset_bottom = 627.0
+text = "[x] Select"

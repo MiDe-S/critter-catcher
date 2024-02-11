@@ -3,9 +3,12 @@ extends Control
 @export var cellScene: PackedScene
 @export var infoScene: PackedScene
 @onready var container := $CanvasLayer/Path2D/PathFollow2D/ColorRect
+@onready var selector: Selector = $CanvasLayer/Path2D/PathFollow2D/Selector
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	selector.changeHover.connect(_critChanged)
+	selector.selection.connect(_critSelected)
 	refresh()
 
 func refresh() -> void:
@@ -14,8 +17,6 @@ func refresh() -> void:
 	var cell_size: Vector2
 	var i := 0
 	for critter: Critter in critters:
-
-		
 		# create cell
 		var cell := cellScene.instantiate()
 		cell.initialize(critter)
@@ -59,3 +60,13 @@ func showCritterInfo(critter: Critter) -> void:
 		var info := infoScene.instantiate()
 		info.setCritter(critter)
 		get_tree().get_root().add_child(info)
+		
+func _critChanged(cell: Node) -> void:
+	showCritterInfo(cell.getCritter())
+	
+func _critSelected(_cell: Node) -> void:
+	showCritterInfo(null)
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("ui_info"):
+		selector.setFocus(container.get_children())
