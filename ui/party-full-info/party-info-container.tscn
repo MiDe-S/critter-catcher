@@ -79,5 +79,6 @@ text = "Back
 
 [node name="Selector" parent="." instance=ExtResource("5_qtyo8")]
 
+[connection signal="pressed" from="Swap" to="." method="_on_swap_pressed"]
 [connection signal="pressed" from="Info" to="." method="_emitInfo"]
 [connection signal="pressed" from="Back" to="." method="_emitBack"]

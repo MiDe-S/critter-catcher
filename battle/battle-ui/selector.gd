@@ -1,6 +1,7 @@
 extends Node
 
 signal selection(obj: Variant)
+signal changeHover(obj: Variant)
 
 var optionsNodes: Array[Variant] = []
 var options: Array[Variant] = []
@@ -32,6 +33,7 @@ func select(index: int) -> void:
 	$BottomLeft.set_global_position(coords[2])
 	$BottomRight.set_global_position(coords[3])
 	currentSelected = index
+	changeHover.emit(optionsNodes[currentSelected])
 
 func setFocus(focusableList: Array[Variant], index: int = 0) -> void:
 	show()
@@ -52,7 +54,7 @@ func setFocus(focusableList: Array[Variant], index: int = 0) -> void:
 		options.append(coords)
 	select(index)
 	
-func _unhandled_input(event: InputEvent) -> void:
+func _input(event: InputEvent) -> void:
 	if active and event is InputEventKey:
 		get_tree().get_root().set_input_as_handled()
 		if event.is_action_pressed("ui_left") or event.is_action_pressed("ui_right") or event.is_action_pressed("ui_down") or event.is_action_pressed("ui_up"):

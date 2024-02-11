@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://xycgkomvgnie"]
+[gd_scene load_steps=9 format=3 uid="uid://xycgkomvgnie"]
 
 [ext_resource type="Script" path="res://ui/crit-full-info/crit-full-info.gd" id="1_krc65"]
 [ext_resource type="Texture2D" uid="uid://clet13vdvn24e" path="res://critters/critter-images/millo.png" id="1_l82p2"]
@@ -32,6 +32,9 @@ alive = true
 health = 0.0
 healthInit = false
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gm6u4"]
+bg_color = Color(0.2, 0.2, 0.2, 1)
+
 [node name="Crit-full-info" type="CanvasLayer"]
 script = ExtResource("1_krc65")
 critter = SubResource("Resource_fck8q")
@@ -40,12 +43,13 @@ critter = SubResource("Resource_fck8q")
 anchors_preset = -1
 anchor_left = 0.05
 anchor_top = 0.05
-anchor_right = 0.88
-anchor_bottom = 0.95
+anchor_right = 0.9
+anchor_bottom = 0.85
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_gm6u4")
 
 [node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
 layout_mode = 2

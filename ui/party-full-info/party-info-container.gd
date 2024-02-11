@@ -9,19 +9,17 @@ signal switch(critter: Critter)
 
 @onready var gridContainer := $PanelContainer/MarginContainer/GridContainer
 
-var showInfo: bool = false
+var infoChild: Node = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	$Selector.connect("selection", _critterChosen)
+	$Selector.selection.connect(_critterChosen)
+	$Selector.changeHover.connect(_changeInfoChar)
 	refresh()
-
-
 
 func freeSelf() -> void:
 	queue_free()
 
-	
 func refresh() -> void:
 	for child in gridContainer.get_children():
 		child.free()
@@ -40,26 +38,35 @@ func startSelector() -> void:
 	$Selector.setFocus(selectableCrits)
 	
 func _emitInfo() -> void:
-	showInfo = true
 	var info := infoScene.instantiate()
 	info.setCritter($Selector.getCurrentSelection().getCritter())
-	add_child(info)
+	infoChild = info
+	get_tree().get_root().add_child(infoChild)
 		
 func hideInfo() -> void:
-	showInfo = false
-	for n in get_children():
-		if n is CritterInfoUI:
-			n.queue_free()
+	if infoChild != null:
+		get_tree().get_root().remove_child(infoChild)
+		infoChild.queue_free()
+		infoChild = null
+
 	
 func _emitBack() -> void:
-	if !showInfo:
+	if infoChild == null:
 		back.emit()
 	else:
 		hideInfo()
 	
 func _critterChosen(critter: Node) -> void:
+	if infoChild != null:
+		hideInfo()
 	if critter == null:
 		back.emit()
 	else:
 		switch.emit(critter.getCritter())
 	
+func _changeInfoChar(critter: Node) -> void:
+	if infoChild != null:
+		infoChild.changeCritter(critter.getCritter())
+
+func _on_swap_pressed() -> void:
+	_critterChosen($Selector.getCurrentSelection())

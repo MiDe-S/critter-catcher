@@ -158,6 +158,8 @@ func endTurn() -> void:
 		$BattleUI.printText(action.actionInfo())
 		if action.getMove() == null:
 			switchCritter(action.getDefenders()[0].getCritter(), get_tree().get_nodes_in_group("p1").find(action.getAttacker()), true)
+			turnActions.erase(action)
+			turnActions.sort_custom(sortTurnActions)
 			continue
 
 		var movePower: float = action.getMove().getPower() * min((0.3 + action.getAttacker().getLevel() / 100.0), 1.0)
