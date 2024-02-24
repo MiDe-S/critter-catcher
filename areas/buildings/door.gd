@@ -13,7 +13,7 @@ func _ready() -> void:
 
 func changeScene() -> void:
 	if connectedScene == null:
-		print("No scene connected")
+		Log.warn("No scene connected to this door")
 	else:
 		@warning_ignore("untyped_declaration")
 		var new_scene = connectedScene.instantiate()

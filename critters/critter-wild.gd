@@ -5,6 +5,8 @@ signal battle_start(critterOut: Critter)
 const SLOW := 5.0
 const SPEED := 100.0
 const TIMER := 1
+const DISENGAGE_RADIUS := 350 # if chasing and move this far from home, stop
+const TIRED_RADIUS := 100 # if chasing and player is further than this, stop
 var current_time: float = TIMER
 var state := MOVEMENT_STATES.IDLE
 var tracking: Variant
@@ -29,6 +31,9 @@ func initialize(nav_region: Node) -> void:
 
 func setCritter(critterInput: Critter) -> void:
 	critter = critterInput
+	
+func getCritter() -> Critter:
+	return critter
 
 func generateTarget() -> Vector2:
 	var dis: float = randf_range(0, 20)
@@ -49,6 +54,10 @@ func _physics_process(delta: float) -> void:
 				state = MOVEMENT_STATES.IDLE
 				current_time = TIMER
 		MOVEMENT_STATES.FOLLOW:
+			if TIRED_RADIUS < _check_target_distance() or DISENGAGE_RADIUS < position.distance_to(target_position):
+				Log.info("Stopped chasing player")
+				state = MOVEMENT_STATES.WANDER
+				
 			var direction: Vector2 = to_local(nav_agent.get_next_path_position())
 			$MovementController.move(direction, SPEED)
 	
@@ -57,25 +66,29 @@ func _physics_process(delta: float) -> void:
 func _on_target_detection_body_entered(body: Variant) -> void:
 	tracking = body
 	nav_agent.set_target_position(tracking.global_position)
-	$Timer.start()
+	$UpdateNavTimer.start()
 	# if player is higher level than self, run
 	# have target range increased based on player level ? 
 
 func _on_target_detection_body_exited(body: Variant) -> void:
 	if body == tracking and state != MOVEMENT_STATES.FOLLOW:
 		tracking = null
-		$Timer.stop()
+		$UpdateNavTimer.stop()
 
 func _on_timer_timeout() -> void:
 	nav_agent.set_target_position(tracking.global_position)
 	if state != MOVEMENT_STATES.FOLLOW:
-		_check_target_distance()
+		var distance := _check_target_distance()
+		if distance <= $TargetDetection/CollisionShape2D.get_shape().get_radius():
+			Log.info("Chasing player")
+			state = MOVEMENT_STATES.FOLLOW
 	
 func _battleStart() -> void:
+	Log.info("Battle started against wild " + critter.getName())
 	battle_start.emit(critter)
 	queue_free()
 
-func _check_target_distance() -> void:
+func _check_target_distance() -> float:
 	# temp solution until navagent.get_navigation_path works
 	var points: PackedVector2Array = NavigationServer2D.map_get_path(
 	region.get_navigation_map(),
@@ -88,8 +101,8 @@ func _check_target_distance() -> void:
 	while length < points.size():
 		distance += points[length - 1].distance_to(points[length])
 		length += 1
-	if distance <= $TargetDetection/CollisionShape2D.get_shape().get_radius():
-		state = MOVEMENT_STATES.FOLLOW
+	return distance
+
 
 func setTimer(time: float) -> void:
-	$Timer.set_wait_time(time)
+	$UpdateNavTimer.set_wait_time(time)

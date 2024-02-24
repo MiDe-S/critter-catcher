@@ -45,6 +45,7 @@ func respondToTransition() -> void:
 func _startScene(newScene: Node) -> void:
 	var oldScene := get_tree().current_scene
 	if oldScene is MapManager and newScene is Battle:
+		Log.info("Switched from MapManager to Battle")
 		#hide ui/map elements
 		_mapScenes = get_tree().get_nodes_in_group("area")
 		var root := get_tree().get_root()
@@ -54,6 +55,7 @@ func _startScene(newScene: Node) -> void:
 			root.remove_child(c)
 		return
 	if oldScene is MapManager and newScene is Building:
+		Log.info("Switched from MapManager to Building")
 		#hide ui/map elements
 		_mapScenes = get_tree().get_nodes_in_group("area")
 		var root := get_tree().get_root()
@@ -65,6 +67,7 @@ func _startScene(newScene: Node) -> void:
 				c.queue_free()
 		return
 	if oldScene is Building and newScene is MapManager:
+		Log.info("Switched from Building to MapManager")
 		var old := get_tree().current_scene
 		get_tree().get_root().add_child(newScene)
 		get_tree().set_current_scene(newScene)
@@ -77,10 +80,12 @@ func _startScene(newScene: Node) -> void:
 		old.queue_free()
 		return
 	if oldScene is Battle and newScene is MapManager:
+		Log.info("Switched from Battle to MapManager")
 		# show UI elements
 		# refresh UI elements
 		return
 	if oldScene is MapManager and newScene is MapManager:
+		Log.info("Switched from MapManager to MapManager")
 		# show UI elements
 		# refresh UI elements
 		return
@@ -102,6 +107,7 @@ func _endScene() -> void:
 		oldScene.queue_free()
 
 func reloadGame() -> void:
+	Log.info("Reload Game From Save")
 	var transitionScene: Transition = transitionFadeBlack.instantiate()
 	transitionScene.screenBlack.connect(_reloadGame)
 	Pause.toggle_pause()

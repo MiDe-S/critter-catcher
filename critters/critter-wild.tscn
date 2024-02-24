@@ -207,7 +207,7 @@ avoidance_layers = 0
 avoidance_mask = 2
 debug_enabled = true
 
-[node name="Timer" type="Timer" parent="."]
+[node name="UpdateNavTimer" type="Timer" parent="."]
 wait_time = 0.25
 
 [node name="MovementController" parent="." instance=ExtResource("4_mh66i")]
@@ -215,5 +215,4 @@ wait_time = 0.25
 [connection signal="body_entered" from="TargetDetection" to="." method="_on_target_detection_body_entered"]
 [connection signal="body_exited" from="TargetDetection" to="." method="_on_target_detection_body_exited"]
 [connection signal="target_reached" from="NavigationAgent2D" to="." method="_battleStart"]
-[connection signal="velocity_computed" from="NavigationAgent2D" to="." method="move"]
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="UpdateNavTimer" to="." method="_on_timer_timeout"]

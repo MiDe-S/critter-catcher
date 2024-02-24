@@ -26,17 +26,23 @@ func getPlayerPosition() -> Vector2:
 	return playerInfo.getPlayerPosition()
 	
 func healParty() -> void:
+	Log.info("Team Healed")
 	playerInfo.healParty()
 	SceneManager.refreshUI()
 	
 func saveGame() -> void:
+	Log.info("Starting Save Game")
 	var result := ResourceSaver.save(playerInfo, FILE_PATH)
-	assert(result == OK, "Failed to save")
+	if result == OK:
+		Log.info("Game saved")
+	else:
+		Log.error("Failed to save game")
 	
 func loadGame() -> void:
+	Log.info("Starting Load Game")
 	if ResourceLoader.exists(FILE_PATH):
 		var player := ResourceLoader.load(FILE_PATH)
 		if player is PlayerInfo: # Check that the data is valid
-			print(PlayerManager.getPlayerPosition(), player.getPlayerPosition())
+			Log.info("Player Data Found")
 			playerInfo = player.duplicate(true)
 			SceneManager.reloadGame()

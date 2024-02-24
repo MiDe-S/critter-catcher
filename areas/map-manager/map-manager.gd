@@ -45,6 +45,7 @@ func _process(_delta: float) -> void:
 	# North
 	if pos.y < cameraSize.y:
 		if (northScene == null and north != null):
+			Log.debug("Loaded north map")
 			northScene = north.instantiate()
 			createNeighbor(northScene, Vector2(0, -mapSize))
 		# player is on other scene, do transfer
@@ -52,12 +53,14 @@ func _process(_delta: float) -> void:
 			transferPlayer(northScene, Vector2(0, -mapSize), Vector2(0, 5))
 			northScene.southScene = self
 	elif northScene != null:
+		Log.debug("Unloaded north map")
 		northScene.queue_free()
 		northScene = null
 	
 	# East
 	if pos.x > (mapSize - cameraSize.x):
 		if (eastScene == null and east != null):
+			Log.debug("Loaded east map")
 			eastScene = east.instantiate()
 			createNeighbor(eastScene, Vector2(mapSize, 0))
 	# player is on other scene, do transfer
@@ -65,12 +68,14 @@ func _process(_delta: float) -> void:
 			transferPlayer(eastScene, Vector2(mapSize, 0), Vector2(-5, 0))
 			eastScene.westScene = self
 	elif eastScene != null:
+		Log.debug("Unloaded east map")
 		eastScene.queue_free()
 		eastScene = null
 
 	# South
 	if pos.y > (mapSize - cameraSize.y):
 		if (southScene == null and south != null):
+			Log.debug("Loaded south map")
 			southScene = south.instantiate()
 			createNeighbor(southScene, Vector2(0, mapSize))
 		# player is on other scene, do transfer
@@ -78,12 +83,14 @@ func _process(_delta: float) -> void:
 			transferPlayer(southScene, Vector2(0, mapSize), Vector2(0, -5))
 			southScene.northScene = self
 	elif southScene != null:
+		Log.debug("Unloaded south map")
 		southScene.queue_free()
 		southScene = null
 		
 	# West
 	if pos.x < cameraSize.x:
 		if (westScene == null and west != null):
+			Log.debug("Loaded west map")
 			westScene = west.instantiate()
 			createNeighbor(westScene, Vector2(-mapSize, 0))
 	# player is on other scene, do transfer
@@ -91,6 +98,7 @@ func _process(_delta: float) -> void:
 			transferPlayer(westScene, Vector2(-mapSize, 0), Vector2(5, 0))
 			westScene.eastScene = self
 	elif westScene != null:
+		Log.debug("Unloaded west map")
 		westScene.queue_free()
 		westScene = null
 
@@ -102,6 +110,7 @@ func createNeighbor(sceneNode: Node, posTransfer: Vector2) -> void:
 	get_tree().get_root().add_child(sceneNode)
 		
 func transferPlayer(scene: Node, posTransfer: Vector2, cameraOffsetVector: Vector2) -> void:
+	Log.debug("Moved to different map tile")
 	var player: Player = removePlayer()
 	# set relative position
 	player.position -= posTransfer
