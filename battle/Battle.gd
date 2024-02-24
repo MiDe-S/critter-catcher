@@ -17,8 +17,10 @@ var turnActions: Array[Action]
 var critterBattleBase: PackedScene = load("res://critters/critter-battle.tscn")
 
 var enemy: NPC
-
 var typeManager: TypeManger = TypeManger.new()
+
+var leftCritters: Array[CritterInstance]
+var rightCritters: Array[CritterInstance]
 
 ### Turn
 ## Select Move on critter 1
@@ -49,31 +51,41 @@ func _ready() -> void:
 	startTurn()
 
 func setUpPlayers(critters: Array[Critter], p1: bool = true) -> void:
-	var i := 0
-	for pos in leftPositions:
-		var critter: Critter = critters[i]
+	if p1:
+		leftCritters = _setUpCritters(critters, "p1")
+		# Put critters on battlefield
+		for i in range(leftPositions.size()):
+			leftCritters[i].setIsInBattle(true)
+			leftCritters[i].position = leftPositions[i].position
+			self.add_child(leftCritters[i])
+	else:
+		rightCritters = _setUpCritters(critters, "p2")
+		for critter in rightCritters:
+			critter.faceLeft()
+		# Put critters on battlefield
+		for i in range(rightPositions.size()):
+			rightCritters[i].setIsInBattle(true)
+			rightCritters[i].position = rightPositions[i].position
+			self.add_child(rightCritters[i])
+
+func _setUpCritters(critters: Array[Critter], group: String) -> Array[CritterInstance]:
+	var output: Array[CritterInstance] = []
+	for critter in critters:
 		var critInstance: CritterInstance = critterBattleBase.instantiate()
 		critInstance.setCritter(critter)
-		if p1:
-			critInstance.add_to_group("p1")
-			critInstance.position = leftPositions[i].position
-		else:
-			critInstance.add_to_group("p2")
-			critInstance.position = rightPositions[i].position
-			critInstance.faceLeft()
-			
+		critInstance.add_to_group(group)
+		
 		var critUi: CritterUI = load(critterUIPath).instantiate()
 		critInstance.add_child(critUi)
 		critUi.initialize(critter, critInstance.getSigName())
 		critInstance.connect("battleMessage", printText)
-		self.add_child(critInstance)
-		i += 1
-
-			
+		output.append(critInstance)
+	return output
+	
 func startTurn() -> void:
 	p1CritterIndex = 0
 	turnActions = []
-	$BattleUI.setMoves(get_tree().get_nodes_in_group("p1")[p1CritterIndex].getMoves())
+	$BattleUI.setMoves(getCrittersInGroupByActiveIndex("p1", p1CritterIndex).getMoves())
 	get_tree().get_nodes_in_group("move_button").front().grab_focus()
 	
 func _actionChosen(action: Variant, metadata: Variant = null) -> void:
@@ -82,9 +94,13 @@ func _actionChosen(action: Variant, metadata: Variant = null) -> void:
 	match action:
 		BattleUI.BattleUIActions.SWITCH:
 			# this is bad, don't do this
-			var temp := CritterInstance.new()
-			temp.setCritter(metadata)
-			turnActions.append(Action.new(get_tree().get_nodes_in_group("p1")[p1CritterIndex], null, [temp]))
+			var crit: CritterInstance = null
+			for critter in leftCritters:
+				if critter.getCritter() == metadata:
+					crit = critter
+			if crit == null:
+				Log.error("Could not find matching critter for " + metadata.getName())
+			turnActions.append(Action.new(getCrittersInGroupByActiveIndex("p1", p1CritterIndex), null, [crit]))
 			handleNextCritterTurn()
 			
 		BattleUI.BattleUIActions.RUN:
@@ -98,9 +114,9 @@ func _moveChosen(move: Move) -> void:
 	if leftPositions.size() == 1:
 		match move.getTarget():
 			Move.targetType.SELF:
-				_critterChosen(get_tree().get_nodes_in_group("p1")[0])
+				_critterChosen(getActiveCrittersInGroup("p1")[0])
 			Move.targetType.SINGLE:
-				_critterChosen(get_tree().get_nodes_in_group("p2")[0])
+				_critterChosen(getActiveCrittersInGroup("p2")[0])
 			Move.targetType.ENEMIES:
 				_critterChosen(opposingSide[0])
 			Move.targetType.ALL:
@@ -110,14 +126,10 @@ func _moveChosen(move: Move) -> void:
 	else:
 		match move.getTarget():
 			Move.targetType.SELF:
-				$Selector.setFocus([get_tree().get_nodes_in_group("p1")[p1CritterIndex]])
+				$Selector.setFocus([getCrittersInGroupByActiveIndex("p1", p1CritterIndex)])
 			Move.targetType.SINGLE:
-				var options: Array[Node] = get_tree().get_nodes_in_group("p2")
-				var i := 0
-				for node in get_tree().get_nodes_in_group("p1"):
-					if i != p1CritterIndex:
-						options.insert(0, node)
-					i += 1
+				var options: Array[Node] = castArrayIns(getActiveCrittersInGroup("p2"))
+				options.insert(0, getCrittersInGroupByActiveIndex("p1", p1CritterIndex))
 				$Selector.setFocus(options)
 			Move.targetType.ENEMIES:
 				$Selector.setFocus(opposingSide)
@@ -132,21 +144,21 @@ func _critterChosen(critter: Variant) -> void:
 		selectedMove = null
 		return;
 	elif critter in opposingSide:
-		targets = get_tree().get_nodes_in_group("p2") as Array[Node]
+		targets = castArrayIns(getActiveCrittersInGroup("p2"))
 	elif critter in all:
-		targets = get_tree().get_nodes_in_group("p1") + get_tree().get_nodes_in_group("p2") as Array[Node]
+		targets = castArrayIns(getActiveCrittersInGroup("p1") + getActiveCrittersInGroup("p2"))
 	else:
 		targets.append(critter)
-	var action := Action.new(get_tree().get_nodes_in_group("p1")[p1CritterIndex], selectedMove, castArray(targets))
+	var action := Action.new(getCrittersInGroupByActiveIndex("p1", p1CritterIndex), selectedMove, castArray(targets))
 	turnActions.append(action)
 	handleNextCritterTurn()
 
 func handleNextCritterTurn() -> void:
 	p1CritterIndex += 1
-	if p1CritterIndex >= get_tree().get_nodes_in_group("p1").size():
+	if p1CritterIndex >= getActiveCrittersInGroup("p1").size():
 		endTurn()
 		return 
-	$BattleUI.setMoves(get_tree().get_nodes_in_group("p1")[p1CritterIndex].getMoves())
+	$BattleUI.setMoves(getCrittersInGroupByActiveIndex("p1", p1CritterIndex).getMoves())
 	get_tree().get_nodes_in_group("move_button").front().grab_focus()
 	
 func endTurn() -> void:
@@ -157,7 +169,7 @@ func endTurn() -> void:
 		var action := turnActions[0]
 		$BattleUI.printText(action.actionInfo())
 		if action.getMove() == null:
-			switchCritter(action.getDefenders()[0].getCritter(), get_tree().get_nodes_in_group("p1").find(action.getAttacker()), true)
+			switchCritter(action.getDefenders()[0], getActiveCrittersInGroup("p1").find(action.getAttacker()), true)
 			turnActions.erase(action)
 			turnActions.sort_custom(sortTurnActions)
 			continue
@@ -195,9 +207,9 @@ func endTurn() -> void:
 		checkForDefeatedCritters()
 	# check arena conditions + 
 	# advance turn counter 1
-	for critter in get_tree().get_nodes_in_group("p1"):
+	for critter in getActiveCrittersInGroup("p1"):
 		critter.incrementTurn()
-	for critter in get_tree().get_nodes_in_group("p2"):
+	for critter in getActiveCrittersInGroup("p2"):
 		critter.incrementTurn()
 	startTurn()
 	pass
@@ -208,18 +220,20 @@ func catchCritter() -> void:
 	endBattle()
 	
 func checkForDefeatedCritters() -> void:
-	for p1Critter in get_tree().get_nodes_in_group("p1"):
+	for p1Critter in getActiveCrittersInGroup("p1"):
 		if p1Critter.isDefeated():
 			# Give player option to switch
 			pass
 			
 	var index := 0
-	for p2Critter in get_tree().get_nodes_in_group("p2"):
+	for p2Critter in getActiveCrittersInGroup("p2"):
 		if p2Critter.isDefeated():
 			printText(p2Critter.getName() + " is defeated.")
+			p2Critter.setIsInBattle(false)
+			self.remove_child(p2Critter)
 			# Add AI picking logic
-			for crit in enemy.getCritters():
-				if !crit.isDefeated():
+			for crit in rightCritters:
+				if !crit.isDefeated() and !crit.getIsInBattle():
 					switchCritter(crit, index, false)
 		index += 1
 	# if any in group p1 or p2 is defeated
@@ -229,30 +243,17 @@ func checkBattleOver() -> void:
 	if $Player.isDefeated() or enemy.isDefeated():
 		endBattle()
 	
-func switchCritter(critter: Critter, activeIndex: int, p1: bool = true) -> void:
+func switchCritter(critterSwappedIn: CritterInstance, activeIndex: int, p1: bool = true) -> void:
 	var pos: Vector2
-	if p1:
-		pos = get_tree().get_nodes_in_group("p1")[activeIndex].get_position()
-		get_tree().get_nodes_in_group("p1")[activeIndex].free()
-	else:
-		pos = get_tree().get_nodes_in_group("p2")[activeIndex].get_position()
-		get_tree().get_nodes_in_group("p2")[activeIndex].free()
+	var swappedOut: CritterInstance = getCrittersInGroupByActiveIndex("p1" if p1 else "p2", activeIndex)
+	pos = swappedOut.get_position()
+	swappedOut.setIsInBattle(false)
+	self.remove_child(swappedOut)
 
-	var critInstance := critterBattleBase.instantiate()
-	critInstance.setCritter(critter)
-	if p1:
-		critInstance.add_to_group("p1")
-		critInstance.position = pos
-	else:
-		critInstance.add_to_group("p2")
-		critInstance.position = pos
-		critInstance.faceLeft()
-		
-	var critUi: CritterUI = load(critterUIPath).instantiate()
-	critInstance.add_child(critUi)
-	critUi.initialize(critter, critInstance.getSigName())
-	critInstance.connect("battleMessage", printText)
-	self.add_child(critInstance)
+	critterSwappedIn.position = pos
+	critterSwappedIn.setIsInBattle(true)
+
+	self.add_child(critterSwappedIn)
 	
 func endBattle() -> void:
 	SceneManager.endScene()
@@ -265,11 +266,22 @@ func castArray(input: Array[Node]) -> Array[CritterInstance]:
 	for i in input:
 		output.append(i as CritterInstance)
 	return output
+	
+func castArrayIns(input: Array[CritterInstance]) -> Array[Node]:
+	var output: Array[Node] = []
+	for i in input:
+		output.append(i as Node)
+	return output
 
 func setIsWild(isWild: bool) -> void:
 	$BattleUI.setIsWild(isWild)
 
 func sortTurnActions(a: Action, b: Action) -> bool:
+	# switched critters
+	if a.getMove() == null:
+		return true
+	if b.getMove() == null:
+		return false
 	if a.getMove().getAdvantage() == b.getMove().getAdvantage():
 		if a.getAttacker().getSpeedForCalc() > b.getAttacker().getSpeedForCalc():
 			return true
@@ -280,4 +292,19 @@ func sortTurnActions(a: Action, b: Action) -> bool:
 	else:
 		return false
 
-	
+func getCrittersInGroupByActiveIndex(group: String, activeIndex: int) -> CritterInstance:
+	var i := 0
+	for critter: CritterInstance in get_tree().get_nodes_in_group(group):
+		if critter.getIsInBattle():
+			if i == activeIndex:
+				return critter
+			i += 1
+	Log.error("Could not find valid critter for index" + str(p1CritterIndex))
+	return null
+
+func getActiveCrittersInGroup(group: String) -> Array[CritterInstance]:
+	var output: Array[CritterInstance] = []
+	for critter: CritterInstance in get_tree().get_nodes_in_group(group):
+		if critter.getIsInBattle():
+			output.append(critter)
+	return output

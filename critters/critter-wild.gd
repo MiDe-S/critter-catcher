@@ -55,7 +55,7 @@ func _physics_process(delta: float) -> void:
 				current_time = TIMER
 		MOVEMENT_STATES.FOLLOW:
 			if TIRED_RADIUS < _check_target_distance() or DISENGAGE_RADIUS < position.distance_to(target_position):
-				Log.info("Stopped chasing player")
+				Log.debug("Stopped chasing player")
 				state = MOVEMENT_STATES.WANDER
 				
 			var direction: Vector2 = to_local(nav_agent.get_next_path_position())
@@ -80,7 +80,7 @@ func _on_timer_timeout() -> void:
 	if state != MOVEMENT_STATES.FOLLOW:
 		var distance := _check_target_distance()
 		if distance <= $TargetDetection/CollisionShape2D.get_shape().get_radius():
-			Log.info("Chasing player")
+			Log.debug("Chasing player")
 			state = MOVEMENT_STATES.FOLLOW
 	
 func _battleStart() -> void:

@@ -6,6 +6,8 @@ signal battleMessage(msg: String)
 
 @export var critter: Critter
 
+var isInBattle := false
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	if critter == null:
@@ -62,3 +64,9 @@ func gainExperience(experience: int) -> void:
 
 func getSpeedForCalc() -> float:
 	return critter.getSpeedForCalc()
+
+func setIsInBattle(active: bool) -> void:
+	isInBattle = active
+	
+func getIsInBattle() -> bool:
+	return isInBattle
