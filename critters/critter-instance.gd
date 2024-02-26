@@ -7,6 +7,7 @@ signal battleMessage(msg: String)
 @export var critter: Critter
 
 var isInBattle := false
+var battlePosition: int = -1 # -1 is out of battle since no null
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -70,3 +71,9 @@ func setIsInBattle(active: bool) -> void:
 	
 func getIsInBattle() -> bool:
 	return isInBattle
+
+func setBattlePosition(pos: int) -> void:
+	battlePosition = pos
+	
+func getBattlePosition() -> int:
+	return battlePosition

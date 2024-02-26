@@ -1,7 +1,8 @@
 extends Node
 class_name Battle
 
-var critterUIPath := "res://battle/battle-ui/critter-ui/critter_ui.tscn"
+const SWITCH_BATTLE_POS := -10
+const critterUIPath := "res://battle/battle-ui/critter-ui/critter_ui.tscn"
 # on init spawn people from people
 
 var p1CritterIndex := 0
@@ -57,6 +58,7 @@ func setUpPlayers(critters: Array[Critter], p1: bool = true) -> void:
 		for i in range(leftPositions.size()):
 			leftCritters[i].setIsInBattle(true)
 			leftCritters[i].position = leftPositions[i].position
+			leftCritters[i].setBattlePosition(i)
 			self.add_child(leftCritters[i])
 	else:
 		rightCritters = _setUpCritters(critters, "p2")
@@ -66,6 +68,7 @@ func setUpPlayers(critters: Array[Critter], p1: bool = true) -> void:
 		for i in range(rightPositions.size()):
 			rightCritters[i].setIsInBattle(true)
 			rightCritters[i].position = rightPositions[i].position
+			rightCritters[i].setBattlePosition(i+leftPositions.size())
 			self.add_child(rightCritters[i])
 
 func _setUpCritters(critters: Array[Critter], group: String) -> Array[CritterInstance]:
@@ -93,14 +96,14 @@ func _actionChosen(action: Variant, metadata: Variant = null) -> void:
 		_moveChosen(action)
 	match action:
 		BattleUI.BattleUIActions.SWITCH:
-			# this is bad, don't do this
 			var crit: CritterInstance = null
 			for critter in leftCritters:
 				if critter.getCritter() == metadata:
 					crit = critter
 			if crit == null:
 				Log.error("Could not find matching critter for " + metadata.getName())
-			turnActions.append(Action.new(getCrittersInGroupByActiveIndex("p1", p1CritterIndex), null, [crit]))
+			crit.setBattlePosition(SWITCH_BATTLE_POS)
+			turnActions.append(Action.new(getCrittersInGroupByActiveIndex("p1", p1CritterIndex), null, [crit.getBattlePosition()]))
 			handleNextCritterTurn()
 			
 		BattleUI.BattleUIActions.RUN:
@@ -121,7 +124,6 @@ func _moveChosen(move: Move) -> void:
 				_critterChosen(opposingSide[0])
 			Move.targetType.ALL:
 				_critterChosen(all[0])
-			
 				
 	else:
 		match move.getTarget():
@@ -129,7 +131,9 @@ func _moveChosen(move: Move) -> void:
 				$Selector.setFocus([getCrittersInGroupByActiveIndex("p1", p1CritterIndex)])
 			Move.targetType.SINGLE:
 				var options: Array[Node] = castArrayIns(getActiveCrittersInGroup("p2"))
-				options.insert(0, getCrittersInGroupByActiveIndex("p1", p1CritterIndex))
+				var others: Array[Node] = castArrayIns(getActiveCrittersInGroup("p1"))
+				others.pop_at(p1CritterIndex)
+				options += others
 				$Selector.setFocus(options)
 			Move.targetType.ENEMIES:
 				$Selector.setFocus(opposingSide)
@@ -149,7 +153,9 @@ func _critterChosen(critter: Variant) -> void:
 		targets = castArrayIns(getActiveCrittersInGroup("p1") + getActiveCrittersInGroup("p2"))
 	else:
 		targets.append(critter)
-	var action := Action.new(getCrittersInGroupByActiveIndex("p1", p1CritterIndex), selectedMove, castArray(targets))
+	var targetPos: Array[int] = []
+	targetPos.assign(targets.map(func(cri: Variant) -> int: return cri.getBattlePosition()))
+	var action := Action.new(getCrittersInGroupByActiveIndex("p1", p1CritterIndex), selectedMove, targetPos)
 	turnActions.append(action)
 	handleNextCritterTurn()
 
@@ -169,7 +175,7 @@ func endTurn() -> void:
 		var action := turnActions[0]
 		$BattleUI.printText(action.actionInfo())
 		if action.getMove() == null:
-			switchCritter(action.getDefenders()[0], getActiveCrittersInGroup("p1").find(action.getAttacker()), true)
+			switchCritter(getCrittersByBattlePosition(action.getDefenders())[0], getActiveCrittersInGroup("p1").find(action.getAttacker()), true)
 			turnActions.erase(action)
 			turnActions.sort_custom(sortTurnActions)
 			continue
@@ -183,7 +189,7 @@ func endTurn() -> void:
 			Move.attributeType.RANGE:
 				atk = action.getAttacker().getCritter().getRangeAttackForCalc()
 		# check for STAB
-		for defender in action.getDefenders():
+		for defender in getCrittersByBattlePosition(action.getDefenders()):
 			if randf_range(0, 100) <= action.getMove().getAccuracy():
 				var randomness := randf_range(.96, 1.04)
 				var def: float
@@ -251,7 +257,10 @@ func switchCritter(critterSwappedIn: CritterInstance, activeIndex: int, p1: bool
 	self.remove_child(swappedOut)
 
 	critterSwappedIn.position = pos
+	critterSwappedIn.setBattlePosition(swappedOut.getBattlePosition())
 	critterSwappedIn.setIsInBattle(true)
+	
+	swappedOut.setBattlePosition(-1)
 
 	self.add_child(critterSwappedIn)
 	
@@ -307,4 +316,15 @@ func getActiveCrittersInGroup(group: String) -> Array[CritterInstance]:
 	for critter: CritterInstance in get_tree().get_nodes_in_group(group):
 		if critter.getIsInBattle():
 			output.append(critter)
+	return output
+	
+func getCrittersByBattlePosition(posList: Array[int]) -> Array[CritterInstance]:
+	var allCritters: Array[CritterInstance] = leftCritters + rightCritters
+	var output: Array[CritterInstance] = []
+	for pos in posList:
+		if pos == -1:
+			Log.error("Trying to attack critter with battle position -1")
+		for crit in allCritters:
+			if crit.getBattlePosition() == pos:
+				output.append(crit)
 	return output
