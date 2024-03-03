@@ -11,14 +11,13 @@ func _init(attackerInput: CritterInstance, moveInput: Move, defendersInput: Arra
 	defenders = defendersInput
 
 func actionInfo() -> String:
+	if move == null:
+		return ""
 	var output := ""
 	output += attacker.getName()
-	if move == null:
-		output += " switched to "
-	else:
-		output += " used "
-		output += move.getName()
-		output += " against "
+	output += " used "
+	output += move.getName()
+	output += " against "
 	for pos in defenders:
 		output += str(pos) + ", "
 	output[-2] = "." # change last comma to period

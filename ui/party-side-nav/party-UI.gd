@@ -48,6 +48,7 @@ func sortCellsByHeight(a: Variant, b: Variant) -> bool:
 
 func freeSelf() -> void:
 	$CanvasLayer/Path2D/PathFollow2D.reverse = true
+	$CanvasLayer/Path2D2/PathFollow2D.reverse = true
 	await $CanvasLayer/Path2D/PathFollow2D.finished
 	self.queue_free()
 

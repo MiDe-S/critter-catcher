@@ -27,7 +27,6 @@ func _ready() -> void:
 	container.connect("back", _partyInfoBack)
 	container.connect("switch", _switchCritter)
 
-	
 func move_pressed(move: Move) -> void:
 	actionChosen.emit(move)
 	
@@ -56,6 +55,7 @@ func _toggleButtons() -> void:
 	buttonContainer.visible = !buttonContainer.visible
 
 func printText(msg: String) -> void:
+	Log.info(msg)
 	$ColorRect/RichTextLabel.add_text(msg + '\n')
 	if debugMode:
 		print(msg)

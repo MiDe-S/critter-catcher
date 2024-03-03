@@ -255,6 +255,8 @@ func switchCritter(critterSwappedIn: CritterInstance, activeIndex: int, p1: bool
 	pos = swappedOut.get_position()
 	swappedOut.setIsInBattle(false)
 	self.remove_child(swappedOut)
+	
+	$BattleUI.printText("Switched from " + swappedOut.getName() + " to " + critterSwappedIn.getName() + ".")
 
 	critterSwappedIn.position = pos
 	critterSwappedIn.setBattlePosition(swappedOut.getBattlePosition())
